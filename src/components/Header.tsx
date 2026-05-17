@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone, ChevronDown } from "lucide-react";
 import { SITE, SERVICES_LIST, WHATSAPP_URL } from "@/lib/constants";
@@ -52,24 +53,22 @@ export default function Header() {
       <div className="container-wide flex items-center justify-between px-4 md:px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div
-            className="w-10 h-10 rounded-lg flex items-center justify-center text-lg font-black"
-            style={{
-              background: "linear-gradient(135deg, var(--color-gold), var(--color-gold-dark))",
-              color: "var(--color-navy-dark)",
-            }}
-          >
-            م
-          </div>
+          <Image 
+            src="/logo.png" 
+            alt={`شعار ${SITE.name}`} 
+            width={56} 
+            height={56} 
+            className="w-12 h-12 md:w-14 md:h-14 object-cover rounded-xl border border-[rgba(212,175,55,0.2)] shadow-[var(--shadow-gold-glow)]"
+          />
           <div>
             <span
-              className="text-lg font-bold block leading-tight"
+              className="text-lg md:text-xl font-bold block leading-tight font-heading"
               style={{ color: "var(--color-pearl)" }}
             >
               {SITE.name}
             </span>
             <span
-              className="text-[10px] tracking-wider block"
+              className="text-[10px] md:text-xs tracking-wider block"
               style={{ color: "var(--color-gold)" }}
             >
               مقاولات معتمدة منذ {SITE.foundedYear}
