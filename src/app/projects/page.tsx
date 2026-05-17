@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, MapPin, Calendar, CheckCircle, Phone } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, CheckCircle, Phone, ShieldCheck, Award } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
@@ -10,9 +10,9 @@ import { SITE, WHATSAPP_URL, SERVICES_LIST } from "@/lib/constants";
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title: `معرض مشاريعنا في جدة — ${SITE.name}`,
+  title: `معرض مشاريعنا في جدة — ${SITE.projectsCompleted}+ مشروع | ${SITE.name}`,
   description:
-    "معرض مشاريع شركة إتقان للمقاولات — أكثر من ٥٠٠ مشروع منجز في جدة. صور قبل/بعد بإحداثيات GPS موثقة. ترميم، بناء، شبوك، أسفلت، ملاحق، هناجر.",
+    `معرض مشاريع ${SITE.name} — ${SITE.projectsCompleted}+ مشروع منجز في جدة بضمان مكتوب. صور قبل/بعد بإحداثيات GPS. ترميم، بناء، شبوك، أسفلت، ملاحق، هناجر، تشطيبات. سجل تجاري ${SITE.crNumber}.`,
   alternates: { canonical: `${SITE.url}/projects` },
   openGraph: {
     title: `معرض المشاريع — ${SITE.name}`,
@@ -157,6 +157,16 @@ const PROJECTS: Project[] = [
   },
 ];
 
+// ─── Projects FAQs ───
+const PROJECT_FAQS = [
+  { question: "هل صور المشاريع حقيقية وموثقة؟", answer: `نعم، جميع الصور التي نعرضها ملتقطة من طرفنا أثناء وبعد التنفيذ. المشاريع الميدانية موثقة بإحداثيات GPS ويمكنك زيارة أي مشروع من مشاريعنا المنجزة بعد التنسيق مع فريقنا.` },
+  { question: "هل يمكنني زيارة مشروع مشابه لمشروعي؟", answer: "بالتأكيد، نرتّب زيارات ميدانية لعملائنا المحتملين لمعاينة مشاريع مماثلة في جدة. هذا يساعدك على تقييم جودة التنفيذ فعلياً قبل اتخاذ قرارك. تواصل معنا لحجز موعد الزيارة." },
+  { question: "كم عدد المشاريع التي أنجزتموها فعلاً؟", answer: `أنجزنا أكثر من ${SITE.projectsCompleted} مشروع في جدة خلال ${SITE.yearsExperience}+ سنة في تخصصات البناء والترميم والشبوك والأسفلت والملاحق والهناجر والتشطيبات والهدم والمقاولات العامة. نعرض في معرضنا عيّنة مختارة تمثل تنوع خدماتنا.` },
+  { question: "ما مدة الضمان على المشاريع المنفذة؟", answer: "نقدم ضمان مكتوب على جميع المشاريع: ١٠ سنوات على الهيكل الإنشائي، ٥ سنوات على العزل المائي والحراري، ٣ سنوات على التشطيبات والتمديدات. الضمان موثق في العقد مع شروط واضحة." },
+  { question: "هل تنفذون مشاريع في جميع أحياء جدة؟", answer: "نعم، لدينا مشاريع منجزة في جميع أحياء جدة: الروضة، السلامة، النزهة، الصفا، الحمدانية، أبحر الشمالية، وشمال جدة. كل حي له خصائص هندسية مختلفة ونملك الخبرة للتعامل معها جميعاً." },
+  { question: "هل يمكنني الاطلاع على صور قبل وبعد؟", answer: "نعم، نوثّق جميع مشاريع الترميم والتجديد بصور احترافية قبل وبعد التنفيذ. يمكنك مشاهدة بعضها في معرضنا أعلاه، وللمزيد تواصل معنا عبر واتساب وسنرسل لك ألبوم مشاريع مماثلة." },
+];
+
 function projectsPageSchema() {
   return {
     "@context": "https://schema.org",
@@ -166,10 +176,10 @@ function projectsPageSchema() {
         "@id": `${SITE.url}/projects/#webpage`,
         url: `${SITE.url}/projects`,
         name: `معرض المشاريع — ${SITE.name}`,
-        description:
-          "معرض أكثر من ٥٠٠ مشروع مقاولات منجز في جدة بضمان مكتوب.",
+        description: `معرض أكثر من ${SITE.projectsCompleted} مشروع مقاولات منجز في جدة بضمان مكتوب.`,
         isPartOf: { "@id": `${SITE.url}/#website` },
         about: { "@id": `${SITE.url}/#organization` },
+        inLanguage: "ar",
       },
       {
         "@type": "ItemList",
@@ -195,6 +205,14 @@ function projectsPageSchema() {
           { "@type": "ListItem", position: 2, name: "مشاريعنا", item: `${SITE.url}/projects` },
         ],
       },
+      {
+        "@type": "FAQPage",
+        mainEntity: PROJECT_FAQS.map((f) => ({
+          "@type": "Question",
+          name: f.question,
+          acceptedAnswer: { "@type": "Answer", text: f.answer },
+        })),
+      },
     ],
   };
 }
@@ -212,9 +230,23 @@ export default function ProjectsPage() {
         {/* HERO */}
         <section className="page-hero">
           <div className="container-wide px-4 md:px-6">
+            <nav className="flex items-center gap-2 text-xs mb-4" style={{ color: "rgba(10,25,47,0.4)" }}>
+              <Link href="/" className="hover:text-[var(--color-gold)]">الرئيسية</Link>
+              <span>/</span>
+              <span style={{ color: "var(--color-gold-dark)" }}>مشاريعنا</span>
+            </nav>
             <span className="gold-accent mx-auto" />
-            <h1 className="text-3xl md:text-4xl font-extrabold">معرض مشاريعنا</h1>
-            <p>أكثر من ٥٠٠ مشروع منجز في جدة — صور موثقة بإحداثيات GPS</p>
+            <h1 className="text-3xl md:text-4xl font-extrabold">معرض مشاريعنا في جدة — {SITE.projectsCompleted}+ مشروع منجز</h1>
+            <p>صور موثقة بإحداثيات GPS — قبل وبعد — تحت إشراف المهندس أحمد الحربي</p>
+          </div>
+        </section>
+
+        {/* NLP INTRO */}
+        <section className="py-6">
+          <div className="container-wide max-w-4xl px-4">
+            <p className="text-sm leading-loose" style={{ color: "rgba(10,25,47,0.7)" }}>
+              يعرض هذا المعرض عيّنة مختارة من مشاريع <strong>{SITE.name}</strong> المنجزة في أحياء جدة المختلفة. كل مشروع تم تنفيذه تحت <strong>إشراف هندسي مباشر</strong> مع التزام صارم بمعايير <strong>كود البناء السعودي</strong> ومواصفات <strong>أمانة جدة</strong>. نوثّق جميع مشاريعنا بصور احترافية وإحداثيات GPS لتتمكن من معاينة الجودة بنفسك قبل اتخاذ قرارك.
+            </p>
           </div>
         </section>
 
@@ -383,28 +415,58 @@ export default function ProjectsPage() {
           </div>
         </section>
 
+        {/* E-E-A-T */}
+        <section className="section-padding">
+          <div className="container-wide max-w-3xl">
+            <div className="glass-card p-8">
+              <div className="flex items-center gap-3 mb-4 justify-center">
+                <Award className="w-5 h-5" style={{ color: "var(--color-gold)" }} />
+                <h2 className="text-lg font-bold">اعتماداتنا الرسمية</h2>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs" style={{ color: "rgba(10,25,47,0.7)" }}>
+                <div className="flex items-center gap-2"><ShieldCheck className="w-4 h-4" style={{ color: "var(--color-gold)" }} /><span>سجل تجاري: {SITE.crNumber}</span></div>
+                <div className="flex items-center gap-2"><ShieldCheck className="w-4 h-4" style={{ color: "var(--color-gold)" }} /><span>الرقم الضريبي: {SITE.vatNumber}</span></div>
+                <div className="flex items-center gap-2"><ShieldCheck className="w-4 h-4" style={{ color: "var(--color-gold)" }} /><span>مسجّل في منصة بلدي ومقاول</span></div>
+                <div className="flex items-center gap-2"><ShieldCheck className="w-4 h-4" style={{ color: "var(--color-gold)" }} /><span>ضمان مكتوب حتى ١٠ سنوات</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQs */}
+        <section className="section-padding bg-section-alt">
+          <div className="container-wide max-w-3xl">
+            <div className="text-center mb-8">
+              <span className="gold-accent mx-auto" />
+              <h2 className="text-2xl font-extrabold mb-3">أسئلة شائعة عن مشاريعنا</h2>
+            </div>
+            <div className="space-y-3">
+              {PROJECT_FAQS.map((faq, i) => (
+                <details key={i} className="glass-card group">
+                  <summary className="flex items-center justify-between p-5 cursor-pointer list-none">
+                    <span className="text-sm font-bold pe-4">{faq.question}</span>
+                    <span className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 transition-transform group-open:rotate-45" style={{ background: "rgba(212,175,55,0.1)", color: "var(--color-gold)" }}>+</span>
+                  </summary>
+                  <div className="px-5 pb-5">
+                    <p className="text-sm leading-relaxed" style={{ color: "rgba(10,25,47,0.65)" }}>{faq.answer}</p>
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* CTA */}
-        <section
-          className="section-padding text-center"
-          style={{ background: "var(--color-navy)" }}
-        >
+        <section className="py-12 text-center" style={{ background: "var(--color-navy)" }}>
           <div className="container-wide max-w-2xl">
-            <h2
-              className="text-2xl md:text-3xl font-extrabold mb-4"
-              style={{ color: "var(--color-pearl)" }}
-            >
+            <h2 className="text-2xl md:text-3xl font-extrabold mb-4" style={{ color: "var(--color-pearl)" }}>
               مشروعك القادم — هل تنضم لقائمة عملائنا؟
             </h2>
             <p className="mb-6 text-sm" style={{ color: "rgba(248,246,240,0.5)" }}>
               معاينة مجانية + دراسة الموقع + عرض سعر مكتوب خلال ٢٤ ساعة
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-gold"
-              >
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-gold">
                 ابدأ مشروعك <ArrowLeft className="w-4 h-4" />
               </a>
               <a href={`tel:${SITE.phone}`} className="btn-outline">

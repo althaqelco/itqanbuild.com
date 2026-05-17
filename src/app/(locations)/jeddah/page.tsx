@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowLeft, MapPin, Wrench, Phone, ShieldCheck, Award, Building2, Users, Sparkles } from "lucide-react";
+import { ArrowLeft, MapPin, Wrench, Phone, ShieldCheck, Award, Building2, Users, Sparkles, CheckCircle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
@@ -13,17 +13,90 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: `مقاول جدة المعتمد | جميع خدمات المقاولات في جدة — ${SITE.name}`,
   description:
-    "مقاول جدة الأول — ٥٠٠+ مشروع منجز | ١٥ سنة خبرة | ٩ خدمات (بناء، ترميم، شبوك، أسفلت، ملاحق، هناجر، تشطيبات، هدم) | يخدم جميع أحياء جدة | ضمان مكتوب",
-  alternates: {
-    canonical: `${SITE.url}/jeddah`,
+    `مقاول جدة الأول — ${SITE.projectsCompleted}+ مشروع منجز | ${SITE.yearsExperience} سنة خبرة | ٩ خدمات (بناء، ترميم، شبوك، أسفلت، ملاحق، هناجر، تشطيبات، هدم) | سجل تجاري ${SITE.crNumber} | يخدم جميع أحياء جدة | ضمان مكتوب ١٠ سنوات`,
+  alternates: { canonical: `${SITE.url}/jeddah` },
+  openGraph: {
+    title: `مقاول جدة — ٩ خدمات متكاملة | ${SITE.name}`,
+    description: `${SITE.projectsCompleted}+ مشروع منجز في جدة بضمان مكتوب`,
+    images: [{ url: "/images/hero-contractor-jeddah.avif", width: 1200, height: 630 }],
   },
 };
+
+// ─── Jeddah Hub FAQs ───
+const JEDDAH_FAQS = [
+  { question: "كيف أختار أفضل مقاول في جدة؟", answer: `تحقق من: (١) السجل التجاري عبر منصة بلدي، (٢) التصنيف في منصة مقاول، (٣) أعمال سابقة موثقة بالصور، (٤) عقد مكتوب يشمل الضمان والجدول الزمني. ${SITE.name} تستوفي جميع هذه المعايير — سجل تجاري ${SITE.crNumber} وأكثر من ${SITE.projectsCompleted} مشروع موثق.` },
+  { question: "كم متوسط أسعار المقاولات في جدة ٢٠٢٦؟", answer: "تختلف حسب الخدمة: الترميم ١٥٠–١,٠٠٠ ريال/م²، البناء ١,٠٠٠–٥,٠٠٠ ريال/م²، الشبوك ٢٥–٥٠٠ ريال/م.ط، الأسفلت ٣٥–١٨٠ ريال/م². الأسعار تتأثر بالحي (أبحر أعلى ٧٪ بسبب الملوحة) ومستوى التشطيب المطلوب." },
+  { question: "ما أحياء جدة التي تخدمونها؟", answer: "نخدم جميع أحياء جدة: الروضة، السلامة، النزهة، الصفا، الحمدانية، أبحر الشمالية، شمال جدة، وأي حي آخر. لدينا فرق عمل موزعة جغرافياً مع فهم تفصيلي لخصائص تربة كل منطقة." },
+  { question: "هل تستخرجون رخص البناء من أمانة جدة؟", answer: "نعم، نتولى جميع إجراءات الترخيص: الكروكي التنظيمي، رخصة البناء عبر نظام ابني الإلكتروني، موافقة الدفاع المدني، وتصاريح الترميم عبر منصة بلدي. الرسوم الحكومية على حساب العميل." },
+  { question: "كم مدة تنفيذ مشروع بناء فيلا في جدة؟", answer: "فيلا ٣٠٠–٥٠٠ م² شغل عظم: ٤–٦ أشهر. تسليم مفتاح بتشطيب متوسط: ٨–١٢ شهراً. تسليم مفتاح VIP: ١٢–١٨ شهراً. نلتزم بجدول زمني مكتوب في العقد مع شرط جزائي." },
+  { question: "ما الضمانات التي تقدمونها؟", answer: "ضمان ١٠ سنوات على الهيكل الإنشائي (أساسات، أعمدة، أسقف)، ٥ سنوات على العزل المائي والحراري، ٣ سنوات على التشطيبات والتمديدات. الضمان مكتوب وموثق في العقد مع شروط واضحة." },
+  { question: "لماذا أسعار أبحر وشمال جدة أعلى من باقي الأحياء؟", answer: "بسبب الملوحة العالية والمياه الجوفية السطحية، نستخدم حصرياً: خرسانة مقاومة للكبريتات (Type V)، حديد مغلف بالإيبوكسي، عزل أسمنتي مزدوج الطبقات، ومواد مقاومة للتآكل. هذا يضمن عمراً إنشائياً ٥٠+ سنة لكنه يزيد التكلفة ٥–٧٪." },
+  { question: "هل يمكنكم تنفيذ أكثر من خدمة في مشروع واحد؟", answer: "نعم، هذه ميزتنا الرئيسية. يمكن تنفيذ هدم + بناء + تشطيبات في مشروع واحد بعقد واحد وفريق واحد — مما يوفر ١٥–٢٠٪ من التكلفة مقارنة بالتعاقد مع مقاولين منفصلين لكل خدمة." },
+];
+
+// ─── Schema ───
+function jeddahHubSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${SITE.url}/jeddah/#webpage`,
+        url: `${SITE.url}/jeddah`,
+        name: `مقاول جدة المعتمد — ${SITE.name}`,
+        description: `جميع خدمات المقاولات في جدة — ${SITE.projectsCompleted}+ مشروع منجز بضمان مكتوب`,
+        isPartOf: { "@id": `${SITE.url}/#website` },
+        about: { "@id": `${SITE.url}/#organization` },
+        inLanguage: "ar",
+        mainEntity: { "@id": `${SITE.url}/jeddah/#servicelist` },
+      },
+      {
+        "@type": "ItemList",
+        "@id": `${SITE.url}/jeddah/#servicelist`,
+        name: "خدمات المقاولات في جدة",
+        numberOfItems: SERVICES_LIST.length,
+        itemListElement: SERVICES_LIST.map((s, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: s.h1.split("—")[0].trim(),
+          url: `${SITE.url}/jeddah/${s.slug}`,
+          item: {
+            "@type": "Service",
+            name: s.h1,
+            provider: { "@id": `${SITE.url}/#organization` },
+            areaServed: { "@type": "City", name: "جدة" },
+            offers: { "@type": "Offer", priceCurrency: "SAR", priceRange: s.tldr.priceRange },
+          },
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "الرئيسية", item: SITE.url },
+          { "@type": "ListItem", position: 2, name: "جدة", item: `${SITE.url}/jeddah` },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: JEDDAH_FAQS.map((f) => ({
+          "@type": "Question",
+          name: f.question,
+          acceptedAnswer: { "@type": "Answer", text: f.answer },
+        })),
+      },
+    ],
+  };
+}
 
 export default function JeddahHubPage() {
   return (
     <>
       <Header />
       <main>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jeddahHubSchema()) }}
+        />
         {/* ═══ HERO ═══ */}
         <section className="relative py-32 md:py-40 overflow-hidden">
           <Image
@@ -136,7 +209,7 @@ export default function JeddahHubPage() {
               />
               <TrustCard
                 icon={<Building2 className="w-6 h-6" />}
-                title="500+ مشروع"
+                title={`${SITE.projectsCompleted}+ مشروع`}
                 desc="موثّقة بصور وإحداثيات GPS"
               />
               <TrustCard
@@ -336,8 +409,51 @@ export default function JeddahHubPage() {
           </div>
         </section>
 
+        {/* ═══ E-E-A-T CREDENTIALS ═══ */}
+        <section className="section-padding bg-section-alt">
+          <div className="container-wide max-w-3xl">
+            <div className="text-center mb-8">
+              <span className="gold-accent mx-auto" />
+              <h2 className="text-2xl font-extrabold mb-3">لماذا نحن مقاول جدة المعتمد</h2>
+            </div>
+            <div className="glass-card p-8">
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: "var(--color-gold)" }} /><span className="text-sm" style={{ color: "rgba(10,25,47,0.7)" }}>سجل تجاري ساري — {SITE.crNumber} — مرخص من وزارة التجارة</span></li>
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: "var(--color-gold)" }} /><span className="text-sm" style={{ color: "rgba(10,25,47,0.7)" }}>رقم ضريبي — {SITE.vatNumber} — مسجّل في هيئة الزكاة والدخل</span></li>
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: "var(--color-gold)" }} /><span className="text-sm" style={{ color: "rgba(10,25,47,0.7)" }}>عضو الغرفة التجارية الصناعية بجدة</span></li>
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: "var(--color-gold)" }} /><span className="text-sm" style={{ color: "rgba(10,25,47,0.7)" }}>مسجّل في منصة بلدي ومنصة مقاول</span></li>
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: "var(--color-gold)" }} /><span className="text-sm" style={{ color: "rgba(10,25,47,0.7)" }}>تأمين ضد الأضرار ساري — يغطي المشروع والجيران</span></li>
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: "var(--color-gold)" }} /><span className="text-sm" style={{ color: "rgba(10,25,47,0.7)" }}>ضمان مكتوب يصل إلى ١٠ سنوات على الهيكل الإنشائي</span></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══ FAQS ═══ */}
+        <section className="section-padding">
+          <div className="container-wide max-w-3xl">
+            <div className="text-center mb-8">
+              <span className="gold-accent mx-auto" />
+              <h2 className="text-2xl font-extrabold mb-3">أسئلة شائعة عن المقاولات في جدة</h2>
+            </div>
+            <div className="space-y-3">
+              {JEDDAH_FAQS.map((faq, i) => (
+                <details key={i} className="glass-card group">
+                  <summary className="flex items-center justify-between p-5 cursor-pointer list-none">
+                    <span className="text-sm font-bold pe-4">{faq.question}</span>
+                    <span className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 transition-transform group-open:rotate-45" style={{ background: "rgba(212,175,55,0.1)", color: "var(--color-gold)" }}>+</span>
+                  </summary>
+                  <div className="px-5 pb-5">
+                    <p className="text-sm leading-relaxed" style={{ color: "rgba(10,25,47,0.65)" }}>{faq.answer}</p>
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ═══ CTA ═══ */}
-        <section className="section-padding text-center" style={{ background: "var(--color-navy)" }}>
+        <section className="py-12 text-center" style={{ background: "var(--color-navy)" }}>
           <div className="container-wide max-w-2xl">
             <Sparkles className="w-8 h-8 mx-auto mb-4" style={{ color: "var(--color-gold)" }} />
             <h2 className="text-3xl font-black mb-6" style={{ color: "var(--color-pearl)" }}>

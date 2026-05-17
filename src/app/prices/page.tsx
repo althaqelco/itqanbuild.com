@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Phone, ArrowLeft, ShieldCheck, TrendingDown, FileText } from "lucide-react";
+import { Phone, ArrowLeft, ShieldCheck, TrendingDown, FileText, Award, CheckCircle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
@@ -12,7 +12,7 @@ export const revalidate = 86400;
 export const metadata: Metadata = {
   title: `أسعار المقاولات في جدة ٢٠٢٦ — جدول شامل | ${SITE.name}`,
   description:
-    "أسعار المقاولات في جدة ٢٠٢٦ — جدول شفاف لـ ٩ خدمات (بناء، ترميم، شبوك، أسفلت، ملاحق، هناجر، تشطيبات، هدم) + حاسبة تكلفة تفاعلية + تعديلات لكل حي.",
+    `أسعار المقاولات في جدة ٢٠٢٦ — جدول شفاف لـ ٩ خدمات + حاسبة تكلفة تفاعلية + تعديلات لكل حي. سجل تجاري ${SITE.crNumber}. معاينة مجانية + عرض سعر مكتوب.`,
   alternates: { canonical: `${SITE.url}/prices` },
   openGraph: {
     title: `أسعار المقاولات في جدة ٢٠٢٦ | ${SITE.name}`,
@@ -162,6 +162,14 @@ const PRICE_FAQS = [
     answer:
       "هامش التفاوض موجود في المشاريع الكبيرة (200م²+) وخاصةً عند الدفع النقدي مقدماً، ويصل إلى 5-8%. أما الأسعار المعلنة فهي تنافسية فعلاً ومحسوبة على أساس تكلفة فعلية + هامش معقول.",
   },
+  {
+    question: "هل تشمل الأسعار استخراج التراخيص؟",
+    answer: "الأسعار المعروضة لا تشمل الرسوم الحكومية (رخصة البناء عبر نظام ابني، تصاريح الترميم من بلدي). لكننا نتولى كافة إجراءات الترخيص نيابةً عنك — الرسوم فقط تُحسب بشكل منفصل وتُذكر صراحةً في العقد.",
+  },
+  {
+    question: "كيف تُحسب أسعار التشطيبات — بالمتر أم بالغرفة؟",
+    answer: "جميع أسعار التشطيبات تُحسب بالمتر المربع (ريال/م²) وتشمل المواد والعمالة. سعر التشطيب يعتمد على المستوى المطلوب: اقتصادي (200-350 ريال/م²)، متوسط (350-600)، فاخر (600-1000)، أو فندقي (1000-1500). الأثاث والواجهات الخارجية بتكلفة منفصلة.",
+  },
 ];
 
 // ─── Schema ───
@@ -174,11 +182,27 @@ function pricesPageSchema() {
         "@id": `${SITE.url}/prices/#webpage`,
         url: `${SITE.url}/prices`,
         name: `أسعار المقاولات في جدة ٢٠٢٦ — ${SITE.name}`,
-        description:
-          "جدول شامل لأسعار جميع خدمات المقاولات في جدة + حاسبة تكلفة تفاعلية + تعديلات السعر حسب الحي.",
+        description: "جدول شامل لأسعار جميع خدمات المقاولات في جدة + حاسبة تكلفة تفاعلية + تعديلات السعر حسب الحي.",
         isPartOf: { "@id": `${SITE.url}/#website` },
         about: { "@id": `${SITE.url}/#organization` },
         inLanguage: "ar",
+      },
+      {
+        "@type": "ItemList",
+        name: "أسعار خدمات المقاولات في جدة",
+        numberOfItems: PRICE_TABLES.length,
+        itemListElement: PRICE_TABLES.map((t, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          item: {
+            "@type": "Offer",
+            name: t.title,
+            priceCurrency: "SAR",
+            priceSpecification: { "@type": "PriceSpecification", minPrice: t.rows[0].min, maxPrice: t.rows[t.rows.length - 1].max, priceCurrency: "SAR", unitText: t.unit },
+            offeredBy: { "@id": `${SITE.url}/#organization` },
+            areaServed: { "@type": "City", name: "جدة" },
+          },
+        })),
       },
       {
         "@type": "BreadcrumbList",
@@ -211,9 +235,23 @@ export default function PricesPage() {
         {/* HERO */}
         <section className="page-hero">
           <div className="container-wide px-4 md:px-6">
+            <nav className="flex items-center gap-2 text-xs mb-4" style={{ color: "rgba(10,25,47,0.4)" }}>
+              <Link href="/" className="hover:text-[var(--color-gold)]">الرئيسية</Link>
+              <span>/</span>
+              <span style={{ color: "var(--color-gold-dark)" }}>الأسعار</span>
+            </nav>
             <span className="gold-accent mx-auto" />
             <h1 className="text-3xl md:text-4xl font-extrabold">أسعار المقاولات في جدة ٢٠٢٦</h1>
             <p>جدول شفاف لجميع الخدمات + حاسبة تفاعلية حسب الحي والتشطيب</p>
+          </div>
+        </section>
+
+        {/* YMYL DISCLAIMER + E-E-A-T */}
+        <section className="py-4">
+          <div className="container-wide max-w-4xl px-4">
+            <p className="text-xs leading-relaxed text-center" style={{ color: "rgba(10,25,47,0.5)" }}>
+              ⚠️ الأسعار المعروضة تقريبية وتعتمد على المعاينة الميدانية. المعاينة مجانية وعرض السعر النهائي مكتوب ومفصّل. سجل تجاري {SITE.crNumber} · الرقم الضريبي {SITE.vatNumber}.
+            </p>
           </div>
         </section>
 

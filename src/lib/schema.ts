@@ -63,6 +63,7 @@ export function generateOrganizationSchema() {
       { "@type": "Place", name: "حي السلامة" },
       { "@type": "Place", name: "حي النزهة" },
       { "@type": "Place", name: "حي الصفا" },
+      { "@type": "Place", name: "حي الحمدانية" },
       { "@type": "Place", name: "أبحر الشمالية" },
       { "@type": "Place", name: "شمال جدة" },
     ],
@@ -150,7 +151,7 @@ export function generateServiceGraph(
     "@graph": [
       {
         "@type": "Service",
-        "@id": `${BASE_URL}/${service.slug}/#service`,
+        "@id": `${BASE_URL}/jeddah/${service.slug}/#service`,
         serviceType: `مقاول ${service.slug === "tarmeem" ? "ترميم" : service.slug}`,
         name: service.h1,
         description: service.description,
@@ -184,8 +185,14 @@ export function generateServiceGraph(
           {
             "@type": "ListItem",
             position: 2,
+            name: "جدة",
+            item: `${BASE_URL}/jeddah`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
             name: service.h1.split("—")[0].trim(),
-            item: `${BASE_URL}/${service.slug}`,
+            item: `${BASE_URL}/jeddah/${service.slug}`,
           },
         ],
       },

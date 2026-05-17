@@ -19,6 +19,7 @@ import {
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import { StatCard, SpecialtyTag, CredentialCard, ValueCard } from "@/components/AboutCards";
 import { SITE, WHATSAPP_URL, SERVICES_LIST, DISTRICTS_LIST } from "@/lib/constants";
 
 export const revalidate = 3600;
@@ -34,7 +35,17 @@ export const metadata: Metadata = {
   },
 };
 
-// ─── About Page Schema with Person + Organization + AboutPage ───
+// ─── About FAQs ───
+const ABOUT_FAQS = [
+  { question: "من هو صاحب شركة إتقان للمقاولات؟", answer: `${SITE.name} يديرها المهندس أحمد الحربي — خريج جامعة الملك عبدالعزيز تخصص هندسة مدنية، مع خبرة ${SITE.yearsExperience}+ سنة في سوق المقاولات بجدة. الشركة مسجلة رسمياً بسجل تجاري ${SITE.crNumber}.` },
+  { question: "كم عدد موظفي الشركة؟", answer: "يعمل في الشركة أكثر من ٥٠ موظفاً دائماً: مهندسون مدنيون، فنيون متخصصون، وعمال مهرة. لا نعتمد على العمالة المؤقتة — جميع فرقنا موظفون دائمون بعقود رسمية." },
+  { question: "ما هي تخصصات الشركة؟", answer: "نتخصص في ٩ خدمات: بناء فلل وعمارات، ترميم وتجديد، شبوك أراضي، أسفلت وتبليط، ملاحق سطح، هناجر ومستودعات، تشطيبات داخلية وخارجية، هدم وإزالة، ومقاولات عامة." },
+  { question: "هل الشركة مرخصة ومسجلة رسمياً؟", answer: `نعم — سجل تجاري ساري ${SITE.crNumber}، رقم ضريبي ${SITE.vatNumber}، مسجلون في منصة بلدي ومنصة مقاول، وعضو الغرفة التجارية الصناعية بجدة.` },
+  { question: "ما مناطق خدمة الشركة؟", answer: "نخدم جميع أحياء جدة: الروضة، السلامة، النزهة، الصفا، الحمدانية، أبحر الشمالية، شمال جدة، وأي حي آخر. لدينا فرق موزعة جغرافياً لتغطية المدينة بالكامل." },
+  { question: "كيف يمكنني التواصل مع الشركة؟", answer: `تواصل معنا عبر واتساب أو اتصل على ${SITE.phoneDisplay}. نرد على الرسائل خلال ١٥ دقيقة ونقدم معاينة مجانية + عرض سعر مكتوب خلال ٢٤ ساعة.` },
+];
+
+// ─── About Page Schema ───
 function aboutPageSchema() {
   return {
     "@context": "https://schema.org",
@@ -59,25 +70,11 @@ function aboutPageSchema() {
         honorificPrefix: "م.",
         jobTitle: "مدير المشاريع ورئيس القسم الفني",
         worksFor: { "@id": `${SITE.url}/#organization` },
-        alumniOf: {
-          "@type": "EducationalOrganization",
-          name: "جامعة الملك عبدالعزيز",
-          sameAs: "https://www.kau.edu.sa",
-        },
-        knowsAbout: [
-          "الهندسة المدنية",
-          "مقاولات البناء",
-          "ترميم المباني",
-          "الكود السعودي للبناء",
-          "إدارة المشاريع الإنشائية",
-        ],
+        alumniOf: { "@type": "EducationalOrganization", name: "جامعة الملك عبدالعزيز", sameAs: "https://www.kau.edu.sa" },
+        knowsAbout: ["الهندسة المدنية", "مقاولات البناء", "ترميم المباني", "الكود السعودي للبناء", "إدارة المشاريع الإنشائية"],
         url: `${SITE.url}/about`,
         image: `${SITE.url}/images/engineer-profile-photo.avif`,
-        hasOccupation: {
-          "@type": "Occupation",
-          name: "مهندس مدني",
-          occupationLocation: { "@type": "City", name: "جدة" },
-        },
+        hasOccupation: { "@type": "Occupation", name: "مهندس مدني", occupationLocation: { "@type": "City", name: "جدة" } },
       },
       {
         "@type": "BreadcrumbList",
@@ -85,6 +82,14 @@ function aboutPageSchema() {
           { "@type": "ListItem", position: 1, name: "الرئيسية", item: SITE.url },
           { "@type": "ListItem", position: 2, name: "من نحن", item: `${SITE.url}/about` },
         ],
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: ABOUT_FAQS.map((f) => ({
+          "@type": "Question",
+          name: f.question,
+          acceptedAnswer: { "@type": "Answer", text: f.answer },
+        })),
       },
     ],
   };
@@ -559,30 +564,41 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* FAQs */}
+        <section className="section-padding bg-section-alt">
+          <div className="container-wide max-w-3xl">
+            <div className="text-center mb-8">
+              <span className="gold-accent mx-auto" />
+              <h2 className="text-2xl font-extrabold mb-3">أسئلة شائعة عن الشركة</h2>
+            </div>
+            <div className="space-y-3">
+              {ABOUT_FAQS.map((faq, i) => (
+                <details key={i} className="glass-card group">
+                  <summary className="flex items-center justify-between p-5 cursor-pointer list-none">
+                    <span className="text-sm font-bold pe-4">{faq.question}</span>
+                    <span className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 transition-transform group-open:rotate-45" style={{ background: "rgba(212,175,55,0.1)", color: "var(--color-gold)" }}>+</span>
+                  </summary>
+                  <div className="px-5 pb-5">
+                    <p className="text-sm leading-relaxed" style={{ color: "rgba(10,25,47,0.65)" }}>{faq.answer}</p>
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* CTA */}
-        <section
-          className="section-padding text-center"
-          style={{ background: "var(--color-navy)" }}
-        >
+        <section className="py-12 text-center" style={{ background: "var(--color-navy)" }}>
           <div className="container-wide max-w-2xl">
-            <h2
-              className="text-2xl md:text-3xl font-extrabold mb-4"
-              style={{ color: "var(--color-pearl)" }}
-            >
+            <h2 className="text-2xl md:text-3xl font-extrabold mb-4" style={{ color: "var(--color-pearl)" }}>
               ابدأ مشروعك مع {SITE.name}
             </h2>
             <p className="mb-6 text-sm" style={{ color: "rgba(248,246,240,0.5)" }}>
               معاينة مجانية + عرض سعر تفصيلي خلال ٢٤ ساعة — بدون التزام
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-gold"
-              >
-                تواصل عبر واتساب
-                <ArrowLeft className="w-4 h-4" />
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-gold">
+                تواصل عبر واتساب <ArrowLeft className="w-4 h-4" />
               </a>
               <a href={`tel:${SITE.phone}`} className="btn-outline">
                 <Phone className="w-4 h-4" />
@@ -598,87 +614,4 @@ export default function AboutPage() {
   );
 }
 
-function StatCard({ icon, value, label }: { icon: React.ReactNode; value: string; label: string }) {
-  return (
-    <div className="glass-card p-6 text-center">
-      <span className="block mb-3 mx-auto w-fit" style={{ color: "var(--color-gold)" }}>
-        {icon}
-      </span>
-      <span
-        className="text-3xl md:text-4xl font-black block mb-1"
-        style={{ color: "var(--color-navy)" }}
-      >
-        {value}
-      </span>
-      <span className="text-xs md:text-sm" style={{ color: "rgba(10,25,47,0.6)" }}>
-        {label}
-      </span>
-    </div>
-  );
-}
 
-function SpecialtyTag({ icon, text }: { icon: React.ReactNode; text: string }) {
-  return (
-    <span
-      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs"
-      style={{
-        background: "rgba(10,25,47,0.04)",
-        color: "rgba(10,25,47,0.7)",
-      }}
-    >
-      <span style={{ color: "var(--color-gold-dark)" }}>{icon}</span>
-      {text}
-    </span>
-  );
-}
-
-function CredentialCard({
-  image,
-  title,
-  subtitle,
-  link,
-}: {
-  image: string;
-  title: string;
-  subtitle: string;
-  link?: string;
-}) {
-  const inner = (
-    <div className="glass-card overflow-hidden text-center hover:-translate-y-0.5 transition-all">
-      <div className="relative h-32" style={{ background: "rgba(10,25,47,0.03)" }}>
-        <Image src={image} alt={title} fill className="object-contain p-4" sizes="200px" />
-      </div>
-      <div className="p-3">
-        <h3 className="text-xs font-bold mb-0.5">{title}</h3>
-        <p
-          className="text-[10px]"
-          style={{ color: "var(--color-gold-dark)" }}
-        >
-          {subtitle}
-          {link && " ↗"}
-        </p>
-      </div>
-    </div>
-  );
-
-  if (link) {
-    return (
-      <a href={link} target="_blank" rel="noopener noreferrer">
-        {inner}
-      </a>
-    );
-  }
-  return inner;
-}
-
-function ValueCard({ icon, title, desc }: { icon: string; title: string; desc: string }) {
-  return (
-    <div className="glass-card p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-      <span className="text-3xl mb-3 block">{icon}</span>
-      <h3 className="text-base font-bold mb-2">{title}</h3>
-      <p className="text-sm leading-relaxed" style={{ color: "rgba(10,25,47,0.65)" }}>
-        {desc}
-      </p>
-    </div>
-  );
-}
