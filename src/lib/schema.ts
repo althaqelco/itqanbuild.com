@@ -66,8 +66,24 @@ export function generateOrganizationSchema() {
       { "@type": "Place", name: "حي الحمدانية" },
       { "@type": "Place", name: "أبحر الشمالية" },
       { "@type": "Place", name: "شمال جدة" },
+      { "@type": "Place", name: "جنوب جدة" },
     ],
     employee: { "@id": `${BASE_URL}/#engineer` },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "خدمات المقاولات في جدة",
+      itemListElement: [
+        { "@type": "Offer", itemOffered: { "@id": `${BASE_URL}/jeddah/tarmeem/#service` } },
+        { "@type": "Offer", itemOffered: { "@id": `${BASE_URL}/jeddah/shboak/#service` } },
+        { "@type": "Offer", itemOffered: { "@id": `${BASE_URL}/jeddah/asphalt/#service` } },
+        { "@type": "Offer", itemOffered: { "@id": `${BASE_URL}/jeddah/binaa/#service` } },
+        { "@type": "Offer", itemOffered: { "@id": `${BASE_URL}/jeddah/molahaq/#service` } },
+        { "@type": "Offer", itemOffered: { "@id": `${BASE_URL}/jeddah/general/#service` } },
+        { "@type": "Offer", itemOffered: { "@id": `${BASE_URL}/jeddah/hadm/#service` } },
+        { "@type": "Offer", itemOffered: { "@id": `${BASE_URL}/jeddah/hanager/#service` } },
+        { "@type": "Offer", itemOffered: { "@id": `${BASE_URL}/jeddah/tashteebat/#service` } },
+      ],
+    },
     aggregateRating: (() => {
       const stats = calculateReviewStats();
       return {
