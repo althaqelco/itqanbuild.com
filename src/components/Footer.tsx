@@ -227,7 +227,9 @@ export default function Footer() {
                 color: "rgba(248, 246, 240, 0.5)",
               }}
             >
-              سجل تجاري رقم: {SITE.crNumber}
+              📋 سجل تجاري رقم: {SITE.crNumber}
+              <br />
+              🧾 الرقم الضريبي: {SITE.vatNumber}
               <br />
               <a
                 href={SITE.social.balady}

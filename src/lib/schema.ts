@@ -90,6 +90,8 @@ export function generateOrganizationSchema() {
       itemReviewed: { "@id": `${BASE_URL}/#organization` },
     })),
     foundingDate: SITE.foundedYear.toString(),
+    taxID: SITE.crNumber,
+    vatID: SITE.vatNumber,
     numberOfEmployees: { "@type": "QuantitativeValue", value: 50 },
     sameAs: [
       SITE.social.googleMaps,
