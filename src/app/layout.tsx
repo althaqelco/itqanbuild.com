@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: `%s | ${SITE.name}`,
   },
   description:
-    "مقاول جدة المرخص — خبرة ١٥+ سنة | ٥٠٠+ مشروع منجز | بناء فلل · ترميم منازل · شبوك · أسفلت · ملاحق · هناجر | ضمان مكتوب على جميع الأعمال | اتصل الآن",
+    `مقاول جدة المرخص — خبرة ${SITE.yearsExperience}+ سنة | ${SITE.projectsCompleted}+ مشروع منجز | بناء فلل · ترميم منازل · شبوك · أسفلت · ملاحق · هناجر | ضمان مكتوب على جميع الأعمال | اتصل الآن`,
   keywords: [
     "مقاول جدة",
     "مقاول ترميم جدة",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     title: `${SITE.name} | مقاول جدة المعتمد`,
     description:
-      "مقاول جدة المرخص — ١٥+ سنة خبرة | بناء · ترميم · شبوك · أسفلت | ضمان مكتوب",
+      `مقاول جدة المرخص — ${SITE.yearsExperience}+ سنة خبرة | بناء · ترميم · شبوك · أسفلت | ضمان مكتوب`,
     images: [
       {
         url: "/images/og-image-default.png",
@@ -75,15 +75,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${SITE.name} | مقاول جدة المعتمد`,
     description:
-      "مقاول جدة المرخص — ١٥+ سنة خبرة | بناء · ترميم · شبوك · أسفلت | ضمان مكتوب",
+      `مقاول جدة المرخص — ${SITE.yearsExperience}+ سنة خبرة | بناء · ترميم · شبوك · أسفلت | ضمان مكتوب`,
     images: ["/images/og-image-default.png"],
   },
   alternates: {
     canonical: SITE.url,
   },
-  verification: {
-    google: "GOOGLE_VERIFICATION_CODE",
-  },
+  // verification: { google: "ADD_YOUR_CODE" },
 };
 
 export const viewport: Viewport = {

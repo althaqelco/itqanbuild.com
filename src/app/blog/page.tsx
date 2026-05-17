@@ -15,6 +15,12 @@ export const metadata: Metadata = {
   title: `المدونة — ${SITE.name} | ${BLOG_POSTS.length} مقالة عن المقاولات في جدة`,
   description: `${BLOG_POSTS.length} مقالة متخصصة عن المقاولات في جدة — أدلة أسعار، مراحل البناء، أنواع الشبوك، الأساسات، العزل، المنزل الذكي، ونصائح اختيار المقاول.`,
   alternates: { canonical: `${SITE.url}/blog` },
+  openGraph: {
+    title: `مدونة ${SITE.name} | ${BLOG_POSTS.length} مقالة متخصصة`,
+    description: `أدلة أسعار المقاولات، مراحل البناء، ونصائح اختيار المقاول في جدة ٢٠٢٦`,
+    url: `${SITE.url}/blog`,
+    images: [{ url: "/images/og-image-default.png", width: 1200, height: 630 }],
+  },
 };
 
 // Blog index Schema

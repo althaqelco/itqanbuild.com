@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   alternates: { canonical: `${SITE.url}/projects` },
   openGraph: {
     title: `معرض المشاريع — ${SITE.name}`,
-    description: "أكثر من ٥٠٠ مشروع منجز في جدة بضمان مكتوب.",
+    description: `أكثر من ${SITE.projectsCompleted} مشروع منجز في جدة بضمان مكتوب.`,
     images: [{ url: "/images/og-image-default.png", width: 1200, height: 630 }],
   },
 };
