@@ -1,18 +1,27 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Cairo } from "next/font/google";
+import { Cairo, Alexandria } from "next/font/google";
 import { generateRootGraph } from "@/lib/schema";
 import { SITE } from "@/lib/constants";
 import "./globals.css";
 
-// ─── Arabic Font — Cairo (Google's official Arabic-first font, locally hosted by next/font) ───
+// ─── Arabic Fonts — locally hosted by next/font ───
 const cairo = Cairo({
   subsets: ["arabic", "latin"],
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
   variable: "--font-primary",
   preload: true,
-  fallback: ["Tajawal", "Noto Sans Arabic", "system-ui", "sans-serif"],
+  fallback: ["system-ui", "sans-serif"],
+});
+
+const alexandria = Alexandria({
+  subsets: ["arabic", "latin"],
+  weight: ["500", "600", "700", "800"],
+  display: "swap",
+  variable: "--font-heading",
+  preload: true,
+  fallback: ["Tajawal", "system-ui", "sans-serif"],
 });
 
 const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID || "G-G55B7C5N9L";
@@ -99,7 +108,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl" className={cairo.variable}>
+    <html lang="ar" dir="rtl" className={`${cairo.variable} ${alexandria.variable}`}>
       <head>
         {/* Connected @graph Schema — Every Page */}
         <script
@@ -147,7 +156,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${cairo.className} antialiased`}>{children}</body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }
