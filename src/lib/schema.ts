@@ -19,7 +19,7 @@ export function generateOrganizationSchema() {
     url: BASE_URL,
     logo: {
       "@type": "ImageObject",
-      url: `${BASE_URL}/icons/logo.png`,
+      url: `${BASE_URL}/logo.png`,
     },
     image: [
       `${BASE_URL}/images/hero-contractor-jeddah.avif`,

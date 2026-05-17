@@ -58,7 +58,8 @@ export default function Header() {
             alt={`شعار ${SITE.name}`} 
             width={56} 
             height={56} 
-            className="w-12 h-12 md:w-14 md:h-14 object-cover rounded-xl border border-[rgba(212,175,55,0.2)] shadow-[var(--shadow-gold-glow)]"
+            className="w-12 h-12 md:w-14 md:h-14 object-contain mix-blend-lighten drop-shadow-md"
+            style={{ filter: "brightness(1.1)" }}
           />
           <div>
             <span

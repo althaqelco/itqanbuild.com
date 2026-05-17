@@ -35,17 +35,16 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-6">
-              <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center text-xl font-black"
-                style={{
-                  background: "linear-gradient(135deg, var(--color-gold), var(--color-gold-dark))",
-                  color: "var(--color-navy-dark)",
-                }}
-              >
-                م
-              </div>
+              <Image 
+                src="/logo.png" 
+                alt={`شعار ${SITE.name}`} 
+                width={56} 
+                height={56} 
+                className="w-12 h-12 md:w-14 md:h-14 object-contain mix-blend-lighten drop-shadow-md"
+                style={{ filter: "brightness(1.1)" }}
+              />
               <div>
-                <span className="text-xl font-bold block" style={{ color: "var(--color-pearl)" }}>
+                <span className="text-xl font-bold block font-heading" style={{ color: "var(--color-pearl)" }}>
                   {SITE.name}
                 </span>
                 <span className="text-xs" style={{ color: "var(--color-gold)" }}>
