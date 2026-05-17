@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone, ChevronDown } from "lucide-react";
 import { SITE, SERVICES_LIST, WHATSAPP_URL } from "@/lib/constants";
 
@@ -25,9 +24,19 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
+  // ─── rAF-throttled scroll listener (INP-safe) ───
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 20);
+        ticking = false;
+      });
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -81,7 +90,7 @@ export default function Header() {
         <nav className="hidden lg:flex items-center gap-1">
           <NavLink href="/" label="الرئيسية" />
 
-          {/* Services Dropdown */}
+          {/* Services Dropdown — Pure CSS Transition (no framer-motion) */}
           <div
             className="relative"
             onMouseEnter={() => setServicesOpen(true)}
@@ -94,48 +103,44 @@ export default function Header() {
             >
               خدماتنا
               <ChevronDown
-                className={`w-3.5 h-3.5 transition-transform ${servicesOpen ? "rotate-180" : ""}`}
+                className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`}
               />
             </button>
-            <AnimatePresence>
-              {servicesOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 8, scale: 0.96 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute top-full end-0 mt-1 w-64 rounded-xl overflow-hidden"
-                  style={{
-                    background: "rgba(10, 25, 47, 0.95)",
-                    backdropFilter: "blur(24px)",
-                    border: "1px solid rgba(212, 175, 55, 0.12)",
-                    boxShadow: "0 16px 48px rgba(0, 0, 0, 0.3)",
-                  }}
-                >
-                  <div className="py-2">
-                    {SERVICES_LIST.map((s) => (
-                      <Link
-                        key={s.key}
-                        href={`/jeddah/${s.slug}`}
-                        className="block px-4 py-2.5 text-sm transition-colors"
-                        style={{ color: "rgba(248, 246, 240, 0.75)" }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.color = "var(--color-gold)";
-                          e.currentTarget.style.background = "rgba(212, 175, 55, 0.06)";
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.color = "rgba(248, 246, 240, 0.75)";
-                          e.currentTarget.style.background = "transparent";
-                        }}
-                        onClick={() => setServicesOpen(false)}
-                      >
-                        {s.h1.split("—")[0].trim()}
-                      </Link>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <div
+              className="absolute top-full end-0 mt-1 w-64 rounded-xl overflow-hidden transition-all duration-200 origin-top"
+              style={{
+                background: "rgba(10, 25, 47, 0.95)",
+                backdropFilter: "blur(24px)",
+                WebkitBackdropFilter: "blur(24px)",
+                border: "1px solid rgba(212, 175, 55, 0.12)",
+                boxShadow: "0 16px 48px rgba(0, 0, 0, 0.3)",
+                opacity: servicesOpen ? 1 : 0,
+                transform: servicesOpen ? "scaleY(1) translateY(0)" : "scaleY(0.96) translateY(8px)",
+                pointerEvents: servicesOpen ? "auto" : "none",
+              }}
+            >
+              <div className="py-2">
+                {SERVICES_LIST.map((s) => (
+                  <Link
+                    key={s.key}
+                    href={`/jeddah/${s.slug}`}
+                    className="block px-4 py-2.5 text-sm transition-colors"
+                    style={{ color: "rgba(248, 246, 240, 0.75)" }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = "var(--color-gold)";
+                      e.currentTarget.style.background = "rgba(212, 175, 55, 0.06)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = "rgba(248, 246, 240, 0.75)";
+                      e.currentTarget.style.background = "transparent";
+                    }}
+                    onClick={() => setServicesOpen(false)}
+                  >
+                    {s.h1.split("—")[0].trim()}
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
 
           <NavLink href="/projects" label="مشاريعنا" />
@@ -189,69 +194,67 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden overflow-hidden"
-            style={{
-              background: "rgba(10, 25, 47, 0.98)",
-              borderTop: "1px solid rgba(212, 175, 55, 0.1)",
-            }}
-          >
-            <nav className="container-wide px-4 py-6 flex flex-col gap-1">
-              <MobileLink href="/" label="الرئيسية" onClick={() => setMobileOpen(false)} />
-              <div className="py-2">
-                <span
-                  className="text-xs font-semibold tracking-wider px-3 pb-2 block"
-                  style={{ color: "var(--color-gold)" }}
-                >
-                  خدماتنا
-                </span>
-                {SERVICES_LIST.map((s) => (
-                  <MobileLink
-                    key={s.key}
-                    href={`/jeddah/${s.slug}`}
-                    label={s.h1.split("—")[0].trim()}
-                    onClick={() => setMobileOpen(false)}
-                    indent
-                  />
-                ))}
-              </div>
-              <MobileLink href="/projects" label="مشاريعنا" onClick={() => setMobileOpen(false)} />
-              <MobileLink href="/prices" label="الأسعار" onClick={() => setMobileOpen(false)} />
-              <MobileLink href="/about" label="من نحن" onClick={() => setMobileOpen(false)} />
-              <MobileLink href="/blog" label="المدونة" onClick={() => setMobileOpen(false)} />
-              <MobileLink href="/contact" label="تواصل" onClick={() => setMobileOpen(false)} />
+      {/* Mobile Menu — CSS grid height animation (no framer-motion) */}
+      <div
+        ref={mobileMenuRef}
+        className="lg:hidden overflow-hidden transition-[grid-template-rows,opacity] duration-300 ease-[var(--ease-smooth)]"
+        style={{
+          display: "grid",
+          gridTemplateRows: mobileOpen ? "1fr" : "0fr",
+          opacity: mobileOpen ? 1 : 0,
+          background: "rgba(10, 25, 47, 0.98)",
+          borderTop: mobileOpen ? "1px solid rgba(212, 175, 55, 0.1)" : "1px solid transparent",
+        }}
+      >
+        <div className="min-h-0">
+          <nav className="container-wide px-4 py-6 flex flex-col gap-1">
+            <MobileLink href="/" label="الرئيسية" onClick={() => setMobileOpen(false)} />
+            <div className="py-2">
+              <span
+                className="text-xs font-semibold tracking-wider px-3 pb-2 block"
+                style={{ color: "var(--color-gold)" }}
+              >
+                خدماتنا
+              </span>
+              {SERVICES_LIST.map((s) => (
+                <MobileLink
+                  key={s.key}
+                  href={`/jeddah/${s.slug}`}
+                  label={s.h1.split("—")[0].trim()}
+                  onClick={() => setMobileOpen(false)}
+                  indent
+                />
+              ))}
+            </div>
+            <MobileLink href="/projects" label="مشاريعنا" onClick={() => setMobileOpen(false)} />
+            <MobileLink href="/prices" label="الأسعار" onClick={() => setMobileOpen(false)} />
+            <MobileLink href="/about" label="من نحن" onClick={() => setMobileOpen(false)} />
+            <MobileLink href="/blog" label="المدونة" onClick={() => setMobileOpen(false)} />
+            <MobileLink href="/contact" label="تواصل" onClick={() => setMobileOpen(false)} />
 
-              <div className="flex flex-col gap-3 mt-4 pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-                <a
-                  href={`tel:${SITE.phone}`}
-                  onClick={() => trackCta("mobile_menu_phone", "phone")}
-                  className="btn-gold w-full text-center"
-                >
-                  <Phone className="w-4 h-4 inline me-2" />
-                  اتصل الآن — {SITE.phoneDisplay}
-                </a>
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackCta("mobile_menu_whatsapp", "whatsapp")}
-                  className="btn-outline w-full text-center"
-                  style={{ borderColor: "var(--color-whatsapp)", color: "var(--color-whatsapp)" }}
-                >
-                  تواصل عبر واتساب
-                </a>
-              </div>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <div className="flex flex-col gap-3 mt-4 pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+              <a
+                href={`tel:${SITE.phone}`}
+                onClick={() => trackCta("mobile_menu_phone", "phone")}
+                className="btn-gold w-full text-center"
+              >
+                <Phone className="w-4 h-4 inline me-2" />
+                اتصل الآن — {SITE.phoneDisplay}
+              </a>
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackCta("mobile_menu_whatsapp", "whatsapp")}
+                className="btn-outline w-full text-center"
+                style={{ borderColor: "var(--color-whatsapp)", color: "var(--color-whatsapp)" }}
+              >
+                تواصل عبر واتساب
+              </a>
+            </div>
+          </nav>
+        </div>
+      </div>
     </header>
   );
 }

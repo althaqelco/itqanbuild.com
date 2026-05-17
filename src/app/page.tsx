@@ -1,14 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { Phone, ArrowLeft, Star, Shield, Award, CheckCircle, MapPin, Building2, Users } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
-import CostCalculator from "@/components/CostCalculator";
-import TestimonialsSlider from "@/components/TestimonialsSlider";
-import StatsCounter from "@/components/StatsCounter";
 import { Badge, WhyUsCard, ProjectCard, EEATItem, FAQ } from "@/components/HomeCards";
 import { SITE, SERVICES_LIST, DISTRICTS_LIST, WHATSAPP_URL } from "@/lib/constants";
+
+// ─── Dynamic Imports — below-the-fold client components ───
+const CostCalculator = dynamic(
+  () => import("@/components/CostCalculator"),
+  { loading: () => <div className="skeleton h-96 rounded-3xl" /> }
+);
+const TestimonialsSlider = dynamic(
+  () => import("@/components/TestimonialsSlider"),
+  { loading: () => <div className="skeleton h-80 rounded-2xl" /> }
+);
+const StatsCounter = dynamic(
+  () => import("@/components/StatsCounter"),
+  { loading: () => <div className="skeleton h-40 rounded-2xl" /> }
+);
 
 export const revalidate = 3600;
 
@@ -69,7 +81,7 @@ export default function HomePage() {
             priority
             className="object-cover"
             sizes="100vw"
-            quality={90}
+            quality={75}
           />
           {/* Gradient Overlay */}
           <div

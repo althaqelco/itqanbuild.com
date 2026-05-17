@@ -8,11 +8,11 @@ import "./globals.css";
 // ─── Arabic Fonts — locally hosted by next/font ───
 const cairo = Cairo({
   subsets: ["arabic", "latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "600", "700", "800"],
   display: "swap",
   variable: "--font-primary",
   preload: true,
-  fallback: ["system-ui", "sans-serif"],
+  fallback: ["Tajawal", "Noto Sans Arabic", "system-ui", "sans-serif"],
 });
 
 const alexandria = Alexandria({

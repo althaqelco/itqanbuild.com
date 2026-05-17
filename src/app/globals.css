@@ -197,13 +197,14 @@ img, picture, video, canvas, svg {
 
 /* ─── Glass Cards ─── */
 .glass-card {
-  background: rgba(255, 255, 255, 0.85);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   border: 1px solid rgba(10, 25, 47, 0.05);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
   transition: box-shadow 0.3s var(--ease-smooth), transform 0.3s var(--ease-smooth);
+  will-change: transform;
 }
 
 .glass-card:hover {
@@ -317,7 +318,7 @@ img, picture, video, canvas, svg {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  animation: pulse-ring 2.5s ease-out infinite 3s;
+  animation: pulse-ring 2.5s ease-out 3 3s;
   pointer-events: none;
 }
 
@@ -501,6 +502,20 @@ details[open] summary {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Mobile GPU optimization ─── */
+@media (max-width: 768px) {
+  .glass-card {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.97);
+  }
+  .glass-card-dark {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: rgba(10, 25, 47, 0.65);
   }
 }
 

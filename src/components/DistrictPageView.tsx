@@ -1,11 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { ArrowLeft, Phone, MapPin, AlertTriangle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import AITLDRBox from "@/components/AITLDRBox";
-import CostCalculator from "@/components/CostCalculator";
+
+const CostCalculator = dynamic(
+  () => import("@/components/CostCalculator"),
+  { loading: () => <div className="skeleton h-96 rounded-3xl" /> }
+);
+
 import DistrictPolygonMap from "@/components/DistrictPolygonMap";
 import {
   SITE,
@@ -51,7 +57,7 @@ export default function DistrictPageView({ slug }: { slug: string }) {
             priority
             className="object-cover"
             sizes="100vw"
-            quality={90}
+            quality={75}
           />
           <div
             className="absolute inset-0"

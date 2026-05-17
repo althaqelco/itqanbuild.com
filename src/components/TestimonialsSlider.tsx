@@ -7,6 +7,7 @@ import { TESTIMONIALS, type Testimonial } from "@/lib/testimonials";
 /**
  * TestimonialsSlider — INP-safe carousel
  * - Auto-advances every 6s (pausable on hover)
+ * - Only auto-advances when visible (IntersectionObserver)
  * - Touch swipe support on mobile
  * - Keyboard accessible (arrow keys + tab)
  * - Pure CSS transitions (no animation libraries)
@@ -14,15 +15,29 @@ import { TESTIMONIALS, type Testimonial } from "@/lib/testimonials";
 export default function TestimonialsSlider() {
   const [active, setActive] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
 
+  // ─── Visibility Observer — stops CPU work when off-screen ───
   useEffect(() => {
-    if (isPaused) return;
+    const node = containerRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (isPaused || !isVisible) return;
     const interval = setInterval(() => {
       setActive((prev) => (prev + 1) % TESTIMONIALS.length);
     }, 6000);
     return () => clearInterval(interval);
-  }, [isPaused]);
+  }, [isPaused, isVisible]);
 
   function next() {
     setActive((prev) => (prev + 1) % TESTIMONIALS.length);
@@ -54,6 +69,7 @@ export default function TestimonialsSlider() {
 
   return (
     <div
+      ref={containerRef}
       className="relative"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}

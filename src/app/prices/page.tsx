@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { Phone, ArrowLeft, ShieldCheck, TrendingDown, FileText, Award, CheckCircle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
-import CostCalculator from "@/components/CostCalculator";
+
+const CostCalculator = dynamic(
+  () => import("@/components/CostCalculator"),
+  { loading: () => <div className="skeleton h-96 rounded-3xl" /> }
+);
+
 import { SITE, SERVICES_LIST, WHATSAPP_URL } from "@/lib/constants";
 
 export const revalidate = 86400;
