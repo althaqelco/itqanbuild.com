@@ -104,7 +104,6 @@ export function generateOrganizationSchema() {
       author: { "@type": "Person", name: t.name },
       datePublished: t.date,
       reviewBody: t.text,
-      itemReviewed: { "@id": `${BASE_URL}/#organization` },
     })),
     foundingDate: SITE.foundedYear.toString(),
     taxID: SITE.crNumber,
