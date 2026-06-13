@@ -20,18 +20,18 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { StatCard, SpecialtyTag, CredentialCard, ValueCard } from "@/components/AboutCards";
-import { SITE, WHATSAPP_URL, SERVICES_LIST, DISTRICTS_LIST } from "@/lib/constants";
+import { SITE, WHATSAPP_URL, SERVICES_LIST, DISTRICTS_LIST, toOgImage } from "@/lib/constants";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: `من نحن — ${SITE.name} | مقاول جدة المعتمد منذ ${SITE.foundedYear}`,
+  title: `من نحن — مقاول جدة المعتمد منذ ${SITE.foundedYear}`,
   description: `تعرّف على ${SITE.name} — مقاول جدة المعتمد منذ ${SITE.foundedYear}. ${SITE.projectsCompleted}+ مشروع منجز، فريق هندسي بقيادة م. أحمد الحربي، ضمان مكتوب ١٠ سنوات.`,
   alternates: { canonical: `${SITE.url}/about` },
   openGraph: {
     title: `من نحن — ${SITE.name}`,
     description: `مقاول جدة المعتمد — ${SITE.yearsExperience} سنة خبرة و${SITE.projectsCompleted}+ مشروع منجز في جميع أحياء جدة.`,
-    images: [{ url: "/images/team-main-contractor-jeddah.avif", width: 1200, height: 630 }],
+    images: [{ url: toOgImage("/images/team-main-contractor-jeddah.avif"), width: 1200, height: 630, type: "image/jpeg" }],
   },
 };
 
@@ -137,7 +137,7 @@ export default function AboutPage() {
   return (
     <>
       <Header />
-      <main>
+      <main id="main">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema()) }}

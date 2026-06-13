@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import Script from "next/script";
 import { Cairo, Alexandria } from "next/font/google";
 import { generateRootGraph } from "@/lib/schema";
-import { SITE } from "@/lib/constants";
+import { SITE, DEFAULT_OG_IMAGE } from "@/lib/constants";
+import GAListener from "@/components/GAListener";
 import "./globals.css";
 
 // ─── Arabic Fonts — locally hosted by next/font ───
@@ -17,7 +19,7 @@ const cairo = Cairo({
 
 const alexandria = Alexandria({
   subsets: ["arabic", "latin"],
-  weight: ["500", "600", "700", "800"],
+  weight: ["600", "700", "800"],
   display: "swap",
   variable: "--font-heading",
   preload: true,
@@ -73,9 +75,10 @@ export const metadata: Metadata = {
       `مقاول جدة المرخص — ${SITE.yearsExperience}+ سنة خبرة | بناء · ترميم · شبوك · أسفلت | ضمان مكتوب`,
     images: [
       {
-        url: "/images/og-image-default.png",
+        url: DEFAULT_OG_IMAGE,
         width: 1200,
         height: 630,
+        type: "image/jpeg",
         alt: `${SITE.name} — مقاول جدة`,
       },
     ],
@@ -85,7 +88,7 @@ export const metadata: Metadata = {
     title: `${SITE.name} | مقاول جدة المعتمد`,
     description:
       `مقاول جدة المرخص — ${SITE.yearsExperience}+ سنة خبرة | بناء · ترميم · شبوك · أسفلت | ضمان مكتوب`,
-    images: ["/images/og-image-default.png"],
+    images: [DEFAULT_OG_IMAGE],
   },
   alternates: {
     canonical: SITE.url,
@@ -156,7 +159,13 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <a href="#main" className="skip-link">تخطّي إلى المحتوى</a>
+        {children}
+        <Suspense fallback={null}>
+          <GAListener gaId={GA4_ID} />
+        </Suspense>
+      </body>
     </html>
   );
 }

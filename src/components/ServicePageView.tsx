@@ -20,6 +20,7 @@ import {
 } from "@/lib/constants";
 import { generateServiceGraph } from "@/lib/schema";
 import { SERVICE_CONTENT } from "@/lib/service-content";
+import { BLOG_POSTS, BLOG_POST_SERVICE } from "@/lib/blog-data";
 import { notFound } from "next/navigation";
 
 export default function ServicePageView({ slug }: { slug: string }) {
@@ -29,11 +30,15 @@ export default function ServicePageView({ slug }: { slug: string }) {
 
   const schema = generateServiceGraph(svc, content.faqs);
   const related = content.relatedKeys.map((k) => SERVICES[k]).filter(Boolean);
+  // Topically-matched articles → links from the money page into the content cluster
+  const relatedPosts = BLOG_POSTS.filter(
+    (p) => BLOG_POST_SERVICE[p.slug] === svc.key
+  ).slice(0, 3);
 
   return (
     <>
       <Header />
-      <main>
+      <main id="main">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
@@ -205,6 +210,10 @@ export default function ServicePageView({ slug }: { slug: string }) {
         {((content.safetyNotes && content.safetyNotes.length > 0) || (content.standards && content.standards.length > 0)) && (
           <section className="section-padding bg-section-alt">
             <div className="container-wide max-w-4xl">
+              <div className="mb-8">
+                <span className="gold-accent" />
+                <h2 className="text-xl md:text-2xl font-extrabold">السلامة والمعايير الفنية</h2>
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {content.safetyNotes && content.safetyNotes.length > 0 && (
                   <div>
@@ -212,7 +221,7 @@ export default function ServicePageView({ slug }: { slug: string }) {
                       <span className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "rgba(231,76,60,0.08)", color: "var(--color-danger)" }}>
                         <AlertTriangle className="w-5 h-5" />
                       </span>
-                      <h2 className="text-lg font-extrabold">إرشادات السلامة</h2>
+                      <h3 className="text-lg font-extrabold">إرشادات السلامة</h3>
                     </div>
                     <ul className="space-y-3">
                       {content.safetyNotes.map((note, i) => (
@@ -230,7 +239,7 @@ export default function ServicePageView({ slug }: { slug: string }) {
                       <span className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "rgba(212,175,55,0.08)", color: "var(--color-gold)" }}>
                         <ClipboardList className="w-5 h-5" />
                       </span>
-                      <h2 className="text-lg font-extrabold">المعايير والمواصفات</h2>
+                      <h3 className="text-lg font-extrabold">المعايير والمواصفات</h3>
                     </div>
                     <ul className="space-y-3">
                       {content.standards.map((std, i) => (
@@ -354,12 +363,50 @@ export default function ServicePageView({ slug }: { slug: string }) {
                     color: "var(--color-navy)",
                   }}
                 >
-                  {d.name}
+                  مقاول {d.name}
                 </Link>
               ))}
             </div>
           </div>
         </section>
+
+        {/* USEFUL ARTICLES — service → blog cluster links */}
+        {relatedPosts.length > 0 && (
+          <section className="section-padding bg-section-alt">
+            <div className="container-wide">
+              <div className="text-center mb-8">
+                <span className="gold-accent mx-auto" />
+                <h2 className="text-xl font-extrabold mb-3">
+                  مقالات ودلائل مفيدة عن {svc.h1.split("—")[0].trim()}
+                </h2>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                {relatedPosts.map((p) => (
+                  <Link
+                    key={p.slug}
+                    href={`/blog/${p.slug}`}
+                    className="glass-card overflow-hidden group hover:-translate-y-1 transition-all"
+                  >
+                    <div className="relative h-36 overflow-hidden">
+                      <Image
+                        src={p.image}
+                        alt={p.imageAlt}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        sizes="33vw"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <h3 className="text-sm font-bold leading-relaxed group-hover:text-[var(--color-gold)] transition-colors">
+                        {p.h1}
+                      </h3>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* CTA */}
         <section

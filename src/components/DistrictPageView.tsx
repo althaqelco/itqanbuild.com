@@ -23,6 +23,7 @@ import {
 } from "@/lib/constants";
 import { generateDistrictGraph } from "@/lib/schema";
 import { DISTRICT_CONTENT } from "@/lib/district-content";
+import { BLOG_POSTS } from "@/lib/blog-data";
 import { notFound } from "next/navigation";
 
 export default function DistrictPageView({ slug }: { slug: string }) {
@@ -34,12 +35,17 @@ export default function DistrictPageView({ slug }: { slug: string }) {
     name: dist.name,
     slug: dist.slug,
     geo: dist.geo,
+    description: dist.description,
+    image: dist.image,
+    faqs: content.faqs,
   });
+
+  const guides = BLOG_POSTS.filter((p) => p.tier === "pillar").slice(0, 3);
 
   return (
     <>
       <Header />
-      <main>
+      <main id="main">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
@@ -374,6 +380,42 @@ export default function DistrictPageView({ slug }: { slug: string }) {
             </div>
           </div>
         </section>
+
+        {/* USEFUL GUIDES — district → blog cluster links */}
+        {guides.length > 0 && (
+          <section className="section-padding bg-section-alt">
+            <div className="container-wide">
+              <div className="text-center mb-8">
+                <span className="gold-accent mx-auto" />
+                <h2 className="text-xl font-extrabold mb-3">أدلة مفيدة قبل أن تبدأ مشروعك</h2>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                {guides.map((p) => (
+                  <Link
+                    key={p.slug}
+                    href={`/blog/${p.slug}`}
+                    className="glass-card overflow-hidden group hover:-translate-y-1 transition-all"
+                  >
+                    <div className="relative h-36 overflow-hidden">
+                      <Image
+                        src={p.image}
+                        alt={p.imageAlt}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        sizes="33vw"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <h3 className="text-sm font-bold leading-relaxed group-hover:text-[var(--color-gold)] transition-colors">
+                        {p.h1}
+                      </h3>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* CTA */}
         <section

@@ -6,8 +6,10 @@ const nextConfig: NextConfig = {
   compress: true,
 
   // ═══ Performance Optimizations ═══
+  // NOTE: experimental.optimizeCss removed — it's a no-op on the App Router
+  // (critters only runs through the Pages Router post-process path) and its
+  // dependency isn't installed, so the flag was misleading dead config.
   experimental: {
-    optimizeCss: true,
     scrollRestoration: true,
   },
 

@@ -6,20 +6,20 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import BlogCategoryFilter from "@/components/BlogCategoryFilter";
-import { SITE, WHATSAPP_URL } from "@/lib/constants";
+import { SITE, WHATSAPP_URL, DEFAULT_OG_IMAGE } from "@/lib/constants";
 import { BLOG_POSTS } from "@/lib/blog-data";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: `المدونة — ${SITE.name} | ${BLOG_POSTS.length} مقالة عن المقاولات في جدة`,
+  title: `المدونة — ${BLOG_POSTS.length} مقالة عن المقاولات في جدة`,
   description: `${BLOG_POSTS.length} مقالة متخصصة عن المقاولات في جدة — أدلة أسعار، مراحل البناء، أنواع الشبوك، الأساسات، العزل، المنزل الذكي، ونصائح اختيار المقاول.`,
   alternates: { canonical: `${SITE.url}/blog` },
   openGraph: {
     title: `مدونة ${SITE.name} | ${BLOG_POSTS.length} مقالة متخصصة`,
     description: `أدلة أسعار المقاولات، مراحل البناء، ونصائح اختيار المقاول في جدة ٢٠٢٦`,
     url: `${SITE.url}/blog`,
-    images: [{ url: "/images/og-image-default.png", width: 1200, height: 630 }],
+    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, type: "image/jpeg" }],
   },
 };
 
@@ -71,7 +71,7 @@ export default function BlogPage() {
   return (
     <>
       <Header />
-      <main>
+      <main id="main">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema()) }}

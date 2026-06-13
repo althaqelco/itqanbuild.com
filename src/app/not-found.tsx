@@ -9,7 +9,7 @@ export default function NotFound() {
   return (
     <>
       <Header />
-      <main>
+      <main id="main">
         {/* Hero */}
         <section
           className="relative flex items-center justify-center"

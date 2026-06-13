@@ -1,33 +1,34 @@
 import type { MetadataRoute } from "next";
-import { SITE, SERVICES_LIST, DISTRICTS_LIST } from "@/lib/constants";
+import { SITE, SERVICES_LIST, DISTRICTS_LIST, LAST_CONTENT_UPDATE } from "@/lib/constants";
 import { BLOG_POSTS } from "@/lib/blog-data";
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = SITE.url;
-  const now = new Date().toISOString();
+  // Stable content-modified date — avoids a churning lastmod that resets every deploy
+  const updated = LAST_CONTENT_UPDATE;
 
   const staticPages: MetadataRoute.Sitemap = [
-    { url: base, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
-    { url: `${base}/jeddah`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${base}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${base}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${base}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${base}/prices`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
-    { url: `${base}/projects`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: base, lastModified: updated, changeFrequency: "weekly", priority: 1.0 },
+    { url: `${base}/jeddah`, lastModified: updated, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${base}/about`, lastModified: updated, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${base}/contact`, lastModified: updated, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${base}/blog`, lastModified: updated, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${base}/prices`, lastModified: updated, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${base}/projects`, lastModified: updated, changeFrequency: "monthly", priority: 0.8 },
   ];
 
   const servicePages: MetadataRoute.Sitemap = SERVICES_LIST.map((s) => ({
     url: `${base}/jeddah/${s.slug}`,
-    lastModified: now,
+    lastModified: updated,
     changeFrequency: "weekly" as const,
     priority: 0.85,
   }));
 
   const districtPages: MetadataRoute.Sitemap = DISTRICTS_LIST.map((d) => ({
     url: `${base}/jeddah/${d.slug}`,
-    lastModified: now,
+    lastModified: updated,
     changeFrequency: "weekly" as const,
     priority: 0.8,
   }));

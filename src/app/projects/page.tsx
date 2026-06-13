@@ -5,19 +5,19 @@ import { ArrowLeft, MapPin, Calendar, CheckCircle, Phone, ShieldCheck, Award } f
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
-import { SITE, WHATSAPP_URL, SERVICES_LIST } from "@/lib/constants";
+import { SITE, WHATSAPP_URL, SERVICES_LIST, DEFAULT_OG_IMAGE } from "@/lib/constants";
 
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title: `معرض مشاريعنا في جدة — ${SITE.projectsCompleted}+ مشروع | ${SITE.name}`,
+  title: `معرض مشاريعنا في جدة — ${SITE.projectsCompleted}+ مشروع منجز`,
   description:
-    `معرض مشاريع ${SITE.name} — ${SITE.projectsCompleted}+ مشروع منجز في جدة بضمان مكتوب. صور قبل/بعد بإحداثيات GPS. ترميم، بناء، شبوك، أسفلت، ملاحق، هناجر، تشطيبات. سجل تجاري ${SITE.crNumber}.`,
+    `معرض مشاريع ${SITE.name} — ${SITE.projectsCompleted}+ مشروع منجز في جدة بضمان مكتوب. صور قبل/بعد لأعمال الترميم والبناء والشبوك والأسفلت والملاحق والهناجر والتشطيبات.`,
   alternates: { canonical: `${SITE.url}/projects` },
   openGraph: {
     title: `معرض المشاريع — ${SITE.name}`,
     description: `أكثر من ${SITE.projectsCompleted} مشروع منجز في جدة بضمان مكتوب.`,
-    images: [{ url: "/images/og-image-default.png", width: 1200, height: 630 }],
+    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, type: "image/jpeg" }],
   },
 };
 
@@ -221,7 +221,7 @@ export default function ProjectsPage() {
   return (
     <>
       <Header />
-      <main>
+      <main id="main">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsPageSchema()) }}

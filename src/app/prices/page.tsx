@@ -11,20 +11,20 @@ const CostCalculator = dynamic(
   { loading: () => <div className="skeleton h-96 rounded-3xl" /> }
 );
 
-import { SITE, SERVICES_LIST, WHATSAPP_URL } from "@/lib/constants";
+import { SITE, SERVICES_LIST, WHATSAPP_URL, DEFAULT_OG_IMAGE } from "@/lib/constants";
 
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title: `أسعار المقاولات في جدة ٢٠٢٦ — جدول شامل | ${SITE.name}`,
+  title: `أسعار المقاولات في جدة ٢٠٢٦ — جدول شامل`,
   description:
-    `أسعار المقاولات في جدة ٢٠٢٦ — جدول شفاف لـ ٩ خدمات + حاسبة تكلفة تفاعلية + تعديلات لكل حي. سجل تجاري ${SITE.crNumber}. معاينة مجانية + عرض سعر مكتوب.`,
+    `أسعار المقاولات في جدة ٢٠٢٦ — جدول شفاف لـ ٩ خدمات + حاسبة تكلفة تفاعلية حسب الحي. معاينة مجانية وعرض سعر مكتوب خلال ٢٤ ساعة.`,
   alternates: { canonical: `${SITE.url}/prices` },
   openGraph: {
-    title: `أسعار المقاولات في جدة ٢٠٢٦ | ${SITE.name}`,
+    title: `أسعار المقاولات في جدة ٢٠٢٦`,
     description:
       "جدول أسعار شفاف لجميع خدمات المقاولات في جدة + حاسبة تكلفة تفاعلية حسب الحي ومستوى التشطيب.",
-    images: [{ url: "/images/og-image-default.png", width: 1200, height: 630 }],
+    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, type: "image/jpeg" }],
   },
 };
 
@@ -235,7 +235,7 @@ export default function PricesPage() {
   return (
     <>
       <Header />
-      <main>
+      <main id="main">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 
         {/* HERO */}

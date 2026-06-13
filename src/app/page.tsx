@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { Badge, WhyUsCard, ProjectCard, EEATItem, FAQ } from "@/components/HomeCards";
 import { SITE, SERVICES_LIST, DISTRICTS_LIST, WHATSAPP_URL } from "@/lib/constants";
+import { BLOG_POSTS } from "@/lib/blog-data";
 
 // ─── Dynamic Imports — below-the-fold client components ───
 const CostCalculator = dynamic(
@@ -51,6 +52,9 @@ function homePageSchema() {
       },
       {
         "@type": "FAQPage",
+        "@id": `${SITE.url}/#faq`,
+        isPartOf: { "@id": `${SITE.url}/#webpage` },
+        inLanguage: "ar",
         mainEntity: HOME_FAQS.map((f) => ({
           "@type": "Question",
           name: f.q,
@@ -62,11 +66,12 @@ function homePageSchema() {
 }
 
 export default function HomePage() {
+  const featuredPosts = BLOG_POSTS.filter((p) => p.tier === "pillar").slice(0, 3);
   return (
     <>
       <Header />
 
-      <main>
+      <main id="main">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(homePageSchema()) }}
@@ -195,6 +200,16 @@ export default function HomePage() {
                   </div>
                 </Link>
               ))}
+            </div>
+
+            <div className="text-center mt-8">
+              <Link
+                href="/jeddah"
+                className="inline-flex items-center gap-1 text-sm font-bold"
+                style={{ color: "var(--color-gold-dark)" }}
+              >
+                مقاول جدة — كل الخدمات والأحياء ←
+              </Link>
             </div>
           </div>
         </section>
@@ -432,7 +447,7 @@ export default function HomePage() {
                 },
                 {
                   icon: <Star className="w-6 h-6" />,
-                  value: 87,
+                  value: 10,
                   suffix: "+",
                   label: "تقييم إيجابي",
                 },
@@ -471,6 +486,49 @@ export default function HomePage() {
               <FAQ q="كيف أتحقق من ترخيص المقاول في جدة؟" a="يمكنك التحقق من ترخيص أي مقاول عبر منصة بلدي (balady.gov.sa) برقم السجل التجاري، أو عبر منصة مقاول التابعة لهيئة المقاولين السعودية." />
               <FAQ q="هل يحتاج الملحق رخصة بناء في جدة؟" a="نعم، أي ملحق أو توسعة يحتاج رخصة بناء من أمانة جدة عبر نظام ابني. نساعدك في استخراج الكروكي التنظيمي وجميع التصاريح اللازمة." />
               <FAQ q="ما هو سعر متر الشبوك في جدة؟" a="يبدأ من ٢٥ ريال/م.ط للشبك المجدول العادي ويصل إلى ٥٠٠ ريال/م.ط للشبك الأمني المقوى. السعر يعتمد على النوع والارتفاع والمنطقة." />
+            </div>
+          </div>
+        </section>
+
+        {/* ═══ FROM THE BLOG — home → content cluster ═══ */}
+        <section className="section-padding bg-section-alt">
+          <div className="container-wide">
+            <div className="text-center mb-10">
+              <span className="gold-accent mx-auto" />
+              <h2 className="text-2xl md:text-3xl font-extrabold mb-3">من مدونتنا</h2>
+              <p className="text-sm max-w-lg mx-auto" style={{ color: "rgba(10,25,47,0.55)" }}>
+                أدلة عملية تساعدك على اتخاذ القرار الصحيح قبل بدء مشروعك في جدة
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {featuredPosts.map((p) => (
+                <Link
+                  key={p.slug}
+                  href={`/blog/${p.slug}`}
+                  className="glass-card overflow-hidden group hover:-translate-y-1 transition-all duration-300"
+                >
+                  <div className="relative h-44 overflow-hidden">
+                    <Image
+                      src={p.image}
+                      alt={p.imageAlt}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <span className="text-[11px]" style={{ color: "rgba(10,25,47,0.45)" }}>{p.category} · {p.readTime}</span>
+                    <h3 className="text-base font-bold leading-relaxed mt-1 group-hover:text-[var(--color-gold)] transition-colors">
+                      {p.h1}
+                    </h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <div className="text-center mt-8">
+              <Link href="/blog" className="inline-flex items-center gap-1 text-sm font-bold" style={{ color: "var(--color-gold-dark)" }}>
+                تصفّح كل المقالات ←
+              </Link>
             </div>
           </div>
         </section>

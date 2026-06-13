@@ -6,8 +6,8 @@ import { ArrowRight, Clock, Calendar } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
-import { SITE, WHATSAPP_URL } from "@/lib/constants";
-import { BLOG_POSTS } from "@/lib/blog-data";
+import { SITE, SERVICES, WHATSAPP_URL, toOgImage } from "@/lib/constants";
+import { BLOG_POSTS, BLOG_POST_SERVICE } from "@/lib/blog-data";
 import { POSTS_CONTENT } from "@/content/posts";
 
 export const revalidate = 3600;
@@ -32,23 +32,58 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.description,
       images: [
         {
-          url: post.image,
+          url: toOgImage(post.image),
           width: 1200,
           height: 630,
+          type: "image/jpeg",
           alt: post.imageAlt,
         },
       ],
       publishedTime: post.date,
-      authors: [SITE.name],
+      modifiedTime: post.dateModified ?? post.date,
+      authors: ["المهندس أحمد الحربي"],
       tags: [post.category, "مقاول جدة", "مقاولات السعودية"],
     },
     twitter: {
       card: "summary_large_image",
       title: post.h1,
       description: post.description,
-      images: [post.image],
+      images: [toOgImage(post.image)],
     },
   };
+}
+
+// Parse inline markdown: [label](url) links (internal → next/link) + **bold**
+function processInline(text: string): React.ReactNode[] {
+  const out: React.ReactNode[] = [];
+  const tokenRe = /\[([^\]]+)\]\(([^)]+)\)|\*\*(.+?)\*\*/g;
+  let last = 0;
+  let i = 0;
+  let m: RegExpExecArray | null;
+  while ((m = tokenRe.exec(text)) !== null) {
+    if (m.index > last) out.push(text.slice(last, m.index));
+    if (m[1] !== undefined) {
+      const label = m[1];
+      const href = m[2];
+      out.push(
+        href.startsWith("/") ? (
+          <Link key={i} href={href} className="article-link">
+            {label}
+          </Link>
+        ) : (
+          <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="article-link">
+            {label}
+          </a>
+        )
+      );
+    } else {
+      out.push(<strong key={i}>{m[3]}</strong>);
+    }
+    last = m.index + m[0].length;
+    i++;
+  }
+  if (last < text.length) out.push(text.slice(last));
+  return out;
 }
 
 function renderMarkdown(md: string) {
@@ -89,22 +124,14 @@ function renderMarkdown(md: string) {
     if (inTable) flushTable();
     if (!line.trim()) continue;
 
-    // Process inline bold markers
-    const processBold = (text: string) => {
-      const parts = text.split(/\*\*(.*?)\*\*/g);
-      return parts.map((part, i) =>
-        i % 2 === 1 ? <strong key={i}>{part}</strong> : part
-      );
-    };
-
     if (line.startsWith("## "))
-      elements.push(<h2 key={key++}>{line.slice(3)}</h2>);
+      elements.push(<h2 key={key++}>{processInline(line.slice(3))}</h2>);
     else if (line.startsWith("### "))
-      elements.push(<h3 key={key++}>{line.slice(4)}</h3>);
+      elements.push(<h3 key={key++}>{processInline(line.slice(4))}</h3>);
     else if (line.startsWith("- "))
-      elements.push(<li key={key++}>{processBold(line.slice(2))}</li>);
+      elements.push(<li key={key++}>{processInline(line.slice(2))}</li>);
     else
-      elements.push(<p key={key++}>{processBold(line)}</p>);
+      elements.push(<p key={key++}>{processInline(line)}</p>);
   }
   if (inTable) flushTable();
   return elements;
@@ -116,23 +143,63 @@ export default async function BlogArticlePage({ params }: Props) {
   const content = POSTS_CONTENT[slug];
   if (!post || !content) notFound();
 
-  const related = BLOG_POSTS.filter((p) => p.slug !== slug).slice(0, 3);
+  // Category/tier-aware related posts (spreads link equity beyond the first 3 pillars)
+  const related = [...BLOG_POSTS.filter((p) => p.slug !== slug)]
+    .sort((a, b) => {
+      const score = (p: (typeof BLOG_POSTS)[number]) =>
+        (p.category === post.category ? 2 : 0) + (p.tier === post.tier ? 1 : 0);
+      return score(b) - score(a);
+    })
+    .slice(0, 3);
 
+  // The commercial (money) page this article supports — for in-content internal linking
+  const relatedService = SERVICES[BLOG_POST_SERVICE[slug]];
+
+  const pageUrl = `${SITE.url}/blog/${slug}`;
   const articleSchema = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    headline: post.h1,
-    description: post.description,
-    image: `${SITE.url}${post.image}`,
-    datePublished: post.date,
-    author: { "@type": "Organization", name: SITE.name, url: SITE.url },
-    publisher: { "@type": "Organization", name: SITE.name, logo: { "@type": "ImageObject", url: `${SITE.url}/icons/logo.png` } },
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}/#webpage`,
+        url: pageUrl,
+        name: post.title,
+        description: post.description,
+        isPartOf: { "@id": `${SITE.url}/#website` },
+        breadcrumb: { "@id": `${pageUrl}/#breadcrumb` },
+        inLanguage: "ar",
+      },
+      {
+        "@type": "Article",
+        "@id": `${pageUrl}/#article`,
+        headline: post.h1,
+        description: post.description,
+        image: `${SITE.url}${toOgImage(post.image)}`,
+        datePublished: post.date,
+        dateModified: post.dateModified ?? post.date,
+        inLanguage: "ar",
+        articleSection: post.category,
+        author: { "@id": `${SITE.url}/#engineer` },
+        publisher: { "@id": `${SITE.url}/#organization` },
+        isPartOf: { "@id": `${pageUrl}/#webpage` },
+        mainEntityOfPage: { "@id": `${pageUrl}/#webpage` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${pageUrl}/#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "الرئيسية", item: SITE.url },
+          { "@type": "ListItem", position: 2, name: "المدونة", item: `${SITE.url}/blog` },
+          { "@type": "ListItem", position: 3, name: post.h1, item: pageUrl },
+        ],
+      },
+    ],
   };
 
   return (
     <>
       <Header />
-      <main>
+      <main id="main">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
 
         {/* Hero */}
@@ -162,8 +229,29 @@ export default async function BlogArticlePage({ params }: Props) {
           <div className="container-wide" style={{ maxWidth: "720px" }}>
             <article className="prose-article">{renderMarkdown(content)}</article>
 
+            {/* Related Service — contextual internal link to the money page */}
+            {relatedService && (
+              <Link
+                href={`/jeddah/${relatedService.slug}`}
+                className="mt-10 glass-card p-5 flex items-start gap-4 group hover:-translate-y-0.5 transition-all"
+              >
+                <div className="relative w-20 h-20 rounded-xl overflow-hidden shrink-0">
+                  <Image src={relatedService.image} alt={relatedService.imageAlt} fill className="object-cover" sizes="80px" />
+                </div>
+                <div>
+                  <span className="text-[11px]" style={{ color: "rgba(10,25,47,0.45)" }}>خدمة ذات صلة في جدة</span>
+                  <h3 className="text-base font-bold mb-1 group-hover:text-[var(--color-gold-dark)] transition-colors">
+                    {relatedService.h1.split("—")[0].trim()} ←
+                  </h3>
+                  <p className="text-xs leading-relaxed" style={{ color: "rgba(10,25,47,0.6)" }}>
+                    {relatedService.tldr.scope} · {relatedService.tldr.priceRange}
+                  </p>
+                </div>
+              </Link>
+            )}
+
             {/* CTA */}
-            <div className="mt-10 p-5 rounded-xl text-center" style={{ background: "var(--color-navy)" }}>
+            <div className="mt-6 p-5 rounded-xl text-center" style={{ background: "var(--color-navy)" }}>
               <p className="text-base font-bold mb-3" style={{ color: "var(--color-pearl)" }}>هل تحتاج استشارة مجانية؟</p>
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-gold">تواصل عبر واتساب</a>
             </div>

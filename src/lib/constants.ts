@@ -8,6 +8,7 @@ export const SITE = {
   nameEn: "ItqanBuild Contractors",
   tagline: "مقاول جدة — إتقان في كل تفصيلة",
   url: "https://itqanbuild.com",
+  logo: "/logo.png",
   phone: "+966542317431",
   phoneDisplay: "٠٥٤ ٢٣١ ٧٤٣١",
   whatsapp: "966542317431",
@@ -28,6 +29,13 @@ export const SITE = {
   geo: {
     latitude: 21.5433,
     longitude: 39.1728,
+  },
+  // ─── Opening Hours — Single Source of Truth (Sat–Thu 08:00–17:00, Fri closed) ───
+  openingHours: {
+    days: ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+    opens: "08:00",
+    closes: "17:00",
+    display: "السبت – الخميس: ٨:٠٠ ص – ٥:٠٠ م · الجمعة إجازة",
   },
   social: {
     instagram: "https://www.instagram.com/itqanbuild",
@@ -70,7 +78,7 @@ export const SERVICES: Record<ServiceKey, ServiceData> = {
   tarmeem: {
     key: "tarmeem",
     slug: "tarmeem",
-    title: "مقاول ترميم جدة | ترميم منازل وفلل — إتقان للمقاولات",
+    title: "مقاول ترميم جدة | ترميم منازل وفلل",
     h1: "مقاول ترميم جدة — تجديد شامل بأسعار تنافسية",
     description:
       "مقاول ترميم جدة المعتمد ✓ ترميم شامل للمنازل والفلل والشقق ✓ أسعار تنافسية ✓ ضمان 3 سنوات مكتوبة",
@@ -87,7 +95,7 @@ export const SERVICES: Record<ServiceKey, ServiceData> = {
   shboak: {
     key: "shboak",
     slug: "shboak",
-    title: "مقاول شبوك جدة | أسوار وشبوك حديد — إتقان للمقاولات",
+    title: "مقاول شبوك جدة | أسوار وشبوك حديد",
     h1: "مقاول شبوك جدة — حلول أسوار لكل الاستخدامات",
     description:
       "مقاول شبوك جدة ✓ شبوك حديد وألمنيوم وبلاستيك ✓ تركيب احترافي ✓ ضمان ٥ سنوات على المجلفنة",
@@ -104,7 +112,7 @@ export const SERVICES: Record<ServiceKey, ServiceData> = {
   asphalt: {
     key: "asphalt",
     slug: "asphalt",
-    title: "مقاول اسفلت جدة | تبليط طرق ومواقف — إتقان للمقاولات",
+    title: "مقاول اسفلت جدة | تبليط طرق ومواقف",
     h1: "مقاول اسفلت جدة — تبليط احترافي بمعايير الطرق السعودية",
     description:
       "مقاول اسفلت جدة ✓ طرق ومواقف سيارات وساحات ✓ أسفلت بارد وساخن ✓ ضمان سنتين",
@@ -121,7 +129,7 @@ export const SERVICES: Record<ServiceKey, ServiceData> = {
   binaa: {
     key: "binaa",
     slug: "binaa",
-    title: "مقاول بناء جدة | بناء فلل وعمارات — إتقان للمقاولات",
+    title: "مقاول بناء جدة | بناء فلل وعمارات",
     h1: "مقاول بناء جدة — من التصميم إلى التسليم",
     description:
       "مقاول بناء جدة ✓ فلل وعمارات ومستودعات ✓ تسليم مفتاح بالمواد ✓ ضمان ١٠ سنوات هيكلي",
@@ -138,7 +146,7 @@ export const SERVICES: Record<ServiceKey, ServiceData> = {
   molahaq: {
     key: "molahaq",
     slug: "molahaq",
-    title: "مقاول ملاحق جدة | بناء ملاحق منازل — إتقان للمقاولات",
+    title: "مقاول ملاحق جدة | بناء ملاحق منازل",
     h1: "مقاول ملاحق جدة — حلول توسعة منزلك بترخيص",
     description:
       "مقاول ملاحق جدة ✓ ملاحق سطح وجانبية وغرف إضافية ✓ مساعدة في التصاريح ✓ ضمان ٥ سنوات",
@@ -155,7 +163,7 @@ export const SERVICES: Record<ServiceKey, ServiceData> = {
   general: {
     key: "general",
     slug: "general",
-    title: "مقاول عام جدة | مقاول معماري معتمد — إتقان للمقاولات",
+    title: "مقاول عام جدة | مقاول معماري معتمد",
     h1: "مقاول عام جدة — حلول مقاولات متكاملة",
     description:
       "مقاول عام جدة المعتمد ✓ مقاولات شاملة ✓ إشراف هندسي ✓ تنفيذ متكامل لجميع الأعمال",
@@ -172,7 +180,7 @@ export const SERVICES: Record<ServiceKey, ServiceData> = {
   hadm: {
     key: "hadm",
     slug: "hadm",
-    title: "مقاول هدم جدة | هدم مباني وإزالة — إتقان للمقاولات",
+    title: "مقاول هدم جدة | هدم مباني وإزالة",
     h1: "مقاول هدم جدة — إزالة آمنة ومرخصة",
     description:
       "مقاول هدم جدة ✓ هدم مباني وإزالة أسوار ✓ ردم ونقل مخلفات ✓ تصاريح + تأمين ضد الأضرار",
@@ -189,7 +197,7 @@ export const SERVICES: Record<ServiceKey, ServiceData> = {
   hanager: {
     key: "hanager",
     slug: "hanager",
-    title: "مقاول هناجر جدة | هناجر حديد ومستودعات — إتقان للمقاولات",
+    title: "مقاول هناجر جدة | هناجر حديد ومستودعات",
     h1: "مقاول هناجر جدة — إنشاء سريع وتوريد فوري",
     description:
       "مقاول هناجر جدة ✓ هناجر حديد ومستودعات صناعية ✓ تصنيع وتركيب ✓ ضمان ١٠ سنوات هيكلي",
@@ -206,7 +214,7 @@ export const SERVICES: Record<ServiceKey, ServiceData> = {
   tashteebat: {
     key: "tashteebat",
     slug: "tashteebat",
-    title: "مقاول تشطيبات جدة | دهانات وتشطيب فلل — إتقان للمقاولات",
+    title: "مقاول تشطيبات جدة | دهانات وتشطيب فلل",
     h1: "مقاول تشطيبات جدة — فلل وشقق بجودة فندقية",
     description:
       "مقاول تشطيبات جدة ✓ تشطيب A/B/C ✓ دهانات داخلية وخارجية ✓ واجهات بروفايل ✓ ضمان سنتين",
@@ -223,6 +231,42 @@ export const SERVICES: Record<ServiceKey, ServiceData> = {
 };
 
 export const SERVICES_LIST = Object.values(SERVICES);
+
+// ─── Arabic serviceType labels for JSON-LD (avoids Latin slug leaking into schema) ───
+export const SERVICE_TYPE_AR: Record<ServiceKey, string> = {
+  tarmeem: "ترميم",
+  shboak: "شبوك",
+  asphalt: "أسفلت",
+  binaa: "بناء",
+  molahaq: "ملاحق",
+  general: "مقاولات عامة",
+  hadm: "هدم",
+  hanager: "هناجر",
+  tashteebat: "تشطيبات",
+};
+
+// ─── Machine-readable price ranges (SAR) for Offer schema; null = quote-based ───
+export const SERVICE_PRICE_RANGE: Record<ServiceKey, { low: number; high: number } | null> = {
+  tarmeem: { low: 150, high: 1000 },
+  shboak: { low: 25, high: 500 },
+  asphalt: { low: 35, high: 120 },
+  binaa: { low: 1000, high: 3000 },
+  molahaq: { low: 800, high: 1800 },
+  general: null,
+  hadm: { low: 15, high: 60 },
+  hanager: { low: 250, high: 600 },
+  tashteebat: { low: 200, high: 1200 },
+};
+
+// ─── OG image helper: maps a square AVIF content photo to its 1200×630 JPG twin ───
+// (social crawlers — Twitter/X especially — need JPG/PNG at 1.91:1, not square AVIF)
+export const toOgImage = (src: string): string => src.replace(/\.avif$/, "-og.jpg");
+
+// Default OG image for pages without a dedicated hero (1200×630 JPG)
+export const DEFAULT_OG_IMAGE = "/images/hero-contractor-jeddah-og.jpg";
+
+// Last meaningful content update — stable sitemap lastmod (avoids churning every deploy)
+export const LAST_CONTENT_UPDATE = "2026-06-13";
 
 export interface DistrictData {
   key: string;

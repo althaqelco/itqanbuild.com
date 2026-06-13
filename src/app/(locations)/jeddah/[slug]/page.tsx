@@ -6,6 +6,7 @@ import {
   SERVICES_LIST,
   DISTRICTS,
   DISTRICTS_LIST,
+  toOgImage,
   type ServiceKey,
 } from "@/lib/constants";
 import ServicePageView from "@/components/ServicePageView";
@@ -37,20 +38,23 @@ export async function generateMetadata({
       openGraph: {
         title: svc.h1,
         description: svc.description,
-        images: [{ url: svc.image, width: 1200, height: 630 }],
+        url: `${SITE.url}/jeddah/${slug}`,
+        images: [{ url: toOgImage(svc.image), width: 1200, height: 630, type: "image/jpeg" }],
       },
     };
   }
   const dist = DISTRICTS[slug];
   if (dist) {
+    // Short, front-loaded title — the root template appends the brand exactly once
     return {
-      title: `${dist.h1} — ${SITE.name}`,
+      title: `مقاول ${dist.name} جدة`,
       description: dist.description,
       alternates: { canonical: `${SITE.url}/jeddah/${slug}` },
       openGraph: {
         title: dist.h1,
         description: dist.description,
-        images: [{ url: dist.image, width: 1200, height: 630 }],
+        url: `${SITE.url}/jeddah/${slug}`,
+        images: [{ url: toOgImage(dist.image), width: 1200, height: 630, type: "image/jpeg" }],
       },
     };
   }

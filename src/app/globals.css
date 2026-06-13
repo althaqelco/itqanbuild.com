@@ -155,6 +155,37 @@ a {
   text-decoration: none;
 }
 
+/* In-article contextual links (markdown [text](url)) */
+.article-link {
+  color: var(--color-gold-dark);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.article-link:hover {
+  color: var(--color-gold);
+}
+
+/* Accessibility — skip to main content (visible only on keyboard focus) */
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  inset-inline-start: 0.5rem;
+  z-index: 1000;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--color-navy, #0a192f);
+  color: #fff;
+  font-weight: 700;
+  transform: translateY(-150%);
+  transition: transform 0.2s ease;
+}
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 2px solid var(--color-gold, #d4af37);
+}
+
 /* ─── Buttons — minimal reset ─── */
 button {
   font-family: inherit;

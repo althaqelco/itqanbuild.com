@@ -6,19 +6,20 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import AITLDRBox from "@/components/AITLDRBox";
-import { SITE, SERVICES_LIST, DISTRICTS_LIST, WHATSAPP_URL } from "@/lib/constants";
+import { SITE, SERVICES_LIST, DISTRICTS_LIST, WHATSAPP_URL, DEFAULT_OG_IMAGE } from "@/lib/constants";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: `مقاول جدة المعتمد | جميع خدمات المقاولات في جدة — ${SITE.name}`,
+  title: `مقاول جدة المعتمد — جميع خدمات المقاولات`,
   description:
-    `مقاول جدة الأول — ${SITE.projectsCompleted}+ مشروع منجز | ${SITE.yearsExperience} سنة خبرة | ٩ خدمات (بناء، ترميم، شبوك، أسفلت، ملاحق، هناجر، تشطيبات، هدم) | سجل تجاري ${SITE.crNumber} | يخدم جميع أحياء جدة | ضمان مكتوب ١٠ سنوات`,
+    `مقاول جدة الأول — ${SITE.projectsCompleted}+ مشروع منجز و${SITE.yearsExperience} سنة خبرة | ٩ خدمات: بناء، ترميم، شبوك، أسفلت، ملاحق، هناجر، تشطيبات، هدم | يخدم جميع أحياء جدة بضمان مكتوب.`,
   alternates: { canonical: `${SITE.url}/jeddah` },
   openGraph: {
     title: `مقاول جدة — ٩ خدمات متكاملة | ${SITE.name}`,
     description: `${SITE.projectsCompleted}+ مشروع منجز في جدة بضمان مكتوب`,
-    images: [{ url: "/images/hero-contractor-jeddah.avif", width: 1200, height: 630 }],
+    url: `${SITE.url}/jeddah`,
+    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, type: "image/jpeg" }],
   },
 };
 
@@ -71,6 +72,7 @@ function jeddahHubSchema() {
       },
       {
         "@type": "BreadcrumbList",
+        "@id": `${SITE.url}/jeddah/#breadcrumb`,
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "الرئيسية", item: SITE.url },
           { "@type": "ListItem", position: 2, name: "جدة", item: `${SITE.url}/jeddah` },
@@ -78,6 +80,9 @@ function jeddahHubSchema() {
       },
       {
         "@type": "FAQPage",
+        "@id": `${SITE.url}/jeddah/#faq`,
+        isPartOf: { "@id": `${SITE.url}/jeddah/#webpage` },
+        inLanguage: "ar",
         mainEntity: JEDDAH_FAQS.map((f) => ({
           "@type": "Question",
           name: f.question,
@@ -92,7 +97,7 @@ export default function JeddahHubPage() {
   return (
     <>
       <Header />
-      <main>
+      <main id="main">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jeddahHubSchema()) }}

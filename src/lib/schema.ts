@@ -4,7 +4,12 @@
 // Organization → WebSite → LocalBusiness → Service → FAQPage
 // ═══════════════════════════════════════════════════════════════════
 
-import { SITE, type ServiceData } from "./constants";
+import {
+  SITE,
+  SERVICE_TYPE_AR,
+  SERVICE_PRICE_RANGE,
+  type ServiceData,
+} from "./constants";
 import { TESTIMONIALS, calculateReviewStats } from "./testimonials";
 
 const BASE_URL = SITE.url;
@@ -19,7 +24,11 @@ export function generateOrganizationSchema() {
     url: BASE_URL,
     logo: {
       "@type": "ImageObject",
-      url: `${BASE_URL}/logo.png`,
+      "@id": `${BASE_URL}/#logo`,
+      url: `${BASE_URL}${SITE.logo}`,
+      width: 500,
+      height: 400,
+      caption: SITE.name,
     },
     image: [
       `${BASE_URL}/images/hero-contractor-jeddah.avif`,
@@ -45,16 +54,24 @@ export function generateOrganizationSchema() {
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Saturday",
-          "Sunday",
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-        ],
-        opens: "08:00",
-        closes: "17:00",
+        dayOfWeek: [...SITE.openingHours.days],
+        opens: SITE.openingHours.opens,
+        closes: SITE.openingHours.closes,
+      },
+    ],
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        telephone: SITE.phone,
+        contactType: "customer service",
+        areaServed: "SA",
+        availableLanguage: ["Arabic"],
+        hoursAvailable: {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: [...SITE.openingHours.days],
+          opens: SITE.openingHours.opens,
+          closes: SITE.openingHours.closes,
+        },
       },
     ],
     areaServed: [
@@ -91,10 +108,10 @@ export function generateOrganizationSchema() {
         ratingValue: stats.averageRating.toString(),
         bestRating: stats.bestRating.toString(),
         worstRating: stats.worstRating.toString(),
-        reviewCount: (87).toString(), // verified Google reviews — exceeds our showcased sample
+        reviewCount: stats.totalReviews.toString(), // matches the reviews actually published on-page
       };
     })(),
-    review: TESTIMONIALS.slice(0, 5).map((t) => ({
+    review: TESTIMONIALS.map((t) => ({
       "@type": "Review",
       reviewRating: {
         "@type": "Rating",
@@ -109,12 +126,12 @@ export function generateOrganizationSchema() {
     taxID: SITE.crNumber,
     vatID: SITE.vatNumber,
     numberOfEmployees: { "@type": "QuantitativeValue", value: 50 },
+    // sameAs must point to profiles that describe THIS business — not generic
+    // government portals (balady.gov.sa / muqawal.sa stay as on-page "verify us" links only).
     sameAs: [
       SITE.social.googleMaps,
       SITE.social.instagram,
       SITE.social.twitter,
-      SITE.social.balady,
-      SITE.social.muqawal,
     ],
   };
 }
@@ -125,7 +142,24 @@ export function generateEngineerSchema() {
     "@type": "Person",
     "@id": `${BASE_URL}/#engineer`,
     name: "المهندس أحمد الحربي",
+    givenName: "أحمد",
+    familyName: "الحربي",
+    honorificPrefix: "م.",
     jobTitle: "مدير المشاريع ورئيس القسم الفني",
+    description:
+      "مهندس مدني خريج جامعة الملك عبدالعزيز بخبرة تتجاوز 15 عاماً في قطاع المقاولات السعودي، أشرف على أكثر من 500 مشروع في جدة من الترميم إلى بناء الفلل والمشاريع التجارية.",
+    knowsAbout: [
+      "الهندسة المدنية",
+      "مقاولات البناء",
+      "ترميم المباني",
+      "الكود السعودي للبناء",
+      "إدارة المشاريع الإنشائية",
+    ],
+    alumniOf: {
+      "@type": "EducationalOrganization",
+      name: "جامعة الملك عبدالعزيز",
+      sameAs: "https://www.kau.edu.sa",
+    },
     worksFor: { "@id": `${BASE_URL}/#organization` },
     url: `${BASE_URL}/about`,
     image: `${BASE_URL}/images/engineer-profile-photo.avif`,
@@ -161,13 +195,30 @@ export function generateServiceGraph(
   service: ServiceData,
   faqs: { question: string; answer: string }[]
 ) {
+  const pageUrl = `${BASE_URL}/jeddah/${service.slug}`;
+  const price = SERVICE_PRICE_RANGE[service.key];
   return {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebPage",
+        "@id": `${pageUrl}/#webpage`,
+        url: pageUrl,
+        name: service.title,
+        description: service.description,
+        isPartOf: { "@id": `${BASE_URL}/#website` },
+        about: { "@id": `${BASE_URL}/#organization` },
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: `${BASE_URL}${service.image}`,
+        },
+        breadcrumb: { "@id": `${pageUrl}/#breadcrumb` },
+        inLanguage: "ar",
+      },
+      {
         "@type": "Service",
-        "@id": `${BASE_URL}/jeddah/${service.slug}/#service`,
-        serviceType: `مقاول ${service.slug === "tarmeem" ? "ترميم" : service.slug}`,
+        "@id": `${pageUrl}/#service`,
+        serviceType: `مقاول ${SERVICE_TYPE_AR[service.key]}`,
         name: service.h1,
         description: service.description,
         provider: { "@id": `${BASE_URL}/#organization` },
@@ -179,35 +230,37 @@ export function generateServiceGraph(
             name: "مكة المكرمة",
           },
         },
-        offers: {
-          "@type": "Offer",
-          priceCurrency: "SAR",
-          priceRange: service.tldr.priceRange,
-          availability: "https://schema.org/InStock",
-        },
+        ...(price
+          ? {
+              offers: {
+                "@type": "Offer",
+                priceCurrency: "SAR",
+                availability: "https://schema.org/InStock",
+                priceSpecification: {
+                  "@type": "PriceSpecification",
+                  priceCurrency: "SAR",
+                  minPrice: price.low,
+                  maxPrice: price.high,
+                  unitText: service.priceUnit,
+                },
+              },
+            }
+          : {}),
         termsOfService: `ضمان ${service.tldr.warranty}`,
         image: `${BASE_URL}${service.image}`,
+        mainEntityOfPage: { "@id": `${pageUrl}/#webpage` },
       },
       {
         "@type": "BreadcrumbList",
+        "@id": `${pageUrl}/#breadcrumb`,
         itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "الرئيسية",
-            item: BASE_URL,
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "جدة",
-            item: `${BASE_URL}/jeddah`,
-          },
+          { "@type": "ListItem", position: 1, name: "الرئيسية", item: BASE_URL },
+          { "@type": "ListItem", position: 2, name: "جدة", item: `${BASE_URL}/jeddah` },
           {
             "@type": "ListItem",
             position: 3,
             name: service.h1.split("—")[0].trim(),
-            item: `${BASE_URL}/jeddah/${service.slug}`,
+            item: pageUrl,
           },
         ],
       },
@@ -215,6 +268,9 @@ export function generateServiceGraph(
         ? [
             {
               "@type": "FAQPage",
+              "@id": `${pageUrl}/#faq`,
+              isPartOf: { "@id": `${pageUrl}/#webpage` },
+              inLanguage: "ar",
               mainEntity: faqs.map((faq) => ({
                 "@type": "Question",
                 name: faq.question,
@@ -235,14 +291,40 @@ export function generateDistrictGraph(district: {
   name: string;
   slug: string;
   geo: { latitude: number; longitude: number };
+  description?: string;
+  image?: string;
+  faqs?: { question: string; answer: string }[];
 }) {
+  const pageUrl = `${BASE_URL}/jeddah/${district.slug}`;
+  const faqs = district.faqs ?? [];
   return {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebPage",
+        "@id": `${pageUrl}/#webpage`,
+        url: pageUrl,
+        name: `مقاول ${district.name} جدة`,
+        ...(district.description ? { description: district.description } : {}),
+        isPartOf: { "@id": `${BASE_URL}/#website` },
+        about: { "@id": `${BASE_URL}/#organization` },
+        ...(district.image
+          ? {
+              primaryImageOfPage: {
+                "@type": "ImageObject",
+                url: `${BASE_URL}${district.image}`,
+              },
+            }
+          : {}),
+        breadcrumb: { "@id": `${pageUrl}/#breadcrumb` },
+        inLanguage: "ar",
+      },
+      {
         "@type": "Service",
-        "@id": `${BASE_URL}/jeddah/${district.slug}/#service`,
+        "@id": `${pageUrl}/#service`,
+        serviceType: "مقاولات عامة",
         name: `خدمات مقاول ${district.name} جدة`,
+        ...(district.description ? { description: district.description } : {}),
         provider: { "@id": `${BASE_URL}/#organization` },
         areaServed: {
           "@type": "Place",
@@ -254,30 +336,33 @@ export function generateDistrictGraph(district: {
             longitude: district.geo.longitude.toString(),
           },
         },
+        ...(district.image ? { image: `${BASE_URL}${district.image}` } : {}),
+        mainEntityOfPage: { "@id": `${pageUrl}/#webpage` },
       },
       {
         "@type": "BreadcrumbList",
+        "@id": `${pageUrl}/#breadcrumb`,
         itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "الرئيسية",
-            item: BASE_URL,
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "جدة",
-            item: `${BASE_URL}/jeddah`,
-          },
-          {
-            "@type": "ListItem",
-            position: 3,
-            name: district.name,
-            item: `${BASE_URL}/jeddah/${district.slug}`,
-          },
+          { "@type": "ListItem", position: 1, name: "الرئيسية", item: BASE_URL },
+          { "@type": "ListItem", position: 2, name: "جدة", item: `${BASE_URL}/jeddah` },
+          { "@type": "ListItem", position: 3, name: district.name, item: pageUrl },
         ],
       },
+      ...(faqs.length > 0
+        ? [
+            {
+              "@type": "FAQPage",
+              "@id": `${pageUrl}/#faq`,
+              isPartOf: { "@id": `${pageUrl}/#webpage` },
+              inLanguage: "ar",
+              mainEntity: faqs.map((faq) => ({
+                "@type": "Question",
+                name: faq.question,
+                acceptedAnswer: { "@type": "Answer", text: faq.answer },
+              })),
+            },
+          ]
+        : []),
     ],
   };
 }

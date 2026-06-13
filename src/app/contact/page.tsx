@@ -5,18 +5,18 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import ContactForm from "@/components/ContactForm";
-import { SITE, SERVICES_LIST, DISTRICTS_LIST, WHATSAPP_URL } from "@/lib/constants";
+import { SITE, SERVICES_LIST, DISTRICTS_LIST, WHATSAPP_URL, DEFAULT_OG_IMAGE } from "@/lib/constants";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: `تواصل معنا — ${SITE.name} | مقاول جدة المعتمد | معاينة مجانية`,
-  description: `تواصل مع ${SITE.name} — مقاول جدة المعتمد (سجل تجاري ${SITE.crNumber}). اتصل ${SITE.phoneDisplay} أو واتساب. معاينة مجانية + عرض سعر مكتوب خلال ٢٤ ساعة. ${SITE.address.district}، جدة.`,
+  title: `تواصل معنا — مقاول جدة | معاينة مجانية`,
+  description: `تواصل مع ${SITE.name} — مقاول جدة المعتمد. اتصل ${SITE.phoneDisplay} أو واتساب. معاينة مجانية وعرض سعر مكتوب خلال ٢٤ ساعة في ${SITE.address.district}، جدة.`,
   alternates: { canonical: `${SITE.url}/contact` },
   openGraph: {
     title: `تواصل معنا — ${SITE.name}`,
     description: `معاينة مجانية وعرض سعر تفصيلي خلال ٢٤ ساعة — مقاول جدة المعتمد`,
-    images: [{ url: "/images/og-image-default.png", width: 1200, height: 630 }],
+    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, type: "image/jpeg" }],
   },
 };
 
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 const CONTACT_FAQS = [
   {
     question: "كم يستغرق الرد على استفسارات العملاء؟",
-    answer: "نرد على رسائل واتساب خلال ١٥ دقيقة خلال ساعات العمل (٨ ص – ١٠ م). المكالمات الهاتفية يُرد عليها فوراً. البريد الإلكتروني خلال ٢٤ ساعة عمل كحد أقصى.",
+    answer: "نرد على رسائل واتساب خلال ١٥ دقيقة خلال ساعات العمل (السبت–الخميس ٨ ص – ٥ م). المكالمات الهاتفية يُرد عليها فوراً. البريد الإلكتروني خلال ٢٤ ساعة عمل كحد أقصى.",
   },
   {
     question: "هل المعاينة الميدانية مجانية فعلاً؟",
@@ -64,39 +64,8 @@ function contactPageSchema() {
         inLanguage: "ar",
       },
       {
-        "@type": "LocalBusiness",
-        "@id": `${SITE.url}/#localbusiness-contact`,
-        name: SITE.name,
-        telephone: SITE.phone,
-        email: SITE.email,
-        url: SITE.url,
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: SITE.address.street,
-          addressLocality: SITE.address.city,
-          addressRegion: SITE.address.region,
-          postalCode: SITE.address.postalCode,
-          addressCountry: "SA",
-        },
-        geo: {
-          "@type": "GeoCoordinates",
-          latitude: SITE.geo.latitude.toString(),
-          longitude: SITE.geo.longitude.toString(),
-        },
-        openingHoursSpecification: [
-          { "@type": "OpeningHoursSpecification", dayOfWeek: ["Sunday","Monday","Tuesday","Wednesday","Thursday"], opens: "08:00", closes: "22:00" },
-          { "@type": "OpeningHoursSpecification", dayOfWeek: ["Friday"], opens: "16:00", closes: "22:00" },
-          { "@type": "OpeningHoursSpecification", dayOfWeek: ["Saturday"], opens: "09:00", closes: "21:00" },
-        ],
-        contactPoint: [
-          { "@type": "ContactPoint", telephone: SITE.phone, contactType: "customer service", areaServed: "SA", availableLanguage: ["Arabic"], hoursAvailable: { "@type": "OpeningHoursSpecification", dayOfWeek: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Saturday"], opens: "08:00", closes: "22:00" } },
-          { "@type": "ContactPoint", telephone: SITE.phone, contactType: "emergency", areaServed: "SA", availableLanguage: ["Arabic"] },
-        ],
-        taxID: SITE.crNumber,
-        vatID: SITE.vatNumber,
-      },
-      {
         "@type": "BreadcrumbList",
+        "@id": `${SITE.url}/contact/#breadcrumb`,
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "الرئيسية", item: SITE.url },
           { "@type": "ListItem", position: 2, name: "تواصل معنا", item: `${SITE.url}/contact` },
@@ -104,6 +73,9 @@ function contactPageSchema() {
       },
       {
         "@type": "FAQPage",
+        "@id": `${SITE.url}/contact/#faq`,
+        isPartOf: { "@id": `${SITE.url}/contact/#contactpage` },
+        inLanguage: "ar",
         mainEntity: CONTACT_FAQS.map((f) => ({
           "@type": "Question",
           name: f.question,
@@ -118,7 +90,7 @@ export default function ContactPage() {
   return (
     <>
       <Header />
-      <main>
+      <main id="main">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema()) }}
@@ -181,7 +153,7 @@ export default function ContactPage() {
                   <Phone className="w-7 h-7" style={{ color: "var(--color-gold)" }} />
                 </div>
                 <h3 className="text-lg font-bold mb-2">اتصل مباشرة</h3>
-                <p className="text-sm mb-4" style={{ color: "rgba(10,25,47,0.6)" }}>متاح من ٨ صباحاً حتى ١٠ مساءً</p>
+                <p className="text-sm mb-4" style={{ color: "rgba(10,25,47,0.6)" }}>السبت–الخميس من ٨ صباحاً حتى ٥ مساءً</p>
                 <span className="text-lg font-bold" style={{ color: "var(--color-gold-dark)" }} dir="ltr">{SITE.phoneDisplay}</span>
               </a>
 
@@ -237,7 +209,7 @@ export default function ContactPage() {
             </div>
             <div className="rounded-2xl overflow-hidden shadow-lg" style={{ height: "320px" }}>
               <iframe
-                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${SITE.geo.latitude},${SITE.geo.longitude}&zoom=15&language=ar`}
+                src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_MAPS_EMBED_KEY ?? "AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"}&q=${SITE.geo.latitude},${SITE.geo.longitude}&zoom=15&language=ar`}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -260,16 +232,12 @@ export default function ContactPage() {
               </div>
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between py-2" style={{ borderBottom: "1px solid rgba(10,25,47,0.06)" }}>
-                  <span>الأحد — الخميس</span>
-                  <span className="font-bold">٨:٠٠ ص — ١٠:٠٠ م</span>
-                </div>
-                <div className="flex justify-between py-2" style={{ borderBottom: "1px solid rgba(10,25,47,0.06)" }}>
-                  <span>الجمعة</span>
-                  <span className="font-bold">٤:٠٠ م — ١٠:٠٠ م</span>
+                  <span>السبت — الخميس</span>
+                  <span className="font-bold">٨:٠٠ ص — ٥:٠٠ م</span>
                 </div>
                 <div className="flex justify-between py-2">
-                  <span>السبت</span>
-                  <span className="font-bold">٩:٠٠ ص — ٩:٠٠ م</span>
+                  <span>الجمعة</span>
+                  <span className="font-bold" style={{ color: "rgba(10,25,47,0.45)" }}>إجازة</span>
                 </div>
               </div>
               <p className="text-xs mt-4 text-center" style={{ color: "rgba(10,25,47,0.4)" }}>* المعاينات الميدانية تتطلب حجز مسبق · خط الطوارئ متاح ٢٤/٧</p>
