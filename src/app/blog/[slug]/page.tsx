@@ -126,9 +126,20 @@ function renderMarkdown(md: string) {
 
     if (line.startsWith("## "))
       elements.push(<h2 key={key++}>{processInline(line.slice(3))}</h2>);
-    else if (line.startsWith("### "))
-      elements.push(<h3 key={key++}>{processInline(line.slice(4))}</h3>);
-    else if (line.startsWith("- "))
+    else if (line.startsWith("### ")) {
+      const h3 = line.slice(4);
+      // Short colon-terminated labels ("الوصف:", "العيوب:") are inline sublabels,
+      // not section headings — render as bold paragraphs to avoid heading-outline bloat.
+      const isLabel =
+        /[:：]\s*$/.test(h3) && h3.replace(/[:：]\s*$/, "").trim().split(/\s+/).length <= 3;
+      elements.push(
+        isLabel ? (
+          <p key={key++} className="font-bold mt-3 mb-1">{processInline(h3)}</p>
+        ) : (
+          <h3 key={key++}>{processInline(h3)}</h3>
+        )
+      );
+    } else if (line.startsWith("- "))
       elements.push(<li key={key++}>{processInline(line.slice(2))}</li>);
     else
       elements.push(<p key={key++}>{processInline(line)}</p>);
@@ -204,7 +215,7 @@ export default async function BlogArticlePage({ params }: Props) {
 
         {/* Hero */}
         <section className="relative overflow-hidden" style={{ paddingTop: "6.5rem", paddingBottom: "3rem" }}>
-          <Image src={post.image} alt={post.imageAlt} fill priority className="object-cover" sizes="100vw" />
+          <Image src={post.image} alt={post.imageAlt} fill priority fetchPriority="high" quality={60} className="object-cover" sizes="100vw" />
           <div className="absolute inset-0" style={{ background: "linear-gradient(165deg, rgba(6,15,31,0.92) 0%, rgba(10,25,47,0.82) 100%)" }} />
           <div className="relative z-10 container-wide px-4 md:px-6">
             <Link href="/blog" className="inline-flex items-center gap-1 text-[11px] mb-4 hover:opacity-100 transition-opacity" style={{ color: "rgba(248,246,240,0.45)" }}>
@@ -214,8 +225,12 @@ export default async function BlogArticlePage({ params }: Props) {
             <h1 className="text-2xl md:text-3xl font-extrabold mb-3 max-w-2xl leading-snug" style={{ color: "var(--color-pearl)" }}>
               {post.h1}
             </h1>
-            <div className="flex items-center gap-3 text-[11px]" style={{ color: "rgba(248,246,240,0.4)" }}>
-              <span className="flex items-center gap-1"><Calendar className="w-3 h-3" />{post.date}</span>
+            <div className="flex items-center gap-3 text-[11px]" style={{ color: "rgba(248,246,240,0.55)" }}>
+              <span className="flex items-center gap-1">
+                <Calendar className="w-3 h-3" />
+                {post.dateModified && post.dateModified !== post.date ? "آخر تحديث: " : "نُشر: "}
+                <time dateTime={post.dateModified ?? post.date}>{post.dateModified ?? post.date}</time>
+              </span>
               <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{post.readTime}</span>
               <span className="px-2 py-0.5 rounded-full" style={{ background: "rgba(212,175,55,0.15)", color: "var(--color-gold)" }}>
                 {post.category}
@@ -239,7 +254,7 @@ export default async function BlogArticlePage({ params }: Props) {
                   <Image src={relatedService.image} alt={relatedService.imageAlt} fill className="object-cover" sizes="80px" />
                 </div>
                 <div>
-                  <span className="text-[11px]" style={{ color: "rgba(10,25,47,0.45)" }}>خدمة ذات صلة في جدة</span>
+                  <span className="text-[11px]" style={{ color: "rgba(10,25,47,0.62)" }}>خدمة ذات صلة في جدة</span>
                   <h3 className="text-base font-bold mb-1 group-hover:text-[var(--color-gold-dark)] transition-colors">
                     {relatedService.h1.split("—")[0].trim()} ←
                   </h3>

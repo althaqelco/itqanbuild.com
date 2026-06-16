@@ -28,7 +28,7 @@ export default function ServicePageView({ slug }: { slug: string }) {
   const content = SERVICE_CONTENT[slug];
   if (!content) notFound();
 
-  const schema = generateServiceGraph(svc, content.faqs);
+  const schema = generateServiceGraph(svc, content.faqs, content.process);
   const related = content.relatedKeys.map((k) => SERVICES[k]).filter(Boolean);
   // Topically-matched articles → links from the money page into the content cluster
   const relatedPosts = BLOG_POSTS.filter(
@@ -54,9 +54,10 @@ export default function ServicePageView({ slug }: { slug: string }) {
             alt={svc.imageAlt}
             fill
             priority
+            fetchPriority="high"
             className="object-cover"
             sizes="100vw"
-            quality={75}
+            quality={60}
           />
           <div
             className="absolute inset-0"

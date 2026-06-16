@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { cloneElement, isValidElement, useId, useState } from "react";
+import type { ReactElement } from "react";
 import { Send, User, Phone, MapPin, MessageSquare, CheckCircle2, AlertCircle } from "lucide-react";
 import { SITE, SERVICES_LIST, DISTRICTS_LIST } from "@/lib/constants";
 
@@ -112,8 +113,8 @@ export default function ContactForm() {
             setForm({ name: "", phone: "", service: "", district: "", message: "" });
             setStatus("idle");
           }}
-          className="text-xs font-semibold"
-          style={{ color: "var(--color-gold-dark)" }}
+          className="text-sm font-semibold"
+          style={{ color: "var(--color-gold-text)" }}
         >
           إرسال طلب آخر
         </button>
@@ -141,7 +142,7 @@ export default function ContactForm() {
           value={form.name}
           onChange={(e) => update("name", e.target.value)}
           placeholder="مثال: أحمد محمد"
-          className="w-full bg-transparent outline-none text-sm py-2"
+          className="w-full bg-transparent outline-none text-base py-2.5"
         />
       </Field>
 
@@ -156,7 +157,7 @@ export default function ContactForm() {
           value={form.phone}
           onChange={(e) => update("phone", e.target.value)}
           placeholder="05XXXXXXXX"
-          className="w-full bg-transparent outline-none text-sm py-2"
+          className="w-full bg-transparent outline-none text-base py-2.5"
         />
       </Field>
 
@@ -168,7 +169,7 @@ export default function ContactForm() {
         <select
           value={form.service}
           onChange={(e) => update("service", e.target.value)}
-          className="w-full bg-transparent outline-none text-sm py-2"
+          className="w-full bg-transparent outline-none text-base py-2.5"
         >
           <option value="">اختر الخدمة...</option>
           {SERVICES_LIST.map((s) => (
@@ -183,7 +184,7 @@ export default function ContactForm() {
         <select
           value={form.district}
           onChange={(e) => update("district", e.target.value)}
-          className="w-full bg-transparent outline-none text-sm py-2"
+          className="w-full bg-transparent outline-none text-base py-2.5"
         >
           <option value="">اختر الحي...</option>
           {DISTRICTS_LIST.map((d) => (
@@ -200,7 +201,7 @@ export default function ContactForm() {
           value={form.message}
           onChange={(e) => update("message", e.target.value)}
           placeholder="صف مشروعك بإيجاز — المساحة، المكان، الجدول الزمني المتوقع..."
-          className="w-full bg-transparent outline-none text-sm py-2 resize-none"
+          className="w-full bg-transparent outline-none text-base py-2.5 resize-none"
         />
       </Field>
 
@@ -213,7 +214,7 @@ export default function ContactForm() {
         <Send className="w-4 h-4" />
       </button>
 
-      <p className="text-xs text-center" style={{ color: "rgba(10,25,47,0.45)" }}>
+      <p className="text-xs text-center" style={{ color: "rgba(10,25,47,0.62)" }}>
         بضغطك على «أرسل الطلب» نفتح واتساب لتأكيد الإرسال — معاينة مجانية + رد خلال ١٥ دقيقة.
       </p>
     </form>
@@ -231,13 +232,30 @@ function Field({
   error?: string;
   children: React.ReactNode;
 }) {
+  const fieldId = useId();
+  const errId = `${fieldId}-err`;
+
+  // Inject id + ARIA onto the single control so the <label htmlFor> associates,
+  // and errors are announced (WCAG 1.3.1 / 4.1.2 / 3.3.1).
+  const control = isValidElement(children)
+    ? cloneElement(children as ReactElement<Record<string, unknown>>, {
+        id: fieldId,
+        "aria-invalid": error ? true : undefined,
+        "aria-describedby": error ? errId : undefined,
+      })
+    : children;
+
   return (
     <div>
-      <label className="block text-xs font-semibold mb-2" style={{ color: "var(--color-navy)" }}>
+      <label
+        htmlFor={fieldId}
+        className="block text-sm font-semibold mb-2"
+        style={{ color: "var(--color-navy)" }}
+      >
         {label}
       </label>
       <div
-        className="flex items-center gap-3 px-4 rounded-xl"
+        className="flex items-center gap-3 px-4 rounded-xl focus-within:ring-2 focus-within:ring-[var(--color-gold)] focus-within:border-[var(--color-gold-dark)]"
         style={{
           background: "white",
           border: `1px solid ${error ? "var(--color-danger)" : "rgba(10,25,47,0.08)"}`,
@@ -248,10 +266,12 @@ function Field({
             {icon}
           </span>
         )}
-        {children}
+        {control}
       </div>
       {error && (
         <div
+          id={errId}
+          role="alert"
           className="mt-1.5 flex items-center gap-1 text-xs"
           style={{ color: "var(--color-danger)" }}
         >

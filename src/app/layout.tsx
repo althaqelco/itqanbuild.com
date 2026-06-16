@@ -113,6 +113,10 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl" className={`${cairo.variable} ${alexandria.variable}`}>
       <head>
+        {/* Resource hints — shave DNS+TLS off the worker-loaded GA connection */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
         {/* Connected @graph Schema — Every Page */}
         <script
           type="application/ld+json"

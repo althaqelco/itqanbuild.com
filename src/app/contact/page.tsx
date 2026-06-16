@@ -203,7 +203,7 @@ export default function ContactPage() {
             <div className="text-center mb-6">
               <span className="gold-accent mx-auto" />
               <h2 className="text-xl font-extrabold mb-2">موقعنا في جدة</h2>
-              <p className="text-xs" style={{ color: "rgba(10,25,47,0.5)" }}>
+              <p className="text-xs" style={{ color: "rgba(10,25,47,0.62)" }}>
                 {SITE.address.street}، {SITE.address.district}، جدة {SITE.address.postalCode}
               </p>
             </div>
@@ -237,7 +237,7 @@ export default function ContactPage() {
                 </div>
                 <div className="flex justify-between py-2">
                   <span>الجمعة</span>
-                  <span className="font-bold" style={{ color: "rgba(10,25,47,0.45)" }}>إجازة</span>
+                  <span className="font-bold" style={{ color: "rgba(10,25,47,0.62)" }}>إجازة</span>
                 </div>
               </div>
               <p className="text-xs mt-4 text-center" style={{ color: "rgba(10,25,47,0.4)" }}>* المعاينات الميدانية تتطلب حجز مسبق · خط الطوارئ متاح ٢٤/٧</p>
@@ -251,7 +251,7 @@ export default function ContactPage() {
             <div className="text-center mb-8">
               <span className="gold-accent mx-auto" />
               <h2 className="text-xl font-extrabold mb-2">مناطق خدمتنا في جدة</h2>
-              <p className="text-xs" style={{ color: "rgba(10,25,47,0.5)" }}>نخدم جميع أحياء جدة — اختر حيّك لمعرفة المزيد</p>
+              <p className="text-xs" style={{ color: "rgba(10,25,47,0.62)" }}>نخدم جميع أحياء جدة — اختر حيّك لمعرفة المزيد</p>
             </div>
             <div className="flex flex-wrap gap-2 justify-center mb-8">
               {DISTRICTS_LIST.map((d) => (

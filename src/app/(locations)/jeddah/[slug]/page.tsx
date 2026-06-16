@@ -45,9 +45,10 @@ export async function generateMetadata({
   }
   const dist = DISTRICTS[slug];
   if (dist) {
-    // Short, front-loaded title — the root template appends the brand exactly once
+    // Short, front-loaded title — the root template appends the brand exactly once.
+    // Guard against double "جدة" when the district name already contains it (e.g. "شمال جدة").
     return {
-      title: `مقاول ${dist.name} جدة`,
+      title: dist.name.includes("جدة") ? `مقاول ${dist.name}` : `مقاول ${dist.name} جدة`,
       description: dist.description,
       alternates: { canonical: `${SITE.url}/jeddah/${slug}` },
       openGraph: {

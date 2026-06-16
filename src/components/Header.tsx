@@ -89,6 +89,7 @@ export default function Header() {
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-1">
           <NavLink href="/" label="الرئيسية" />
+          <NavLink href="/jeddah" label="مقاول جدة" />
 
           {/* Services Dropdown — Pure CSS Transition (no framer-motion) */}
           <div
@@ -99,7 +100,11 @@ export default function Header() {
             <button
               className="flex items-center gap-1 px-4 py-2 text-sm font-semibold rounded-lg transition-colors"
               style={{ color: "rgba(248, 246, 240, 0.8)" }}
+              aria-haspopup="true"
+              aria-expanded={servicesOpen}
+              onClick={() => setServicesOpen((o) => !o)}
               onMouseEnter={() => setServicesOpen(true)}
+              onKeyDown={(e) => e.key === "Escape" && setServicesOpen(false)}
             >
               خدماتنا
               <ChevronDown
@@ -189,6 +194,8 @@ export default function Header() {
           style={{ color: "var(--color-pearl)" }}
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="القائمة"
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-nav"
         >
           {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -197,6 +204,7 @@ export default function Header() {
       {/* Mobile Menu — CSS grid height animation (no framer-motion) */}
       <div
         ref={mobileMenuRef}
+        id="mobile-nav"
         className="lg:hidden overflow-hidden transition-[grid-template-rows,opacity] duration-300 ease-[var(--ease-smooth)]"
         style={{
           display: "grid",
@@ -209,6 +217,7 @@ export default function Header() {
         <div className="min-h-0">
           <nav className="container-wide px-4 py-6 flex flex-col gap-1">
             <MobileLink href="/" label="الرئيسية" onClick={() => setMobileOpen(false)} />
+            <MobileLink href="/jeddah" label="مقاول جدة" onClick={() => setMobileOpen(false)} />
             <div className="py-2">
               <span
                 className="text-xs font-semibold tracking-wider px-3 pb-2 block"
@@ -291,7 +300,7 @@ function MobileLink({
   return (
     <Link
       href={href}
-      className={`block py-2.5 text-sm rounded-lg transition-colors ${indent ? "ps-8" : "ps-3"}`}
+      className={`block py-3 text-sm rounded-lg transition-colors ${indent ? "ps-8" : "ps-3"}`}
       style={{ color: "rgba(248, 246, 240, 0.7)" }}
       onClick={onClick}
     >

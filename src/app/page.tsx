@@ -10,17 +10,18 @@ import { SITE, SERVICES_LIST, DISTRICTS_LIST, WHATSAPP_URL } from "@/lib/constan
 import { BLOG_POSTS } from "@/lib/blog-data";
 
 // ─── Dynamic Imports — below-the-fold client components ───
+// Skeleton heights reserve space close to the real component to minimise hydration CLS
 const CostCalculator = dynamic(
   () => import("@/components/CostCalculator"),
-  { loading: () => <div className="skeleton h-96 rounded-3xl" /> }
+  { loading: () => <div className="skeleton rounded-3xl" style={{ minHeight: 560 }} /> }
 );
 const TestimonialsSlider = dynamic(
   () => import("@/components/TestimonialsSlider"),
-  { loading: () => <div className="skeleton h-80 rounded-2xl" /> }
+  { loading: () => <div className="skeleton rounded-2xl" style={{ minHeight: 340 }} /> }
 );
 const StatsCounter = dynamic(
   () => import("@/components/StatsCounter"),
-  { loading: () => <div className="skeleton h-40 rounded-2xl" /> }
+  { loading: () => <div className="skeleton rounded-2xl" style={{ minHeight: 190 }} /> }
 );
 
 export const revalidate = 3600;
@@ -81,12 +82,13 @@ export default function HomePage() {
           {/* Background Image */}
           <Image
             src="/images/hero-contractor-jeddah.avif"
-            alt="مقاول جدة — إتقان للمقاولات"
+            alt="مقاول بناء وترميم في جدة يشرف على موقع إنشاء — إتقان للمقاولات"
             fill
             priority
+            fetchPriority="high"
             className="object-cover"
             sizes="100vw"
-            quality={75}
+            quality={60}
           />
           {/* Gradient Overlay */}
           <div
@@ -206,7 +208,7 @@ export default function HomePage() {
               <Link
                 href="/jeddah"
                 className="inline-flex items-center gap-1 text-sm font-bold"
-                style={{ color: "var(--color-gold-dark)" }}
+                style={{ color: "var(--color-gold-text)" }}
               >
                 مقاول جدة — كل الخدمات والأحياء ←
               </Link>
@@ -403,7 +405,7 @@ export default function HomePage() {
                   />
                   <div>
                     <span className="text-sm font-bold block">م. أحمد الحربي</span>
-                    <span className="text-xs" style={{ color: "rgba(10,25,47,0.5)" }}>
+                    <span className="text-xs" style={{ color: "rgba(10,25,47,0.62)" }}>
                       مدير المشاريع — إتقان للمقاولات
                     </span>
                   </div>
@@ -517,7 +519,7 @@ export default function HomePage() {
                     />
                   </div>
                   <div className="p-5">
-                    <span className="text-[11px]" style={{ color: "rgba(10,25,47,0.45)" }}>{p.category} · {p.readTime}</span>
+                    <span className="text-[11px]" style={{ color: "rgba(10,25,47,0.62)" }}>{p.category} · {p.readTime}</span>
                     <h3 className="text-base font-bold leading-relaxed mt-1 group-hover:text-[var(--color-gold)] transition-colors">
                       {p.h1}
                     </h3>

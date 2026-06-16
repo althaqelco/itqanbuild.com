@@ -150,9 +150,11 @@ export default function AboutPage() {
         >
           <Image
             src="/images/team-main-contractor-jeddah.avif"
-            alt={`فريق ${SITE.name} جدة`}
+            alt={`فريق ${SITE.name} الهندسي في موقع مشروع بجدة`}
             fill
             priority
+            fetchPriority="high"
+            quality={60}
             className="object-cover"
             sizes="100vw"
           />

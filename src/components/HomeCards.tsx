@@ -66,7 +66,7 @@ export function ProjectCard({
       </div>
       <div className="p-4">
         <h3 className="text-sm font-bold mb-1">{title}</h3>
-        <div className="flex items-center gap-2 text-xs" style={{ color: "rgba(10,25,47,0.5)" }}>
+        <div className="flex items-center gap-2 text-xs" style={{ color: "rgba(10,25,47,0.62)" }}>
           <span>{category}</span>
           <span>·</span>
           <span className="flex items-center gap-1">

@@ -106,9 +106,11 @@ export default function JeddahHubPage() {
         <section className="relative py-32 md:py-40 overflow-hidden">
           <Image
             src="/images/hero-contractor-jeddah.avif"
-            alt="مقاول جدة — خدمات مقاولات متكاملة"
+            alt="مقاول جدة — خدمات مقاولات متكاملة في موقع بناء بجدة"
             fill
             priority
+            fetchPriority="high"
+            quality={60}
             className="object-cover"
             sizes="100vw"
           />
@@ -270,7 +272,7 @@ export default function JeddahHubPage() {
                     <p className="text-sm mb-4" style={{ color: "rgba(10,25,47,0.6)" }}>
                       {s.description}
                     </p>
-                    <div className="flex flex-wrap gap-4 text-xs" style={{ color: "rgba(10,25,47,0.5)" }}>
+                    <div className="flex flex-wrap gap-4 text-xs" style={{ color: "rgba(10,25,47,0.62)" }}>
                       <span>📋 {s.tldr.scope.split("،")[0]}</span>
                       <span>⏱️ {s.tldr.duration}</span>
                       <span>🛡️ {s.tldr.warranty}</span>

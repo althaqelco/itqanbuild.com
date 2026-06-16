@@ -255,7 +255,7 @@ export default function PricesPage() {
         {/* YMYL DISCLAIMER + E-E-A-T */}
         <section className="py-4">
           <div className="container-wide max-w-4xl px-4">
-            <p className="text-xs leading-relaxed text-center" style={{ color: "rgba(10,25,47,0.5)" }}>
+            <p className="text-xs leading-relaxed text-center" style={{ color: "rgba(10,25,47,0.62)" }}>
               ⚠️ الأسعار المعروضة تقريبية وتعتمد على المعاينة الميدانية. المعاينة مجانية وعرض السعر النهائي مكتوب ومفصّل. سجل تجاري {SITE.crNumber} · الرقم الضريبي {SITE.vatNumber}.
             </p>
           </div>
@@ -384,7 +384,7 @@ export default function PricesPage() {
                       <td
                         className="text-center p-4 font-bold whitespace-nowrap"
                         style={{
-                          color: d.modifier === "0%" ? "rgba(10,25,47,0.5)" : "var(--color-gold-dark)",
+                          color: d.modifier === "0%" ? "rgba(10,25,47,0.62)" : "var(--color-gold-dark)",
                         }}
                       >
                         {d.modifier}
@@ -468,7 +468,7 @@ function TrustItem({ icon, title, desc }: { icon: React.ReactNode; title: string
       </span>
       <div className="text-start">
         <span className="text-sm font-bold block">{title}</span>
-        <span className="text-xs" style={{ color: "rgba(10,25,47,0.5)" }}>
+        <span className="text-xs" style={{ color: "rgba(10,25,47,0.62)" }}>
           {desc}
         </span>
       </div>

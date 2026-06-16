@@ -179,7 +179,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         ))}
         <span
           className="text-xs ms-2"
-          style={{ color: "rgba(10,25,47,0.5)" }}
+          style={{ color: "rgba(10,25,47,0.62)" }}
         >
           {testimonial.date}
         </span>

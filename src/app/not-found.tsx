@@ -1,9 +1,17 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, Home, Phone, Search } from "lucide-react";
+import { Home, Phone, Search } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { SITE, SERVICES_LIST, WHATSAPP_URL } from "@/lib/constants";
+
+// Override the layout's inherited robots:{index:true} so the 404 emits a single,
+// non-contradictory noindex directive (was emitting both noindex AND index,follow).
+export const metadata: Metadata = {
+  title: "الصفحة غير موجودة — 404",
+  robots: { index: false, follow: false },
+};
 
 export default function NotFound() {
   return (

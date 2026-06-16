@@ -61,9 +61,10 @@ export default function DistrictPageView({ slug }: { slug: string }) {
             alt={dist.imageAlt}
             fill
             priority
+            fetchPriority="high"
             className="object-cover"
             sizes="100vw"
-            quality={75}
+            quality={60}
           />
           <div
             className="absolute inset-0"
@@ -233,7 +234,7 @@ export default function DistrictPageView({ slug }: { slug: string }) {
               >
                 {content.priceAdjustment}
               </p>
-              <div className="mt-6 text-xs" style={{ color: "rgba(10,25,47,0.5)" }}>
+              <div className="mt-6 text-xs" style={{ color: "rgba(10,25,47,0.62)" }}>
                 <strong>نوع التربة:</strong> {dist.soilNote}
               </div>
             </div>

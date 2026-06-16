@@ -193,7 +193,8 @@ export function generateRootGraph() {
 // ─── Service Schema (per-service page) ───
 export function generateServiceGraph(
   service: ServiceData,
-  faqs: { question: string; answer: string }[]
+  faqs: { question: string; answer: string }[],
+  process?: { step: string; desc: string }[]
 ) {
   const pageUrl = `${BASE_URL}/jeddah/${service.slug}`;
   const price = SERVICE_PRICE_RANGE[service.key];
@@ -278,6 +279,24 @@ export function generateServiceGraph(
                   "@type": "Answer",
                   text: faq.answer,
                 },
+              })),
+            },
+          ]
+        : []),
+      ...(process && process.length > 0
+        ? [
+            {
+              "@type": "HowTo",
+              "@id": `${pageUrl}/#howto`,
+              name: `مراحل تنفيذ ${service.h1.split("—")[0].trim()} في جدة`,
+              description: `خطوات تنفيذ خدمة ${service.h1.split("—")[0].trim()} مع إتقان للمقاولات من المعاينة حتى التسليم.`,
+              inLanguage: "ar",
+              isPartOf: { "@id": `${pageUrl}/#webpage` },
+              step: process.map((p, i) => ({
+                "@type": "HowToStep",
+                position: i + 1,
+                name: p.step,
+                text: p.desc,
               })),
             },
           ]

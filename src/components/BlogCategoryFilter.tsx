@@ -124,7 +124,7 @@ export default function BlogCategoryFilter({
           {activeCategory ? `مقالات: ${activeCategory}` : "جميع المقالات"}
           <span
             className="text-sm font-normal ms-2"
-            style={{ color: "rgba(10,25,47,0.5)" }}
+            style={{ color: "rgba(10,25,47,0.62)" }}
           >
             ({filteredPosts.length} مقالة)
           </span>
@@ -193,7 +193,7 @@ export default function BlogCategoryFilter({
           className="text-center py-12 rounded-2xl"
           style={{
             background: "rgba(10,25,47,0.02)",
-            color: "rgba(10,25,47,0.5)",
+            color: "rgba(10,25,47,0.62)",
           }}
         >
           لا توجد مقالات في هذا التصنيف حالياً
@@ -236,7 +236,7 @@ function CategoryButton({
           background: active
             ? "rgba(10,25,47,0.15)"
             : "rgba(10,25,47,0.06)",
-          color: active ? "var(--color-navy-dark)" : "rgba(10,25,47,0.5)",
+          color: active ? "var(--color-navy-dark)" : "rgba(10,25,47,0.62)",
         }}
       >
         {count}

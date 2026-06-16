@@ -156,6 +156,24 @@ export default function Footer() {
                   المدونة
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/prices"
+                  className="text-sm transition-colors hover:text-[var(--color-gold)]"
+                  style={{ color: "rgba(248, 246, 240, 0.6)" }}
+                >
+                  أسعار المقاولات في جدة
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="text-sm transition-colors hover:text-[var(--color-gold)]"
+                  style={{ color: "rgba(248, 246, 240, 0.6)" }}
+                >
+                  تواصل معنا
+                </Link>
+              </li>
             </ul>
           </div>
 
