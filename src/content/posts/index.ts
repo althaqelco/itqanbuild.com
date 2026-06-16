@@ -28,6 +28,7 @@ import waterproofing from "./waterproofing-jeddah";
 import foundationTypes from "./foundation-types-jeddah";
 import costOverrun from "./cost-overrun-prevention";
 import bestTimeBuild from "./best-time-build-jeddah";
+import villaBuildCost from "./villa-build-cost-jeddah";
 
 export const POSTS_CONTENT: Record<string, string> = {
   "choose-contractor-jeddah": chooseContractor,
@@ -55,4 +56,5 @@ export const POSTS_CONTENT: Record<string, string> = {
   "foundation-types-jeddah": foundationTypes,
   "cost-overrun-prevention": costOverrun,
   "best-time-build-jeddah": bestTimeBuild,
+  "villa-build-cost-jeddah": villaBuildCost,
 };

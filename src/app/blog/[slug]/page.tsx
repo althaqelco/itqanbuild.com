@@ -213,6 +213,21 @@ export default async function BlogArticlePage({ params }: Props) {
           { "@type": "ListItem", position: 3, name: post.h1, item: pageUrl },
         ],
       },
+      ...(post.faqs && post.faqs.length > 0
+        ? [
+            {
+              "@type": "FAQPage",
+              "@id": `${pageUrl}/#faq`,
+              isPartOf: { "@id": `${pageUrl}/#webpage` },
+              inLanguage: "ar",
+              mainEntity: post.faqs.map((f) => ({
+                "@type": "Question",
+                name: f.question,
+                acceptedAnswer: { "@type": "Answer", text: f.answer },
+              })),
+            },
+          ]
+        : []),
     ],
   };
 
@@ -252,6 +267,26 @@ export default async function BlogArticlePage({ params }: Props) {
         <section className="section-padding">
           <div className="container-wide" style={{ maxWidth: "720px" }}>
             <article className="prose-article">{renderMarkdown(content)}</article>
+
+            {/* On-page FAQ — visible + emitted as FAQPage JSON-LD (AEO / rich results) */}
+            {post.faqs && post.faqs.length > 0 && (
+              <div className="mt-12">
+                <h2 className="text-xl font-extrabold mb-5">أسئلة شائعة</h2>
+                <div className="space-y-3">
+                  {post.faqs.map((f, i) => (
+                    <details key={i} className="glass-card p-4 group" {...(i === 0 ? { open: true } : {})}>
+                      <summary className="font-bold cursor-pointer list-none flex items-start justify-between gap-3">
+                        <span>{f.question}</span>
+                        <span className="text-[var(--color-gold-dark)] shrink-0 transition-transform group-open:rotate-45">+</span>
+                      </summary>
+                      <p className="faq-answer mt-3 text-sm leading-relaxed" style={{ color: "rgba(10,25,47,0.72)" }}>
+                        {f.answer}
+                      </p>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Related Service — contextual internal link to the money page */}
             {relatedService && (
