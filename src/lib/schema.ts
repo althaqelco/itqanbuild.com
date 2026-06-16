@@ -8,11 +8,18 @@ import {
   SITE,
   SERVICE_TYPE_AR,
   SERVICE_PRICE_RANGE,
+  LAST_CONTENT_UPDATE,
   type ServiceData,
 } from "./constants";
 import { TESTIMONIALS, calculateReviewStats } from "./testimonials";
 
 const BASE_URL = SITE.url;
+
+// Reusable Speakable block — marks the primary spoken regions for voice/AI assistants
+const SPEAKABLE = {
+  "@type": "SpeakableSpecification",
+  cssSelector: ["h1", ".ai-tldr", ".faq-answer"],
+};
 
 // ─── Organization + LocalBusiness (Root Entity — Every Page) ───
 export function generateOrganizationSchema() {
@@ -22,6 +29,10 @@ export function generateOrganizationSchema() {
     name: SITE.name,
     alternateName: SITE.nameEn,
     url: BASE_URL,
+    description:
+      "شركة مقاولات معتمدة في جدة منذ 2010 — بناء فلل وعمارات، ترميم، أسفلت، شبوك، هناجر، ملاحق، وتشطيبات بضمان مكتوب يصل إلى 10 سنوات.",
+    slogan: SITE.tagline,
+    knowsLanguage: ["ar", "en"],
     logo: {
       "@type": "ImageObject",
       "@id": `${BASE_URL}/#logo`,
@@ -38,6 +49,8 @@ export function generateOrganizationSchema() {
     email: SITE.email,
     priceRange: "$$",
     currenciesAccepted: "SAR",
+    paymentAccepted: "تحويل بنكي، نقد، شيك مصدّق",
+    hasMap: SITE.social.googleMaps,
     address: {
       "@type": "PostalAddress",
       streetAddress: SITE.address.street,
@@ -123,6 +136,13 @@ export function generateOrganizationSchema() {
       reviewBody: t.text,
     })),
     foundingDate: SITE.foundedYear.toString(),
+    foundingLocation: { "@type": "City", name: "جدة" },
+    memberOf: {
+      "@type": "Organization",
+      name: "الغرفة التجارية الصناعية بجدة",
+    },
+    keywords:
+      "مقاول جدة، مقاول ترميم جدة، مقاول بناء جدة، مقاول أسفلت جدة، شركة مقاولات جدة، تسليم مفتاح جدة",
     taxID: SITE.crNumber,
     vatID: SITE.vatNumber,
     numberOfEmployees: { "@type": "QuantitativeValue", value: 50 },
@@ -160,6 +180,18 @@ export function generateEngineerSchema() {
       name: "جامعة الملك عبدالعزيز",
       sameAs: "https://www.kau.edu.sa",
     },
+    knowsLanguage: ["ar", "en"],
+    hasCredential: {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "بكالوريوس الهندسة المدنية",
+      educationalLevel: "Bachelor's Degree",
+      about: "الهندسة المدنية",
+      recognizedBy: {
+        "@type": "EducationalOrganization",
+        name: "جامعة الملك عبدالعزيز",
+        sameAs: "https://www.kau.edu.sa",
+      },
+    },
     worksFor: { "@id": `${BASE_URL}/#organization` },
     url: `${BASE_URL}/about`,
     image: `${BASE_URL}/images/engineer-profile-photo.avif`,
@@ -173,8 +205,11 @@ export function generateWebSiteSchema() {
     "@id": `${BASE_URL}/#website`,
     url: BASE_URL,
     name: `${SITE.name} جدة`,
+    description: "مقاول جدة المعتمد — بناء، ترميم، أسفلت، شبوك، هناجر، ملاحق، تشطيبات.",
     publisher: { "@id": `${BASE_URL}/#organization` },
     inLanguage: "ar",
+    // NOTE: potentialAction/SearchAction intentionally omitted — the site has no
+    // on-site search endpoint; declaring a fake SearchAction violates Google's policy.
   };
 }
 
@@ -215,14 +250,31 @@ export function generateServiceGraph(
         },
         breadcrumb: { "@id": `${pageUrl}/#breadcrumb` },
         inLanguage: "ar",
+        datePublished: `${SITE.foundedYear}-01-01`,
+        dateModified: LAST_CONTENT_UPDATE,
+        lastReviewed: LAST_CONTENT_UPDATE,
+        speakable: SPEAKABLE,
       },
       {
         "@type": "Service",
         "@id": `${pageUrl}/#service`,
         serviceType: `مقاول ${SERVICE_TYPE_AR[service.key]}`,
+        category: "خدمات المقاولات والبناء",
         name: service.h1,
         description: service.description,
         provider: { "@id": `${BASE_URL}/#organization` },
+        brand: { "@id": `${BASE_URL}/#organization` },
+        audience: {
+          "@type": "Audience",
+          audienceType: "ملاك العقارات والمستثمرون في جدة",
+          geographicArea: { "@type": "City", name: "جدة" },
+        },
+        hoursAvailable: {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: [...SITE.openingHours.days],
+          opens: SITE.openingHours.opens,
+          closes: SITE.openingHours.closes,
+        },
         areaServed: {
           "@type": "City",
           name: "جدة",
@@ -292,11 +344,23 @@ export function generateServiceGraph(
               description: `خطوات تنفيذ خدمة ${service.h1.split("—")[0].trim()} مع إتقان للمقاولات من المعاينة حتى التسليم.`,
               inLanguage: "ar",
               isPartOf: { "@id": `${pageUrl}/#webpage` },
+              image: `${BASE_URL}${service.image}`,
+              ...(price
+                ? {
+                    estimatedCost: {
+                      "@type": "MonetaryAmount",
+                      currency: "SAR",
+                      minValue: price.low,
+                      maxValue: price.high,
+                    },
+                  }
+                : {}),
               step: process.map((p, i) => ({
                 "@type": "HowToStep",
                 position: i + 1,
                 name: p.step,
                 text: p.desc,
+                url: `${pageUrl}#step-${i + 1}`,
               })),
             },
           ]
@@ -337,14 +401,25 @@ export function generateDistrictGraph(district: {
           : {}),
         breadcrumb: { "@id": `${pageUrl}/#breadcrumb` },
         inLanguage: "ar",
+        dateModified: LAST_CONTENT_UPDATE,
+        lastReviewed: LAST_CONTENT_UPDATE,
+        speakable: SPEAKABLE,
       },
       {
         "@type": "Service",
         "@id": `${pageUrl}/#service`,
         serviceType: "مقاولات عامة",
+        category: "خدمات المقاولات والبناء",
         name: `خدمات مقاول ${district.name} جدة`,
         ...(district.description ? { description: district.description } : {}),
         provider: { "@id": `${BASE_URL}/#organization` },
+        brand: { "@id": `${BASE_URL}/#organization` },
+        hoursAvailable: {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: [...SITE.openingHours.days],
+          opens: SITE.openingHours.opens,
+          closes: SITE.openingHours.closes,
+        },
         areaServed: {
           "@type": "Place",
           name: district.name,

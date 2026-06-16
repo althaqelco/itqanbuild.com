@@ -181,7 +181,7 @@ export default async function BlogArticlePage({ params }: Props) {
         inLanguage: "ar",
       },
       {
-        "@type": "Article",
+        "@type": "BlogPosting",
         "@id": `${pageUrl}/#article`,
         headline: post.h1,
         description: post.description,
@@ -190,10 +190,19 @@ export default async function BlogArticlePage({ params }: Props) {
         dateModified: post.dateModified ?? post.date,
         inLanguage: "ar",
         articleSection: post.category,
+        keywords: [post.category, "مقاول جدة", "مقاولات السعودية", post.h1.split("—")[0].trim()],
+        wordCount: content.trim().split(/\s+/).length,
         author: { "@id": `${SITE.url}/#engineer` },
         publisher: { "@id": `${SITE.url}/#organization` },
         isPartOf: { "@id": `${pageUrl}/#webpage` },
         mainEntityOfPage: { "@id": `${pageUrl}/#webpage` },
+        ...(relatedService
+          ? { about: { "@id": `${SITE.url}/jeddah/${relatedService.slug}/#service` } }
+          : {}),
+        speakable: {
+          "@type": "SpeakableSpecification",
+          cssSelector: ["h1", ".prose-article"],
+        },
       },
       {
         "@type": "BreadcrumbList",

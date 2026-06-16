@@ -18,7 +18,7 @@ export default function AITLDRBox({
   return (
     <section
       aria-label="الخلاصة السريعة"
-      className="my-8 rounded-2xl p-6 md:p-8"
+      className="ai-tldr my-8 rounded-2xl p-6 md:p-8"
       style={{
         background: "rgba(212, 175, 55, 0.04)",
         border: "1px solid rgba(212, 175, 55, 0.15)",

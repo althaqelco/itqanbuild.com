@@ -297,7 +297,7 @@ export default function ServicePageView({ slug }: { slug: string }) {
                     </summary>
                     <div className="px-5 pb-5">
                       <p
-                        className="text-sm leading-relaxed"
+                        className="faq-answer text-sm leading-relaxed"
                         style={{ color: "rgba(10,25,47,0.65)" }}
                       >
                         {faq.answer}
