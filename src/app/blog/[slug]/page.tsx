@@ -124,8 +124,9 @@ function renderMarkdown(md: string) {
     if (inTable) flushTable();
     if (!line.trim()) continue;
 
-    if (line.startsWith("![")) {
-      const match = line.match(/^!\[([^\]]*)\]\(([^)]+)\)/);
+    const trimmedLine = line.trim();
+    if (trimmedLine.startsWith("![")) {
+      const match = trimmedLine.match(/^!\[([^\]]*)\]\(([^)]+)\)/);
       if (match) {
         const alt = match[1];
         const src = match[2];
