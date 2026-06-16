@@ -53,6 +53,11 @@ import apartmentCost from "./apartment-building-cost-jeddah";
 import restHouse from "./rest-house-construction-jeddah";
 import bestDistricts from "./best-districts-build-jeddah";
 import swimmingPool from "./swimming-pool-construction-jeddah";
+import gypsumBoard from "./gypsum-board-decor-jeddah";
+import flooringTypes from "./flooring-types-jeddah";
+import landscaping from "./landscaping-jeddah";
+import villaDesignStyles from "./villa-design-styles-jeddah";
+import paymentSchedule from "./construction-payment-schedule-jeddah";
 
 export const POSTS_CONTENT: Record<string, string> = {
   "choose-contractor-jeddah": chooseContractor,
@@ -105,4 +110,9 @@ export const POSTS_CONTENT: Record<string, string> = {
   "rest-house-construction-jeddah": restHouse,
   "best-districts-build-jeddah": bestDistricts,
   "swimming-pool-construction-jeddah": swimmingPool,
+  "gypsum-board-decor-jeddah": gypsumBoard,
+  "flooring-types-jeddah": flooringTypes,
+  "landscaping-jeddah": landscaping,
+  "villa-design-styles-jeddah": villaDesignStyles,
+  "construction-payment-schedule-jeddah": paymentSchedule,
 };
