@@ -83,7 +83,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "كم تكلفة بناء فيلا في جدة ٢٠٢٦؟ دليل الأسعار بالمتر (عظم وتسليم مفتاح)",
     description:
       "تكلفة بناء فيلا في جدة ٢٠٢٦ بالتفصيل — سعر متر العظم وتسليم المفتاح، أمثلة محسوبة لفلل ٣٠٠ و٤٠٠ و٥٠٠ م²، تفصيل بنود التكلفة، والرسوم الحكومية.",
-    image: "/images/service-binaa-villa-jeddah.avif",
+    image: "/images/blog/villa-build-cost-jeddah-hero.avif",
     imageAlt: "تكلفة بناء فيلا في جدة — عظم وتسليم مفتاح",
     date: "2026-06-16",
     readTime: "١٤ دقيقة",
@@ -128,7 +128,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "اسعار تشطيب فلل في جدة ٢٠٢٦: سعر متر التشطيب وأمثلة محسوبة",
     description:
       "دليل اسعار تشطيب فلل في جدة ٢٠٢٦: سعر متر التشطيب من ٢٠٠ إلى ١,٥٠٠ ريال بأربعة مستويات، مع أمثلة محسوبة لشقة ١٥٠م² وفيلا ٤٠٠م² وتوزيع البنود.",
-    image: "/images/service-tashteebat-villa-jeddah.avif",
+    image: "/images/blog/finishing-cost-jeddah-hero.avif",
     imageAlt: "تشطيب داخلي فاخر لصالة فيلا في جدة يوضح مستويات أسعار متر التشطيب",
     date: "2026-06-16",
     readTime: "٩ دقائق",
@@ -178,7 +178,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "سعر متر الأسفلت في جدة ٢٠٢٦: دليل المواقف والطرق (بارد وساخن)",
     description:
       "سعر متر الأسفلت في جدة ٢٠٢٦ من ٣٥ إلى ١٨٠ ريالاً حسب النوع. جداول أسعار البارد والساخن والطرق + أمثلة محسوبة لموقف ٥٠٠م² وطريق داخلي ومقارنة الإنترلوك.",
-    image: "/images/service-asphalt-jeddah.avif",
+    image: "/images/blog/asphalt-cost-jeddah-hero.avif",
     imageAlt: "عامل يفرد طبقة أسفلت ساخن لموقف سيارات في جدة بمعدة فرد متخصصة",
     date: "2026-06-16",
     readTime: "٩ دقائق",
@@ -228,7 +228,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "نسبة البناء المسموحة في جدة ٢٠٢٦: كم دوراً وكم متراً يمكنك أن تبني؟",
     description:
       "دليل نسبة البناء في جدة ٢٠٢٦: تعرّف على معامل استغلال الأرض والارتدادات وعدد الأدوار، مع مثال حساب أرض ٦٠٠م² تبني نحو ١,٠٠٦م² مبنية.",
-    image: "/images/blog-hero-build-stages.avif",
+    image: "/images/blog/building-ratio-jeddah-hero.avif",
     imageAlt: "مخطط توضيحي لأرض في جدة يبيّن الارتدادات الأمامية والجانبية والخلفية ونسبة البناء المسموحة وعدد الأدوار فوق الأرض",
     date: "2026-06-16",
     readTime: "١٢ دقيقة",
@@ -278,7 +278,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "الكود السعودي للبناء (SBC): دليل المالك في جدة لمبنى آمن طويل العمر",
     description:
       "دليل المالك للكود السعودي للبناء في جدة: أبوابه الـ٨ الإلزامية، خرسانة Type V المقاومة للكبريتات، كفاءة الطاقة، وكيف تتأكد أن مقاولك يطبّقه فعلاً.",
-    image: "/images/service-general-contractor-jeddah.avif",
+    image: "/images/blog/saudi-building-code-sbc-hero.avif",
     imageAlt: "مهندس يراجع مخططات الكود السعودي للبناء أمام فيلا قيد الإنشاء في جدة",
     date: "2026-06-16",
     readTime: "١١ دقيقة",
@@ -323,7 +323,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "سعر متر الشبوك في جدة ٢٠٢٦: دليل أسعار أسوار الفلل والأراضي",
     description:
       "سعر متر الشبوك في جدة ٢٠٢٦ يتراوح بين ٢٥ و٥٠٠ ريال للمتر الطولي حسب النوع. أسعار الأسوار والبوابات والجلفنة مع أمثلة محسوبة لسور فيلا وأرض.",
-    image: "/images/service-shboak-jeddah.avif",
+    image: "/images/blog/shboak-cost-jeddah-hero.avif",
     imageAlt: "سور حديد مجلفن مدهون لفيلا في جدة مع بوابة سحابة يوضح سعر متر الشبوك",
     date: "2026-06-17",
     readTime: "١٠ دقائق",
@@ -373,7 +373,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "سعر متر الهنجر في جدة ٢٠٢٦: تكلفة بناء هنجر بالمتر (مستودعات ومصانع وورش)",
     description:
       "سعر متر الهنجر في جدة ٢٠٢٦ من ٢٥٠ إلى ٦٠٠ ريال حسب العزل والارتفاع، مع جداول أسعار وأمثلة محسوبة لهنجر ٥٠٠ و١,٠٠٠ م² ومكوّنات التكلفة والضمان.",
-    image: "/images/service-hanager-steel-jeddah.avif",
+    image: "/images/blog/hanager-cost-jeddah-hero.avif",
     imageAlt: "هنجر حديدي معزول بالساندويتش بانل في جدة يوضح مستويات سعر متر الهنجر",
     date: "2026-06-17",
     readTime: "١١ دقيقة",
@@ -418,7 +418,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "تكلفة هدم مبنى في جدة ٢٠٢٦: سعر متر الهدم بالتفصيل",
     description:
       "دليل تكلفة هدم مبنى في جدة ٢٠٢٦ وسعر متر الهدم من ١٥ إلى ٦٠ ريالاً، مع جداول حسب نوع المبنى وطريقة الهدم والترحيل والتصاريح وأمثلة محسوبة.",
-    image: "/images/project-rawdah-before.avif",
+    image: "/images/blog/hadm-cost-jeddah-hero.avif",
     imageAlt: "معدة هدم ميكانيكية تهدم مبنى خرسانياً في جدة مع تجميع الأنقاض للترحيل",
     date: "2026-06-17",
     readTime: "١٠ دقائق",
@@ -463,7 +463,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "تكلفة بناء ملحق في جدة ٢٠٢٦: سعر متر الملحق (علوي وخارجي)",
     description:
       "دليل تكلفة بناء ملحق في جدة ٢٠٢٦ وسعر متر الملحق من ٨٠٠ إلى ١,٨٠٠ ريال، مع جداول حسب النوع والتشطيب وأمثلة محسوبة والترخيص ونسبة البناء.",
-    image: "/images/project-molahaq-salamah.avif",
+    image: "/images/blog/molahaq-cost-jeddah-hero.avif",
     imageAlt: "ملحق علوي روف مبني على سطح فيلا في جدة يوضح تكلفة بناء الملحق وسعر المتر",
     date: "2026-06-17",
     readTime: "١١ دقيقة",
@@ -1514,7 +1514,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "مراحل بناء منزل في جدة من الصفر — الدليل الكامل",
     description:
       "من رخصة البناء إلى تسليم المفتاح — ٧ مراحل لبناء منزل في جدة مع جدول زمني وتكاليف تقريبية لكل مرحلة + أخطاء شائعة.",
-    image: "/images/blog-hero-build-stages.avif",
+    image: "/images/blog/build-house-jeddah-stages-hero.avif",
     imageAlt: "مراحل بناء منزل جدة",
     date: "2026-05-05",
     readTime: "١٥ دقيقة",
@@ -1568,7 +1568,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "أفضل ألوان دهانات الفلل في جدة ٢٠٢٦ — دليل المعماري",
     description:
       "اختيار ألوان دهانات الفلل في جدة — تأثير المناخ على الألوان، الترندات الحديثة، ونصائح اختيار اللون المناسب للواجهة والداخلية.",
-    image: "/images/service-tashteebat-villa-jeddah.avif",
+    image: "/images/blog/villa-paint-colors-jeddah-hero.avif",
     imageAlt: "ألوان دهانات فلل جدة",
     date: "2026-04-10",
     readTime: "٧ دقائق",
@@ -1581,7 +1581,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "اشتراطات هدم المباني في جدة — دليل التصاريح والأمان",
     description:
       "كيفية الحصول على تصريح هدم في جدة، الإجراءات القانونية، احتياطات السلامة، وتكلفة الهدم لكل نوع مبنى.",
-    image: "/images/service-hadm-mabani-jeddah.avif",
+    image: "/images/blog/hadm-requirements-jeddah-hero.avif",
     imageAlt: "هدم مباني جدة",
     date: "2026-04-05",
     readTime: "٨ دقائق",
@@ -1594,7 +1594,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "تشطيب A vs B vs C — الفرق التفصيلي ومتى تختار كل نوع",
     description:
       "شرح مفصّل لأنظمة التشطيب الثلاثة في السوق السعودي — المواد، التكلفة، الجودة، ومتى تختار كل نوع.",
-    image: "/images/service-tashteebat-villa-jeddah.avif",
+    image: "/images/blog/tashteeb-abc-comparison-hero.avif",
     imageAlt: "أنواع تشطيب الفلل جدة",
     date: "2026-03-28",
     readTime: "٩ دقائق",
@@ -1607,7 +1607,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "كيف تحصل على رخصة بناء في جدة ٢٠٢٦ — دليل خطوة بخطوة",
     description:
       "إجراءات استخراج رخصة البناء عبر نظام «ابني» — المتطلبات، المدة، التكلفة، وأخطاء شائعة يقع فيها الملاك.",
-    image: "/images/service-binaa-villa-jeddah.avif",
+    image: "/images/blog/building-permit-jeddah-2026-hero.avif",
     imageAlt: "رخصة بناء جدة",
     date: "2026-03-20",
     readTime: "١١ دقيقة",
@@ -1620,7 +1620,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "عزل الأسطح في جدة — أفضل أنواع العزل لمناخ جدة الحار",
     description:
       "مقارنة أنواع عزل الأسطح في جدة (بيتومين، بولي يوريا، فوم، رغوي) — التكلفة، العمر الافتراضي، وأيها يناسب مناخ جدة.",
-    image: "/images/service-tarmeem-jeddah.avif",
+    image: "/images/blog/roof-insulation-jeddah-hero.avif",
     imageAlt: "عزل أسطح جدة",
     date: "2026-03-15",
     readTime: "٨ دقائق",
@@ -1633,7 +1633,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "الطوب الخفيف vs الطوب الأحمر — أيهما الأفضل للبناء في جدة؟",
     description:
       "مقارنة فنية بين الطوب الخفيف (سيبوركس) والطوب الأحمر التقليدي — العزل، التكلفة، السرعة، وأيهما يناسب مناخ جدة.",
-    image: "/images/service-binaa-villa-jeddah.avif",
+    image: "/images/blog/brick-types-jeddah-hero.avif",
     imageAlt: "أنواع الطوب جدة",
     date: "2026-03-08",
     readTime: "٧ دقائق",
@@ -1648,7 +1648,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "ما الفرق بين المقاول العام والمقاول المعماري؟",
     description:
       "شرح الفرق بين المقاول العام والمقاول المعماري في السوق السعودي — التخصصات، المسؤوليات، ومتى تحتاج كلاً منهما.",
-    image: "/images/service-general-contractor-jeddah.avif",
+    image: "/images/blog/mokawel-aam-vs-mimari-hero.avif",
     imageAlt: "الفرق بين المقاول العام والمعماري",
     date: "2026-02-28",
     readTime: "٦ دقائق",
@@ -1661,7 +1661,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "كم يأخذ المقاول نسبة من مشروع البناء؟ الحقيقة الكاملة",
     description:
       "شرح هامش الربح الفعلي للمقاول في جدة — كيف يُحسب السعر، هل المقاول الأرخص هو الأفضل، ومتى تشك بأن السعر منخفض جداً.",
-    image: "/images/service-general-contractor-jeddah.avif",
+    image: "/images/blog/mokawel-profit-percentage-hero.avif",
     imageAlt: "نسبة ربح المقاول",
     date: "2026-02-20",
     readTime: "٦ دقائق",
@@ -1674,7 +1674,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "هل يحتاج الملحق رخصة بناء في جدة؟ الإجابة الكاملة",
     description:
       "كل ما تحتاج معرفته عن تصاريح الملاحق في جدة — متى تحتاج رخصة، الإجراءات، التكلفة، وما يحدث إذا بنيت بدون ترخيص.",
-    image: "/images/service-molahaq-jeddah.avif",
+    image: "/images/blog/ml7aq-permit-jeddah-hero.avif",
     imageAlt: "رخصة ملحق جدة",
     date: "2026-02-15",
     readTime: "٧ دقائق",
@@ -1687,7 +1687,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "شغل عظم بالمواد vs تسليم مفتاح — الفرق الجوهري",
     description:
       "شرح مصطلحي «شغل عظم بالمواد» و«تسليم مفتاح» في السوق السعودي — الفروقات، التكاليف، الضمانات، وأيهما أنسب لمشروعك.",
-    image: "/images/service-binaa-villa-jeddah.avif",
+    image: "/images/blog/tasleem-miftah-meaning-hero.avif",
     imageAlt: "تسليم مفتاح أم عظم بالمواد",
     date: "2026-02-08",
     readTime: "٦ دقائق",
@@ -1700,7 +1700,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "١٠ علامات تحذير تدل على أنك اخترت المقاول الخطأ",
     description:
       "كيف تكتشف المقاول السيء قبل التوقيع — علامات تحذيرية في العرض، العقد، الموقع، والتواصل تحميك من الكوارث.",
-    image: "/images/service-general-contractor-jeddah.avif",
+    image: "/images/blog/contractor-warning-signs-hero.avif",
     imageAlt: "علامات التحذير من المقاول السيء",
     date: "2026-02-01",
     readTime: "٧ دقائق",
@@ -1713,7 +1713,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "متى يجب ترميم المنزل قبل فوات الأوان؟ ٨ علامات",
     description:
       "علامات تدل على حاجة منزلك لترميم عاجل — شقوق، تسرّب، صدأ، رطوبة. كيف تكتشفها مبكراً قبل تفاقم الأضرار.",
-    image: "/images/service-tarmeem-jeddah.avif",
+    image: "/images/blog/best-time-tarmeem-jeddah-hero.avif",
     imageAlt: "وقت ترميم المنزل جدة",
     date: "2026-01-25",
     readTime: "٦ دقائق",
@@ -1728,7 +1728,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "كيف تحمي نفسك قانونياً في عقد المقاولة؟ ١٠ بنود إلزامية",
     description:
       "دليل قانوني لتوقيع عقد مقاولة آمن — ١٠ بنود إلزامية، شروط الدفع، الضمانات، الشرط الجزائي، وآلية حل النزاعات.",
-    image: "/images/service-general-contractor-jeddah.avif",
+    image: "/images/blog/contract-protection-tips-hero.avif",
     imageAlt: "حماية قانونية في عقد المقاولة",
     date: "2026-01-15",
     readTime: "١٠ دقائق",
@@ -1741,7 +1741,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "أنواع الخرسانة في جدة — مواصفات الكود السعودي",
     description:
       "شرح فني لأنواع الخرسانة (OPC, SRC Type V, HSC) — متى تستخدم كل نوع، التكلفة، وخصوصية الأحياء الساحلية في جدة.",
-    image: "/images/service-binaa-villa-jeddah.avif",
+    image: "/images/blog/concrete-types-jeddah-hero.avif",
     imageAlt: "أنواع الخرسانة في جدة",
     date: "2026-01-08",
     readTime: "١١ دقيقة",
@@ -1754,7 +1754,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "المنزل الذكي في جدة ٢٠٢٦ — استثمار أم رفاهية؟",
     description:
       "كل ما تحتاجه عن المنازل الذكية في جدة — KNX, HomeKit, Google Home. التكاليف، التأسيس، والاستراتيجية الذكية للاستثمار.",
-    image: "/images/service-tashteebat-villa-jeddah.avif",
+    image: "/images/blog/smart-home-jeddah-hero.avif",
     imageAlt: "منزل ذكي جدة",
     date: "2025-12-28",
     readTime: "١٢ دقيقة",
@@ -1767,7 +1767,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "العزل المائي في جدة — كل أنواعه وأيها يناسبك",
     description:
       "مقارنة أنواع العزل المائي (بيتومين، بولي يوريا، إسمنتي، HDPE) — التكلفة، العمر الافتراضي، وأي نوع يناسب كل حي في جدة.",
-    image: "/images/service-tarmeem-jeddah.avif",
+    image: "/images/blog/waterproofing-jeddah-hero.avif",
     imageAlt: "عزل مائي في جدة",
     date: "2025-12-20",
     readTime: "١٠ دقائق",
@@ -1780,7 +1780,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "أنواع الأساسات في جدة — دليل اختيار الأساس الصحيح",
     description:
       "شرح أنواع الأساسات (شريطية، لبشة، أوتاد، منفصلة) — أيها يناسب تربة كل حي في جدة، التكاليف، وأخطاء قاتلة يجب تجنّبها.",
-    image: "/images/service-binaa-villa-jeddah.avif",
+    image: "/images/blog/foundation-types-jeddah-hero.avif",
     imageAlt: "أنواع الأساسات في جدة",
     date: "2025-12-12",
     readTime: "١١ دقيقة",
@@ -1793,7 +1793,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "كيف تتجنب تجاوز ميزانية البناء؟ ١٠ أسباب وحلول",
     description:
       "٧٣٪ من مشاريع جدة تتجاوز الميزانية ١٥-٥٠٪. اكتشف الأسباب الـ ١٠ وكيف تحمي ميزانيتك بقاعدة الـ ٢٠٪.",
-    image: "/images/service-general-contractor-jeddah.avif",
+    image: "/images/blog/cost-overrun-prevention-hero.avif",
     imageAlt: "تجنب تجاوز ميزانية البناء",
     date: "2025-12-05",
     readTime: "١٠ دقائق",
@@ -1806,7 +1806,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "أفضل وقت لبدء البناء في جدة — التوقيت يحدد التكلفة والجودة",
     description:
       "دليل التوقيت المثالي للبناء في جدة — كيف يؤثر الموسم على التكلفة (١٠-٢٠٪) والجودة. خطة سنوية كاملة لمشروعك.",
-    image: "/images/service-binaa-villa-jeddah.avif",
+    image: "/images/blog/best-time-build-jeddah-hero.avif",
     imageAlt: "أفضل وقت للبناء في جدة",
     date: "2025-11-25",
     readTime: "٩ دقائق",
