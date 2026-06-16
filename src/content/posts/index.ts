@@ -37,6 +37,10 @@ import shboakCost from "./shboak-cost-jeddah";
 import hanagerCost from "./hanager-cost-jeddah";
 import hadmCost from "./hadm-cost-jeddah";
 import molahaqCost from "./molahaq-cost-jeddah";
+import krokiGuide from "./kroki-jeddah-guide";
+import completionCert from "./completion-certificate-jeddah";
+import civilDefense from "./civil-defense-requirements-jeddah";
+import renovationPermit from "./renovation-permit-jeddah";
 
 export const POSTS_CONTENT: Record<string, string> = {
   "choose-contractor-jeddah": chooseContractor,
@@ -73,4 +77,8 @@ export const POSTS_CONTENT: Record<string, string> = {
   "hanager-cost-jeddah": hanagerCost,
   "hadm-cost-jeddah": hadmCost,
   "molahaq-cost-jeddah": molahaqCost,
+  "kroki-jeddah-guide": krokiGuide,
+  "completion-certificate-jeddah": completionCert,
+  "civil-defense-requirements-jeddah": civilDefense,
+  "renovation-permit-jeddah": renovationPermit,
 };
