@@ -206,7 +206,10 @@ export default async function BlogArticlePage({ params }: Props) {
         "@id": `${pageUrl}/#article`,
         headline: post.h1,
         description: post.description,
-        image: `${SITE.url}${toOgImage(post.image)}`,
+        image: [
+          `${SITE.url}${toOgImage(post.image)}`,
+          `${SITE.url}/images/blog/${post.slug}-body.avif`
+        ],
         datePublished: post.date,
         dateModified: post.dateModified ?? post.date,
         inLanguage: "ar",

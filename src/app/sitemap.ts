@@ -38,13 +38,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     images: [`${base}${d.image}`],
   }));
 
-  const blogPages: MetadataRoute.Sitemap = BLOG_POSTS.map((p) => ({
-    url: `${base}/blog/${p.slug}`,
-    lastModified: p.dateModified ?? p.date,
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-    images: [`${base}${p.image}`],
-  }));
+  const blogPages: MetadataRoute.Sitemap = BLOG_POSTS.map((p) => {
+    const images = [`${base}${p.image}`];
+    images.push(`${base}/images/blog/${p.slug}-body.avif`);
+    
+    return {
+      url: `${base}/blog/${p.slug}`,
+      lastModified: p.dateModified ?? p.date,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+      images,
+    };
+  });
 
   return [...staticPages, ...servicePages, ...districtPages, ...blogPages];
 }
