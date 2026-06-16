@@ -13,7 +13,6 @@ declare global {
  * Fires a GA4 page_view on App Router client-side (soft) navigations.
  * The initial hard load is already counted by `gtag('config', …, { send_page_view: true })`
  * in layout.tsx, so we skip the first effect run to avoid a double count.
- * gtag is bridged to the Partytown worker via the `forward: ["gtag", …]` config.
  */
 export default function GAListener({ gaId }: { gaId: string }) {
   const pathname = usePathname();

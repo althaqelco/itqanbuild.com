@@ -123,34 +123,19 @@ export default function RootLayout({
           }}
         />
 
-        {/* Partytown — moves heavy 3rd-party scripts to Web Worker (INP-safe) */}
-        <Script
-          id="partytown-config"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.partytown = {
-                lib: "/~partytown/",
-                forward: ["gtag", "dataLayer.push"],
-              };
-            `,
-          }}
-        />
-        <Script
-          id="partytown-script"
-          strategy="beforeInteractive"
-          src="/~partytown/partytown.js"
-        />
-
-        {/* GA4 via Partytown Worker — does NOT block Main Thread / INP */}
+        {/* GA4 — standard afterInteractive load.
+            (Partytown was removed: routing gtag through its web worker never
+            forwarded GA4's /collect requests, so the property received ZERO data.
+            Standard gtag reliably collects pageviews + custom events; GA's own
+            payload is light and async, so main-thread/INP cost is negligible.) */}
         <Script
           id="gtag-src"
-          strategy="worker"
+          strategy="afterInteractive"
           src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}
         />
         <Script
           id="gtag-init"
-          strategy="worker"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];

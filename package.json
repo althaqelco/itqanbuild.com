@@ -4,14 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "copylib": "partytown copylib public/~partytown",
-    "prebuild": "partytown copylib public/~partytown",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
-    "@builder.io/partytown": "0.10.3",
     "lucide-react": "^1.16.0",
     "next": "16.2.6",
     "react": "19.2.4",
