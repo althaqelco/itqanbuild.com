@@ -45,6 +45,10 @@ import azmVsTasleem from "./azm-vs-tasleem-miftah-jeddah";
 import buildVsBuy from "./build-vs-buy-villa-jeddah";
 import renovateVsRebuild from "./renovate-vs-rebuild-jeddah";
 import centralVsSplitAc from "./central-vs-split-ac-jeddah";
+import bathroomReno from "./bathroom-renovation-jeddah";
+import kitchenReno from "./kitchen-renovation-jeddah";
+import villaFacades from "./villa-facades-jeddah";
+import villaTimeline from "./villa-construction-timeline-jeddah";
 
 export const POSTS_CONTENT: Record<string, string> = {
   "choose-contractor-jeddah": chooseContractor,
@@ -89,4 +93,8 @@ export const POSTS_CONTENT: Record<string, string> = {
   "build-vs-buy-villa-jeddah": buildVsBuy,
   "renovate-vs-rebuild-jeddah": renovateVsRebuild,
   "central-vs-split-ac-jeddah": centralVsSplitAc,
+  "bathroom-renovation-jeddah": bathroomReno,
+  "kitchen-renovation-jeddah": kitchenReno,
+  "villa-facades-jeddah": villaFacades,
+  "villa-construction-timeline-jeddah": villaTimeline,
 };
