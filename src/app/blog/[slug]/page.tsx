@@ -124,6 +124,26 @@ function renderMarkdown(md: string) {
     if (inTable) flushTable();
     if (!line.trim()) continue;
 
+    if (line.startsWith("![")) {
+      const match = line.match(/^!\[([^\]]*)\]\(([^)]+)\)/);
+      if (match) {
+        const alt = match[1];
+        const src = match[2];
+        elements.push(
+          <div key={key++} className="my-6 overflow-hidden rounded-xl shadow-lg border border-[rgba(248,246,240,0.08)] relative aspect-[16/9]">
+            <Image
+              src={src}
+              alt={alt}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 720px"
+            />
+          </div>
+        );
+        continue;
+      }
+    }
+
     if (line.startsWith("## "))
       elements.push(<h2 key={key++}>{processInline(line.slice(3))}</h2>);
     else if (line.startsWith("### ")) {
@@ -238,27 +258,46 @@ export default async function BlogArticlePage({ params }: Props) {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
 
         {/* Hero */}
-        <section className="relative overflow-hidden" style={{ paddingTop: "6.5rem", paddingBottom: "3rem" }}>
-          <Image src={post.image} alt={post.imageAlt} fill priority fetchPriority="high" quality={60} className="object-cover" sizes="100vw" />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(165deg, rgba(6,15,31,0.92) 0%, rgba(10,25,47,0.82) 100%)" }} />
+        <section className="relative overflow-hidden bg-[var(--color-navy-dark)]" style={{ paddingTop: "7.5rem", paddingBottom: "3.5rem" }}>
+          {/* Subtle background glow/mesh instead of stretching the main image as a dark background */}
+          <div className="absolute inset-0 opacity-15" style={{ background: "radial-gradient(circle at 80% 20%, var(--color-gold) 0%, transparent 50%)" }} />
           <div className="relative z-10 container-wide px-4 md:px-6">
-            <Link href="/blog" className="inline-flex items-center gap-1 text-[11px] mb-4 hover:opacity-100 transition-opacity" style={{ color: "rgba(248,246,240,0.45)" }}>
+            <Link href="/blog" className="inline-flex items-center gap-1 text-[11px] mb-6 hover:opacity-100 transition-opacity" style={{ color: "rgba(248,246,240,0.45)" }}>
               <ArrowRight className="w-3 h-3" /> العودة للمدونة
             </Link>
-            <span className="gold-accent" />
-            <h1 className="text-2xl md:text-3xl font-extrabold mb-3 max-w-2xl leading-snug" style={{ color: "var(--color-pearl)" }}>
-              {post.h1}
-            </h1>
-            <div className="flex items-center gap-3 text-[11px]" style={{ color: "rgba(248,246,240,0.55)" }}>
-              <span className="flex items-center gap-1">
-                <Calendar className="w-3 h-3" />
-                {post.dateModified && post.dateModified !== post.date ? "آخر تحديث: " : "نُشر: "}
-                <time dateTime={post.dateModified ?? post.date}>{post.dateModified ?? post.date}</time>
-              </span>
-              <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{post.readTime}</span>
-              <span className="px-2 py-0.5 rounded-full" style={{ background: "rgba(212,175,55,0.15)", color: "var(--color-gold)" }}>
-                {post.category}
-              </span>
+            
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+              <div className="md:col-span-7">
+                <span className="gold-accent" />
+                <h1 className="text-2xl md:text-3.5xl font-extrabold mb-4 leading-snug" style={{ color: "var(--color-pearl)", fontSize: "clamp(1.5rem, 4vw, 2.25rem)" }}>
+                  {post.h1}
+                </h1>
+                <div className="flex items-center gap-4 text-[11px] flex-wrap" style={{ color: "rgba(248,246,240,0.55)" }}>
+                  <span className="flex items-center gap-1">
+                    <Calendar className="w-3 h-3" />
+                    {post.dateModified && post.dateModified !== post.date ? "آخر تحديث: " : "نُشر: "}
+                    <time dateTime={post.dateModified ?? post.date}>{post.dateModified ?? post.date}</time>
+                  </span>
+                  <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{post.readTime}</span>
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold" style={{ background: "rgba(212,175,55,0.15)", color: "var(--color-gold)" }}>
+                    {post.category}
+                  </span>
+                </div>
+              </div>
+              <div className="md:col-span-5 w-full">
+                <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden shadow-2xl border-2 border-[rgba(212,175,55,0.25)] bg-[rgba(10,25,47,0.5)]">
+                  <Image
+                    src={post.image}
+                    alt={post.imageAlt}
+                    fill
+                    priority
+                    fetchPriority="high"
+                    quality={75}
+                    className="object-cover hover:scale-102 transition-transform duration-700"
+                    sizes="(max-width: 768px) 100vw, 450px"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </section>

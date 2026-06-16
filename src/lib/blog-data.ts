@@ -508,7 +508,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "الكروكي التنظيمي في جدة: ما هو وكيف تقرأه قبل الشراء والبناء",
     description:
       "دليل عملي للكروكي التنظيمي في جدة: ما هو، والفرق بينه وبين الصك والمخطط المعماري، وماذا يحتوي، وكيف تستخرجه عبر بلدي وتقرأه قبل شراء الأرض والبناء.",
-    image: "/images/balady-verified-screenshot.avif",
+    image: "/images/blog/kroki-jeddah-guide-hero.avif",
     imageAlt: "نموذج الكروكي التنظيمي لقطعة أرض في جدة يوضح الارتدادات وعدد الأدوار ونسبة البناء والاستعمال المسموح",
     date: "2026-06-17",
     readTime: "١١ دقيقة",
@@ -553,7 +553,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "شهادة إتمام البناء في جدة: كيف تحصل عليها ولماذا هي ضرورية",
     description:
       "دليل شهادة إتمام البناء في جدة (شهادة الإشغال): أهميتها للخدمات الدائمة والإفراغ والبيع والرهن، متطلباتها، وخطوات استخراجها عبر منصة بلدي.",
-    image: "/images/certificate-chamber-commerce.avif",
+    image: "/images/blog/completion-certificate-jeddah-hero.avif",
     imageAlt: "مبنى سكني مكتمل في جدة مع وثيقة شهادة إتمام البناء الرسمية",
     date: "2026-06-17",
     readTime: "٩ دقائق",
@@ -603,7 +603,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "اشتراطات الدفاع المدني ومتطلبات السلامة للمباني في جدة",
     description:
       "دليل اشتراطات الدفاع المدني ومتطلبات السلامة للمباني في جدة: مخارج الطوارئ والطفايات والإنذار والرش الآلي وكيف تستوفيها وتستخرج رخصة السلامة.",
-    image: "/images/project-salamah-villa.avif",
+    image: "/images/blog/civil-defense-requirements-jeddah-hero.avif",
     imageAlt: "مخطط سلامة لمبنى في جدة يوضح مخارج الطوارئ وطفايات الحريق وأنظمة الإنذار والرش الآلي ضمن اشتراطات الدفاع المدني",
     date: "2026-06-17",
     readTime: "٩ دقائق",
@@ -648,7 +648,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "رخصة الترميم في جدة — متى تحتاجها وكيف تستخرجها",
     description:
       "دليل رخصة الترميم في جدة: متى تحتاج تصريح ترميم ومتى لا تحتاجه، الأعمال الهيكلية المرخّصة، وخطوات استخراج الرخصة عبر منصة بلدي بدقة.",
-    image: "/images/service-tarmeem-jeddah.avif",
+    image: "/images/blog/renovation-permit-jeddah-hero.avif",
     imageAlt: "عامل ترميم يعالج جداراً إنشائياً في مبنى بجدة مع مخططات ووثائق رخصة الترميم",
     date: "2026-06-17",
     readTime: "٩ دقائق",
@@ -693,7 +693,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "الفرق بين العظم وتسليم المفتاح: كيف تختار طريقة بناء فيلتك في جدة",
     description:
       "مقارنة محايدة بين العظم بالمواد وتسليم المفتاح لبناء فيلتك في جدة ٢٠٢٦: جدول مقارنة شامل، حساب تكلفة حقيقي بمثال، ولمن يناسب كل خيار مع توصية عملية.",
-    image: "/images/project-rawdah-after.avif",
+    image: "/images/blog/azm-vs-tasleem-miftah-jeddah-hero.avif",
     imageAlt: "مقارنة بين بناء فيلا بنظام العظم بالمواد ونظام تسليم المفتاح في جدة",
     date: "2026-06-17",
     readTime: "٩ دقائق",
@@ -738,7 +738,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "أبني فيلا أم أشتري جاهزة في جدة؟ مقارنة التكلفة والجودة والوقت",
     description:
       "مقارنة محايدة بين بناء فيلا وشراء جاهزة في جدة ٢٠٢٦ من حيث التكلفة والجودة والوقت والمخاطر، مع جدول قرار وتوصية عملية حسب وضعك المالي والزمني.",
-    image: "/images/service-binaa-villa-jeddah.avif",
+    image: "/images/blog/build-vs-buy-villa-jeddah-hero.avif",
     imageAlt: "مقارنة بين بناء فيلا جديدة وشراء فيلا جاهزة في جدة من حيث التكلفة والجودة والوقت",
     date: "2026-06-17",
     readTime: "٩ دقائق",
@@ -783,7 +783,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "ترميم المبنى أم هدمه وإعادة بنائه في جدة؟ كيف تتخذ القرار الصحيح",
     description:
       "ترميم أم إعادة بناء في جدة؟ دليل حيادي يحسم القرار بقاعدة الـ٥٠٪ وجدول مقارنة للتكلفة والوقت والمخاطر ودور الفحص الإنشائي مع مثال واقعي ٢٠٢٦.",
-    image: "/images/blog-hero-tarmeem-cost.avif",
+    image: "/images/blog/renovate-vs-rebuild-jeddah-hero.avif",
     imageAlt: "مقارنة بين ترميم مبنى قديم وإعادة بنائه في جدة مع معايير اتخاذ القرار",
     date: "2026-06-17",
     readTime: "٩ دقائق",
@@ -828,7 +828,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "التكييف المركزي أم السبليت لفيلتك في جدة؟ مقارنة التكلفة والكفاءة",
     description:
       "تكييف مركزي أم سبليت لفيلتك في جدة؟ مقارنة محايدة بالأرقام للتكلفة والاستهلاك والصيانة والمظهر، مع توصية عملية حسب مساحة الفيلا والميزانية لمناخ جدة الحار.",
-    image: "/images/service-tashteebat-villa-jeddah.avif",
+    image: "/images/blog/central-vs-split-ac-jeddah-hero.avif",
     imageAlt: "مقارنة بين وحدة تكييف مركزي ووحدات سبليت في فيلا حديثة بجدة",
     date: "2026-06-17",
     readTime: "٩ دقائق",
@@ -878,7 +878,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "تجديد وترميم الحمامات في جدة ٢٠٢٦: التكلفة والخطوات والعزل",
     description:
       "دليل تجديد الحمامات في جدة ٢٠٢٦: تكلفة ترميم حمام من ٨٬٠٠٠ إلى ٢٥٬٠٠٠ ريال حسب المستوى، خطوات التنفيذ، أهمية العزل المائي، وأمثلة محسوبة بالريال.",
-    image: "/images/service-tarmeem-jeddah.avif",
+    image: "/images/blog/bathroom-renovation-jeddah-hero.avif",
     imageAlt: "حمام مجدد في جدة بسيراميك بورسلين حديث وعزل مائي وأدوات صحية وخلاطات جديدة",
     date: "2026-06-17",
     readTime: "٩ دقائق",
@@ -928,7 +928,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "تجديد وتفصيل المطابخ في جدة ٢٠٢٦: دليل التكلفة والخامات",
     description:
       "دليل تجديد وتفصيل مطابخ جدة ٢٠٢٦: تكلفة المطبخ بالمتر الطولي، مقارنة خامات الخزائن والأسطح، أمثلة محسوبة بالريال لمطبخ شقة وفيلا، ونصائح عملية.",
-    image: "/images/service-tashteebat-villa-jeddah.avif",
+    image: "/images/blog/kitchen-renovation-jeddah-hero.avif",
     imageAlt: "مطبخ عصري مفصّل في فيلا بجدة بخزائن بولي لاك وسطح كوارتز وجزيرة وسطية وإضاءة تحت الخزائن",
     date: "2026-06-17",
     readTime: "٩ دقائق",
@@ -973,7 +973,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "واجهات الفلل في جدة ٢٠٢٦: الأنواع والتكلفة وكيف تختار",
     description:
       "دليل واجهات الفلل في جدة ٢٠٢٦: أنواع المواد وأسعارها بالريال للمتر، تكلفة واجهة فيلا ١٥٠م²، ومقارنة GRC والحجر والكلادينج لاختيار الأنسب لمناخ جدة.",
-    image: "/images/project-salamah-villa.avif",
+    image: "/images/blog/villa-facades-jeddah-hero.avif",
     imageAlt: "واجهة فيلا حديثة في جدة بمزيج من الحجر الطبيعي والكلادينج وزخارف GRC مع إنارة خارجية",
     date: "2026-06-17",
     readTime: "٩ دقائق",
@@ -1023,7 +1023,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "مدة بناء فيلا في جدة ٢٠٢٦: الجدول الزمني مرحلة بمرحلة",
     description:
       "كم يستغرق بناء فيلا في جدة؟ مدة بناء فيلا متوسطة ٨–١٦ شهراً. جدول زمني مرحلة بمرحلة لعام ٢٠٢٦ ومثال محسوب لفيلا ٤٠٠م² وعوامل التسريع والتأخير.",
-    image: "/images/blog-hero-build-stages.avif",
+    image: "/images/blog/villa-construction-timeline-jeddah-hero.avif",
     imageAlt: "جدول زمني لمراحل بناء فيلا في جدة من التصميم والأساسات والعظم حتى التشطيب وتسليم المفتاح",
     date: "2026-06-17",
     readTime: "٨ دقائق",
@@ -1068,7 +1068,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "تكلفة بناء عمارة سكنية في جدة ٢٠٢٦ والعائد الاستثماري",
     description:
       "دليل تكلفة بناء عمارة في جدة ٢٠٢٦ وسعر متر العمارة: عظم وتسليم مفتاح، مثال محسوب لعمارة ٨ شقق، وحساب العائد الاستثماري وفترة الاسترداد بتقدير إرشادي.",
-    image: "/images/service-binaa-villa-jeddah.avif",
+    image: "/images/blog/apartment-building-cost-jeddah-hero.avif",
     imageAlt: "عمارة سكنية حديثة من أربعة أدوار قيد الإنشاء في جدة مع توضيح تكلفة بناء العمارة والعائد الاستثماري",
     date: "2026-06-17",
     readTime: "٩ دقائق",
@@ -1118,7 +1118,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "بناء استراحة في جدة ٢٠٢٦: التكلفة والتصميم والتراخيص بالتفصيل",
     description:
       "دليل تكلفة بناء استراحة في جدة ٢٠٢٦: أسعار المسبح والمجلس والسور واللاندسكيب بجداول واقعية، أمثلة محسوبة، التراخيص اللازمة، ونصائح لتقليل التكلفة.",
-    image: "/images/project-abhur-shboak.avif",
+    image: "/images/blog/rest-house-construction-jeddah-hero.avif",
     imageAlt: "استراحة عائلية في جدة بمسبح ومجلس مغطى وجلسات خارجية ومظلات",
     date: "2026-06-17",
     readTime: "٩ دقائق",
@@ -1163,7 +1163,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "أفضل أحياء جدة للبناء والسكن والاستثمار في ٢٠٢٦",
     description:
       "دليل ٢٠٢٦ لأفضل أحياء جدة للبناء والسكن: مقارنة الروضة والسلامة والنزهة وأبحر من حيث أسعار الأراضي والتربة والخدمات والاستثمار والملاءمة العائلية.",
-    image: "/images/project-north-asphalt.avif",
+    image: "/images/blog/best-districts-build-jeddah-hero.avif",
     imageAlt: "خريطة مقارنة أبرز أحياء جدة للبناء والسكن والاستثمار بأسعار الأراضي التقديرية لعام ٢٠٢٦",
     date: "2026-06-17",
     readTime: "٩ دقائق",
@@ -1208,7 +1208,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "تكلفة بناء مسبح في جدة ٢٠٢٦: الأنواع والأسعار ومكوّنات التكلفة",
     description:
       "دليل تكلفة بناء مسبح في جدة ٢٠٢٦: أسعار المسابح الخرسانية والفايبر والموزاييك، مكوّنات التكلفة، أمثلة محسوبة بالحجم، العزل، والتشغيل والصيانة.",
-    image: "/images/project-rawdah-after.avif",
+    image: "/images/blog/swimming-pool-construction-jeddah-hero.avif",
     imageAlt: "مسبح خرساني حديث بتشطيب موزاييك في فيلا بجدة مع إضاءة غاطسة وديكور محيط",
     date: "2026-06-17",
     readTime: "٩ دقائق",
@@ -1253,7 +1253,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "الجبس بورد والأسقف المعلقة والديكورات الجبسية في جدة ٢٠٢٦: الأنواع والأسعار",
     description:
       "دليل جبس بورد جدة ٢٠٢٦: أنواع الألواح، الفرق عن الجبس العادي، اسعار الجبس بورد بالمتر شامل التركيب ٤٠–٢٠٠ ريال، الأسقف المعلقة والإضاءة المخفية.",
-    image: "/images/service-tashteebat-villa-jeddah.avif",
+    image: "/images/blog/gypsum-board-decor-jeddah-hero.avif",
     imageAlt: "سقف معلق من جبس بورد بإضاءة مخفية وديكورات جبسية في صالة فيلا بجدة",
     date: "2026-06-17",
     readTime: "٩ دقائق",
@@ -1298,7 +1298,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "أنواع أرضيات الفلل في جدة ٢٠٢٦: رخام وبورسلين وباركيه وسيراميك — مقارنة وأسعار",
     description:
       "دليل أنواع الأرضيات وأفضلها للفلل في جدة ٢٠٢٦ مع سعر متر الرخام والبورسلين والباركيه والسيراميك ومقارنة المتانة والصيانة والأنسب لكل غرفة.",
-    image: "/images/project-rawdah-after.avif",
+    image: "/images/blog/flooring-types-jeddah-hero.avif",
     imageAlt: "مقارنة أنواع أرضيات الفلل في جدة من رخام وبورسلين وباركيه وسيراميك مع الأسعار",
     date: "2026-06-17",
     readTime: "٩ دقائق",
@@ -1348,7 +1348,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "تنسيق الحدائق واللاندسكيب في جدة ٢٠٢٦: دليل التصميم والتكلفة",
     description:
       "دليل تنسيق حدائق جدة ٢٠٢٦: العشب الطبيعي مقابل الصناعي، أنظمة الري، النباتات الملائمة لمناخ جدة، وتكلفة حديقة ١٠٠م٢ مع أبرز الأخطاء.",
-    image: "/images/service-general-contractor-jeddah.avif",
+    image: "/images/blog/landscaping-jeddah-hero.avif",
     imageAlt: "حديقة فيلا منسّقة في جدة بعشب أخضر ونخيل وإضاءة خارجية ومنطقة جلوس",
     date: "2026-06-17",
     readTime: "٩ دقائق",
@@ -1398,7 +1398,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "طُرز تصميم الفلل في جدة ٢٠٢٦: دليل المودرن والكلاسيك والنيوكلاسيك والإسلامي",
     description:
       "دليل تصميم فلل جدة ٢٠٢٦: مقارنة طرز المودرن والكلاسيك والنيوكلاسيك والإسلامي والنجدي، سماتها وتأثيرها على الواجهة والتوزيع والتكلفة، وكيف تختار الأنسب.",
-    image: "/images/project-salamah-villa.avif",
+    image: "/images/blog/villa-design-styles-jeddah-hero.avif",
     imageAlt: "واجهات فلل بطرز مودرن وكلاسيك ونيوكلاسيك وإسلامي ونجدي معاصر في جدة",
     date: "2026-06-17",
     readTime: "٩ دقائق",
@@ -1443,7 +1443,7 @@ export const BLOG_POSTS: BlogPost[] = [
     h1: "نظام الدفعات في عقود المقاولات بجدة ٢٠٢٦: كيف تحمي أموالك",
     description:
       "دليل نظام دفعات عقد المقاولة وبناء فيلا في جدة ٢٠٢٦: دفعة مقدمة ٥-١٠٪، دفعات مرحلية مرتبطة بالإنجاز، وضمان محتجز ٥-١٠٪ يحمي أموالك من التعثّر.",
-    image: "/images/guarantee-certificate.avif",
+    image: "/images/blog/construction-payment-schedule-jeddah-hero.avif",
     imageAlt: "جدول دفعات عقد بناء فيلا في جدة يربط كل دفعة بمرحلة إنجاز موثّقة",
     date: "2026-06-17",
     readTime: "٩ دقائق",
