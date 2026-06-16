@@ -29,6 +29,10 @@ import foundationTypes from "./foundation-types-jeddah";
 import costOverrun from "./cost-overrun-prevention";
 import bestTimeBuild from "./best-time-build-jeddah";
 import villaBuildCost from "./villa-build-cost-jeddah";
+import finishingCost from "./finishing-cost-jeddah";
+import asphaltCost from "./asphalt-cost-jeddah";
+import buildingRatio from "./building-ratio-jeddah";
+import saudiBuildingCode from "./saudi-building-code-sbc";
 
 export const POSTS_CONTENT: Record<string, string> = {
   "choose-contractor-jeddah": chooseContractor,
@@ -57,4 +61,8 @@ export const POSTS_CONTENT: Record<string, string> = {
   "cost-overrun-prevention": costOverrun,
   "best-time-build-jeddah": bestTimeBuild,
   "villa-build-cost-jeddah": villaBuildCost,
+  "finishing-cost-jeddah": finishingCost,
+  "asphalt-cost-jeddah": asphaltCost,
+  "building-ratio-jeddah": buildingRatio,
+  "saudi-building-code-sbc": saudiBuildingCode,
 };
