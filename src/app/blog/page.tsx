@@ -35,6 +35,7 @@ function blogSchema() {
         name: `مدونة ${SITE.name}`,
         description: `${BLOG_POSTS.length} مقالة متخصصة في المقاولات بجدة`,
         publisher: { "@id": `${SITE.url}/#organization` },
+        isPartOf: { "@id": `${SITE.url}/#website` },
         inLanguage: "ar",
         blogPost: BLOG_POSTS.slice(0, 10).map((p) => ({
           "@type": "BlogPosting",
@@ -81,7 +82,7 @@ export default function BlogPage() {
         <section className="page-hero">
           <div className="container-wide px-4 md:px-6">
             <span className="gold-accent mx-auto" />
-            <h1 className="text-3xl md:text-4xl font-extrabold">مدونة إتقان</h1>
+            <h1 className="text-3xl md:text-4xl font-extrabold">مدونة المقاولات في جدة — أدلة ونصائح إتقان</h1>
             <p>
               {BLOG_POSTS.length} مقالة متخصصة — أدلة، تقنيات، ومقارنات من فريقنا الهندسي
             </p>

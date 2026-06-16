@@ -199,7 +199,7 @@ export default function Footer() {
                 <a
                   href={WHATSAPP_URL}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="nofollow noopener noreferrer"
                   className="flex items-center gap-3 text-sm group"
                   style={{ color: "rgba(248, 246, 240, 0.7)" }}
                 >

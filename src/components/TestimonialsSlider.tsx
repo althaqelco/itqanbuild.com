@@ -109,17 +109,20 @@ export default function TestimonialsSlider() {
               onClick={() => setActive(i)}
               aria-label={`الانتقال للتقييم ${i + 1}`}
               aria-current={active === i}
-              className="transition-all"
-              style={{
-                width: active === i ? "24px" : "8px",
-                height: "8px",
-                borderRadius: "4px",
-                background:
-                  active === i
-                    ? "var(--color-gold)"
-                    : "rgba(10,25,47,0.15)",
-              }}
-            />
+              // padded transparent hit-area (~28px) around the 8px visual pill
+              className="flex items-center justify-center p-2.5 -m-2.5"
+            >
+              <span
+                className="block transition-all"
+                style={{
+                  width: active === i ? "24px" : "8px",
+                  height: "8px",
+                  borderRadius: "4px",
+                  background:
+                    active === i ? "var(--color-gold)" : "rgba(10,25,47,0.2)",
+                }}
+              />
+            </button>
           ))}
         </div>
 

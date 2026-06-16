@@ -11,7 +11,7 @@ export default function FloatingWhatsApp() {
     <a
       href={WHATSAPP_URL}
       target="_blank"
-      rel="noopener noreferrer"
+      rel="nofollow noopener noreferrer"
       className="whatsapp-float"
       aria-label="تواصل عبر واتساب"
     >

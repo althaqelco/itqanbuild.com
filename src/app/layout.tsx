@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     locale: "ar_SA",
     url: SITE.url,
     siteName: SITE.name,
-    title: `${SITE.name} | مقاول جدة المعتمد`,
+    title: `مقاول جدة المعتمد — بناء · ترميم · شبوك · أسفلت | ${SITE.name}`,
     description:
       `مقاول جدة المرخص — ${SITE.yearsExperience}+ سنة خبرة | بناء · ترميم · شبوك · أسفلت | ضمان مكتوب`,
     images: [
@@ -83,12 +83,10 @@ export const metadata: Metadata = {
       },
     ],
   },
+  // Only the card TYPE here — title/description/image intentionally omitted so each
+  // page's own openGraph cascades into the Twitter/X card (no stale generic cards).
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} | مقاول جدة المعتمد`,
-    description:
-      `مقاول جدة المرخص — ${SITE.yearsExperience}+ سنة خبرة | بناء · ترميم · شبوك · أسفلت | ضمان مكتوب`,
-    images: [DEFAULT_OG_IMAGE],
   },
   alternates: {
     canonical: SITE.url,

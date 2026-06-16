@@ -30,10 +30,14 @@ export default function ServicePageView({ slug }: { slug: string }) {
 
   const schema = generateServiceGraph(svc, content.faqs, content.process);
   const related = content.relatedKeys.map((k) => SERVICES[k]).filter(Boolean);
-  // Topically-matched articles → links from the money page into the content cluster
-  const relatedPosts = BLOG_POSTS.filter(
-    (p) => BLOG_POST_SERVICE[p.slug] === svc.key
-  ).slice(0, 3);
+  // Topically-matched articles → links from the money page into the content cluster.
+  // Backfill with pillar guides so every service shows a full 3-card cluster (lifts
+  // the services that only have one mapped article: asphalt/shboak/hadm/molahaq/hanager).
+  const directPosts = BLOG_POSTS.filter((p) => BLOG_POST_SERVICE[p.slug] === svc.key);
+  const fillerPosts = BLOG_POSTS.filter(
+    (p) => p.tier === "pillar" && !directPosts.some((d) => d.slug === p.slug)
+  );
+  const relatedPosts = [...directPosts, ...fillerPosts].slice(0, 3);
 
   return (
     <>

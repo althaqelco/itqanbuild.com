@@ -160,7 +160,7 @@ export default function Header() {
           <a
             href={WHATSAPP_URL}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="nofollow noopener noreferrer"
             onClick={() => trackCta("header_whatsapp", "whatsapp")}
             className="px-4 py-2 text-sm font-semibold rounded-full transition-all"
             style={{
@@ -253,7 +253,7 @@ export default function Header() {
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="nofollow noopener noreferrer"
                 onClick={() => trackCta("mobile_menu_whatsapp", "whatsapp")}
                 className="btn-outline w-full text-center"
                 style={{ borderColor: "var(--color-whatsapp)", color: "var(--color-whatsapp)" }}

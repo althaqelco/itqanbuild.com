@@ -320,7 +320,7 @@ export const DISTRICTS: Record<string, DistrictData> = {
     nameEn: "Al Nazhah",
     h1: "مقاول حي النزهة جدة — بناء وتشطيب بأعلى المعايير",
     description:
-      "مقاول حي النزهة جدة ✓ بناء فلل ✓ هناجر صناعية ✓ أسفلت مواقف",
+      "مقاول حي النزهة جدة ✓ بناء فلل وهناجر صناعية وأسفلت مواقف ✓ خبرة في الأراضي المختلطة وفحص التربة ✓ معاينة مجانية وعرض سعر تفصيلي.",
     image: "/images/district-nazha-jeddah.avif",
     imageAlt: "مقاول حي النزهة جدة",
     geo: { latitude: 21.5812, longitude: 39.1654 },
@@ -334,7 +334,7 @@ export const DISTRICTS: Record<string, DistrictData> = {
     nameEn: "Al Safa",
     h1: "مقاول حي الصفا جدة — ترميم وتطوير العقارات",
     description:
-      "مقاول حي الصفا جدة ✓ ترميم شامل ✓ ملاحق ✓ تشطيبات فاخرة",
+      "مقاول حي الصفا جدة ✓ ترميم شامل وملاحق وتشطيبات فاخرة ✓ خبرة في تطوير العقارات القائمة ✓ معاينة مجانية وعرض سعر مكتوب خلال ٢٤ ساعة.",
     image: "/images/district-safa-jeddah.avif",
     imageAlt: "مقاول حي الصفا جدة",
     geo: { latitude: 21.5511, longitude: 39.1851 },
@@ -348,7 +348,7 @@ export const DISTRICTS: Record<string, DistrictData> = {
     nameEn: "Al Hamadaniyah",
     h1: "مقاول حي الحمدانية جدة — بناء مشاريع سكنية جديدة",
     description:
-      "مقاول حي الحمدانية جدة ✓ بناء فلل جديدة ✓ شبوك وأسوار ✓ أسفلت",
+      "مقاول حي الحمدانية جدة ✓ بناء فلل جديدة وشبوك وأسوار وأسفلت ✓ خبرة في الأساسات العميقة قرب الأودية ✓ ضمان مكتوب ومعاينة مجانية.",
     image: "/images/district-hamadaniyah-jeddah.avif",
     imageAlt: "مقاول حي الحمدانية جدة",
     geo: { latitude: 21.6123, longitude: 39.2145 },
@@ -363,7 +363,7 @@ export const DISTRICTS: Record<string, DistrictData> = {
     nameEn: "North Jeddah",
     h1: "مقاول شمال جدة — أبحر الشمالية والأحياء الجديدة",
     description:
-      "مقاول شمال جدة ✓ خرسانة مقاومة للملوحة ✓ عزل مزدوج ✓ بناء فلل ساحلية",
+      "مقاول شمال جدة وأبحر ✓ خرسانة مقاومة للكبريتات وعزل مزدوج للبناء الساحلي ✓ معالجة الملوحة والمياه الجوفية ✓ معاينة مجانية وضمان مكتوب.",
     image: "/images/district-north-jeddah.avif",
     imageAlt: "مقاول شمال جدة وأبحر الشمالية",
     geo: { latitude: 21.6745, longitude: 39.1234 },
