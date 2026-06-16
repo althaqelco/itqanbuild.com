@@ -41,6 +41,10 @@ import krokiGuide from "./kroki-jeddah-guide";
 import completionCert from "./completion-certificate-jeddah";
 import civilDefense from "./civil-defense-requirements-jeddah";
 import renovationPermit from "./renovation-permit-jeddah";
+import azmVsTasleem from "./azm-vs-tasleem-miftah-jeddah";
+import buildVsBuy from "./build-vs-buy-villa-jeddah";
+import renovateVsRebuild from "./renovate-vs-rebuild-jeddah";
+import centralVsSplitAc from "./central-vs-split-ac-jeddah";
 
 export const POSTS_CONTENT: Record<string, string> = {
   "choose-contractor-jeddah": chooseContractor,
@@ -81,4 +85,8 @@ export const POSTS_CONTENT: Record<string, string> = {
   "completion-certificate-jeddah": completionCert,
   "civil-defense-requirements-jeddah": civilDefense,
   "renovation-permit-jeddah": renovationPermit,
+  "azm-vs-tasleem-miftah-jeddah": azmVsTasleem,
+  "build-vs-buy-villa-jeddah": buildVsBuy,
+  "renovate-vs-rebuild-jeddah": renovateVsRebuild,
+  "central-vs-split-ac-jeddah": centralVsSplitAc,
 };
