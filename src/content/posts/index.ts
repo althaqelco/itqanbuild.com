@@ -33,6 +33,10 @@ import finishingCost from "./finishing-cost-jeddah";
 import asphaltCost from "./asphalt-cost-jeddah";
 import buildingRatio from "./building-ratio-jeddah";
 import saudiBuildingCode from "./saudi-building-code-sbc";
+import shboakCost from "./shboak-cost-jeddah";
+import hanagerCost from "./hanager-cost-jeddah";
+import hadmCost from "./hadm-cost-jeddah";
+import molahaqCost from "./molahaq-cost-jeddah";
 
 export const POSTS_CONTENT: Record<string, string> = {
   "choose-contractor-jeddah": chooseContractor,
@@ -65,4 +69,8 @@ export const POSTS_CONTENT: Record<string, string> = {
   "asphalt-cost-jeddah": asphaltCost,
   "building-ratio-jeddah": buildingRatio,
   "saudi-building-code-sbc": saudiBuildingCode,
+  "shboak-cost-jeddah": shboakCost,
+  "hanager-cost-jeddah": hanagerCost,
+  "hadm-cost-jeddah": hadmCost,
+  "molahaq-cost-jeddah": molahaqCost,
 };
