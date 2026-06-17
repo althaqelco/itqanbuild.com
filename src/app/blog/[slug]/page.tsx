@@ -266,7 +266,7 @@ export default async function BlogArticlePage({ params }: Props) {
           {/* Subtle background glow/mesh instead of stretching the main image as a dark background */}
           <div className="absolute inset-0 opacity-15" style={{ background: "radial-gradient(circle at 80% 20%, var(--color-gold) 0%, transparent 50%)" }} />
           <div className="relative z-10 container-wide px-4 md:px-6">
-            <Link href="/blog" className="inline-flex items-center gap-1 text-[11px] mb-6 hover:opacity-100 transition-opacity" style={{ color: "rgba(248,246,240,0.45)" }}>
+            <Link href="/blog" className="inline-flex items-center gap-1 text-xs mb-6 hover:opacity-100 transition-opacity" style={{ color: "rgba(248,246,240,0.55)" }}>
               <ArrowRight className="w-3 h-3" /> العودة للمدونة
             </Link>
             
@@ -276,14 +276,14 @@ export default async function BlogArticlePage({ params }: Props) {
                 <h1 className="text-2xl md:text-3.5xl font-extrabold mb-4 leading-snug" style={{ color: "var(--color-pearl)", fontSize: "clamp(1.5rem, 4vw, 2.25rem)" }}>
                   {post.h1}
                 </h1>
-                <div className="flex items-center gap-4 text-[11px] flex-wrap" style={{ color: "rgba(248,246,240,0.55)" }}>
+                <div className="flex items-center gap-4 text-xs flex-wrap" style={{ color: "rgba(248,246,240,0.6)" }}>
                   <span className="flex items-center gap-1">
                     <Calendar className="w-3 h-3" />
                     {post.dateModified && post.dateModified !== post.date ? "آخر تحديث: " : "نُشر: "}
                     <time dateTime={post.dateModified ?? post.date}>{post.dateModified ?? post.date}</time>
                   </span>
                   <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{post.readTime}</span>
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold" style={{ background: "rgba(212,175,55,0.15)", color: "var(--color-gold)" }}>
+                  <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold" style={{ background: "rgba(212,175,55,0.15)", color: "var(--color-gold)" }}>
                     {post.category}
                   </span>
                 </div>
