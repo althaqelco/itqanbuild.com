@@ -1,7 +1,11 @@
 # Firebase App Hosting — Cloud Run + Cloud CDN
-# Region: me-central2 (Dammam) closest to Jeddah for lowest TTFB
+# ملاحظة: الـ region يُحدَّد عند إنشاء الـ backend (فعلياً asia-southeast1)، لا من هنا.
+# 💰 minInstances: 0 — الموقع محتوى ثابت بالكامل (SEO/مدونة، لا API/webhooks/cron)،
+#    فلا شيء خادمي يحتاج instance دائماً صاحياً. الـ instance الدائم كان يستهلك ~$9/شهر
+#    (كامل الفاتورة تقريباً). مع 0: يُحاسَب على المعالجة فقط + CDN يخدم الصفحات المخزّنة؛
+#    الكلفة الوحيدة cold-start نادر على صفحة غير مخزّنة (ثوانٍ) — صفر فقدان وظيفة.
 runConfig:
-  minInstances: 1
+  minInstances: 0
   maxInstances: 10
   concurrency: 80
   cpu: 1
