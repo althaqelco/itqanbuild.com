@@ -6,7 +6,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import AITLDRBox from "@/components/AITLDRBox";
-import { SITE, SERVICES_LIST, DISTRICTS_LIST, WHATSAPP_URL, DEFAULT_OG_IMAGE } from "@/lib/constants";
+import { SITE, SERVICES_LIST, DISTRICTS_LIST, WHATSAPP_URL, DEFAULT_OG_IMAGE, LAST_CONTENT_UPDATE } from "@/lib/constants";
+import { SPEAKABLE } from "@/lib/schema";
 
 export const revalidate = 3600;
 
@@ -49,6 +50,8 @@ function jeddahHubSchema() {
         isPartOf: { "@id": `${SITE.url}/#website` },
         about: { "@id": `${SITE.url}/#organization` },
         inLanguage: "ar",
+        dateModified: LAST_CONTENT_UPDATE,
+        speakable: SPEAKABLE,
         mainEntity: { "@id": `${SITE.url}/jeddah/#servicelist` },
       },
       {
@@ -451,7 +454,7 @@ export default function JeddahHubPage() {
                     <span className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 transition-transform group-open:rotate-45" style={{ background: "rgba(212,175,55,0.1)", color: "var(--color-gold)" }}>+</span>
                   </summary>
                   <div className="px-5 pb-5">
-                    <p className="text-sm leading-relaxed" style={{ color: "rgba(10,25,47,0.65)" }}>{faq.answer}</p>
+                    <p className="faq-answer text-sm leading-relaxed" style={{ color: "rgba(10,25,47,0.65)" }}>{faq.answer}</p>
                   </div>
                 </details>
               ))}
@@ -522,7 +525,7 @@ function ProcessStep({ num, title, desc }: { num: string; title: string; desc: s
       </div>
       <div className="flex-1">
         <h3 className="text-base font-bold mb-1.5">{title}</h3>
-        <p className="text-sm leading-relaxed" style={{ color: "rgba(10,25,47,0.65)" }}>
+        <p className="faq-answer text-sm leading-relaxed" style={{ color: "rgba(10,25,47,0.65)" }}>
           {desc}
         </p>
       </div>

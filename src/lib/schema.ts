@@ -16,7 +16,7 @@ import { TESTIMONIALS, calculateReviewStats } from "./testimonials";
 const BASE_URL = SITE.url;
 
 // Reusable Speakable block — marks the primary spoken regions for voice/AI assistants
-const SPEAKABLE = {
+export const SPEAKABLE = {
   "@type": "SpeakableSpecification",
   cssSelector: ["h1", ".ai-tldr", ".faq-answer"],
 };

@@ -6,7 +6,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import BlogCategoryFilter from "@/components/BlogCategoryFilter";
-import { SITE, WHATSAPP_URL, DEFAULT_OG_IMAGE } from "@/lib/constants";
+import { SITE, WHATSAPP_URL, DEFAULT_OG_IMAGE, LAST_CONTENT_UPDATE } from "@/lib/constants";
+import { SPEAKABLE } from "@/lib/schema";
 import { BLOG_POSTS } from "@/lib/blog-data";
 
 export const revalidate = 3600;
@@ -37,6 +38,8 @@ function blogSchema() {
         publisher: { "@id": `${SITE.url}/#organization` },
         isPartOf: { "@id": `${SITE.url}/#website` },
         inLanguage: "ar",
+        dateModified: LAST_CONTENT_UPDATE,
+        speakable: SPEAKABLE,
         blogPost: BLOG_POSTS.slice(0, 10).map((p) => ({
           "@type": "BlogPosting",
           headline: p.h1,

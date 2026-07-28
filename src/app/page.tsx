@@ -6,7 +6,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { Badge, WhyUsCard, ProjectCard, EEATItem, FAQ } from "@/components/HomeCards";
-import { SITE, SERVICES_LIST, DISTRICTS_LIST, WHATSAPP_URL } from "@/lib/constants";
+import { SITE, SERVICES_LIST, DISTRICTS_LIST, WHATSAPP_URL, LAST_CONTENT_UPDATE } from "@/lib/constants";
+import { SPEAKABLE } from "@/lib/schema";
 import { BLOG_POSTS } from "@/lib/blog-data";
 
 // ─── Dynamic Imports — below-the-fold client components ───
@@ -50,6 +51,8 @@ function homePageSchema() {
         isPartOf: { "@id": `${SITE.url}/#website` },
         about: { "@id": `${SITE.url}/#organization` },
         inLanguage: "ar",
+        dateModified: LAST_CONTENT_UPDATE,
+        speakable: SPEAKABLE,
       },
       {
         "@type": "FAQPage",

@@ -15,17 +15,41 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         // Explicitly opt into AI-search citation (AEO) — we WANT to be cited.
+        // Covers training/indexing bots AND live "user-triggered fetch" agents
+        // (ChatGPT-User, Perplexity-User, MistralAI-User) that retrieve a page
+        // in real time to answer a question — those are the citation moments.
         userAgent: [
+          // OpenAI / ChatGPT
           "GPTBot",
           "OAI-SearchBot",
           "ChatGPT-User",
+          // Google (AI Overviews / Gemini grounding)
           "Google-Extended",
-          "PerplexityBot",
+          "Google-CloudVertexBot",
+          // Anthropic / Claude
           "ClaudeBot",
           "Claude-Web",
+          "Claude-User",
+          "Claude-SearchBot",
           "anthropic-ai",
-          "CCBot",
+          // Perplexity
+          "PerplexityBot",
+          "Perplexity-User",
+          // Apple / Microsoft / Meta / Amazon
+          "Applebot",
           "Applebot-Extended",
+          "meta-externalagent",
+          "FacebookBot",
+          "Amazonbot",
+          // Other AI answer engines & datasets
+          "MistralAI-User",
+          "cohere-ai",
+          "DuckAssistBot",
+          "YouBot",
+          "Bytespider",
+          "Diffbot",
+          "Timpibot",
+          "CCBot",
         ],
         allow: "/",
       },

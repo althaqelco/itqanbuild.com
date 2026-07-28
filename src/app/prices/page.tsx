@@ -11,7 +11,8 @@ const CostCalculator = dynamic(
   { loading: () => <div className="skeleton h-96 rounded-3xl" /> }
 );
 
-import { SITE, SERVICES_LIST, WHATSAPP_URL, DEFAULT_OG_IMAGE } from "@/lib/constants";
+import { SITE, SERVICES_LIST, WHATSAPP_URL, DEFAULT_OG_IMAGE, LAST_CONTENT_UPDATE } from "@/lib/constants";
+import { SPEAKABLE } from "@/lib/schema";
 
 export const revalidate = 86400;
 
@@ -192,6 +193,8 @@ function pricesPageSchema() {
         isPartOf: { "@id": `${SITE.url}/#website` },
         about: { "@id": `${SITE.url}/#organization` },
         inLanguage: "ar",
+        dateModified: LAST_CONTENT_UPDATE,
+        speakable: SPEAKABLE,
       },
       {
         "@type": "ItemList",
@@ -420,7 +423,7 @@ export default function PricesPage() {
                     </span>
                   </summary>
                   <div className="px-5 pb-5">
-                    <p className="text-sm leading-relaxed" style={{ color: "rgba(10,25,47,0.65)" }}>
+                    <p className="faq-answer text-sm leading-relaxed" style={{ color: "rgba(10,25,47,0.65)" }}>
                       {faq.answer}
                     </p>
                   </div>

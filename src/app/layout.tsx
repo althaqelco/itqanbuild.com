@@ -115,6 +115,22 @@ export default function RootLayout({
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
+        {/* AEO — make the AI knowledge files discoverable from any page, not just
+            by convention at the root. AI crawlers/agents follow these to the
+            curated index and the full citation-ready knowledge base. */}
+        <link
+          rel="alternate"
+          type="text/plain"
+          href="/llms.txt"
+          title="llms.txt — فهرس المحتوى لمحرّكات الذكاء الاصطناعي"
+        />
+        <link
+          rel="alternate"
+          type="text/plain"
+          href="/llms-full.txt"
+          title="llms-full.txt — قاعدة المعرفة الكاملة للاستشهاد"
+        />
+
         {/* Connected @graph Schema — Every Page */}
         <script
           type="application/ld+json"

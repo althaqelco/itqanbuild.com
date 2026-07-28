@@ -104,7 +104,9 @@ export function FAQ({ q, a }: { q: string; a: string }) {
         </span>
       </summary>
       <div className="px-5 pb-5">
-        <p className="text-sm leading-relaxed" style={{ color: "rgba(10,25,47,0.65)" }}>
+        {/* .faq-answer — target of the SpeakableSpecification cssSelector, so voice
+            assistants and AI answer engines can lift this answer verbatim. */}
+        <p className="faq-answer text-sm leading-relaxed" style={{ color: "rgba(10,25,47,0.65)" }}>
           {a}
         </p>
       </div>

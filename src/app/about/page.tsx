@@ -20,7 +20,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { StatCard, SpecialtyTag, CredentialCard, ValueCard } from "@/components/AboutCards";
-import { SITE, WHATSAPP_URL, SERVICES_LIST, DISTRICTS_LIST, toOgImage } from "@/lib/constants";
+import { SITE, WHATSAPP_URL, SERVICES_LIST, DISTRICTS_LIST, toOgImage, LAST_CONTENT_UPDATE } from "@/lib/constants";
+import { SPEAKABLE } from "@/lib/schema";
 
 export const revalidate = 3600;
 
@@ -60,6 +61,8 @@ function aboutPageSchema() {
         about: { "@id": `${SITE.url}/#organization` },
         mainEntity: { "@id": `${SITE.url}/#engineer` },
         inLanguage: "ar",
+        dateModified: LAST_CONTENT_UPDATE,
+        speakable: SPEAKABLE,
       },
       {
         "@type": "Person",
@@ -581,7 +584,7 @@ export default function AboutPage() {
                     <span className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 transition-transform group-open:rotate-45" style={{ background: "rgba(212,175,55,0.1)", color: "var(--color-gold)" }}>+</span>
                   </summary>
                   <div className="px-5 pb-5">
-                    <p className="text-sm leading-relaxed" style={{ color: "rgba(10,25,47,0.65)" }}>{faq.answer}</p>
+                    <p className="faq-answer text-sm leading-relaxed" style={{ color: "rgba(10,25,47,0.65)" }}>{faq.answer}</p>
                   </div>
                 </details>
               ))}

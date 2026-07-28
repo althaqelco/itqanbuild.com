@@ -5,7 +5,8 @@ import { ArrowLeft, MapPin, Calendar, CheckCircle, Phone, ShieldCheck, Award } f
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
-import { SITE, WHATSAPP_URL, SERVICES_LIST, DEFAULT_OG_IMAGE } from "@/lib/constants";
+import { SITE, WHATSAPP_URL, SERVICES_LIST, DEFAULT_OG_IMAGE, LAST_CONTENT_UPDATE } from "@/lib/constants";
+import { SPEAKABLE } from "@/lib/schema";
 
 export const revalidate = 86400;
 
@@ -180,6 +181,8 @@ function projectsPageSchema() {
         isPartOf: { "@id": `${SITE.url}/#website` },
         about: { "@id": `${SITE.url}/#organization` },
         inLanguage: "ar",
+        dateModified: LAST_CONTENT_UPDATE,
+        speakable: SPEAKABLE,
       },
       {
         "@type": "ItemList",
@@ -448,7 +451,7 @@ export default function ProjectsPage() {
                     <span className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 transition-transform group-open:rotate-45" style={{ background: "rgba(212,175,55,0.1)", color: "var(--color-gold)" }}>+</span>
                   </summary>
                   <div className="px-5 pb-5">
-                    <p className="text-sm leading-relaxed" style={{ color: "rgba(10,25,47,0.65)" }}>{faq.answer}</p>
+                    <p className="faq-answer text-sm leading-relaxed" style={{ color: "rgba(10,25,47,0.65)" }}>{faq.answer}</p>
                   </div>
                 </details>
               ))}
