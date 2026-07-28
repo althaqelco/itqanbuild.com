@@ -1,11 +1,17 @@
 # Firebase App Hosting — Cloud Run + Cloud CDN
 # ملاحظة: الـ region يُحدَّد عند إنشاء الـ backend (فعلياً asia-southeast1)، لا من هنا.
-# 💰 minInstances: 0 — الموقع محتوى ثابت بالكامل (SEO/مدونة، لا API/webhooks/cron)،
-#    فلا شيء خادمي يحتاج instance دائماً صاحياً. الـ instance الدائم كان يستهلك ~$9/شهر
-#    (كامل الفاتورة تقريباً). مع 0: يُحاسَب على المعالجة فقط + CDN يخدم الصفحات المخزّنة؛
-#    الكلفة الوحيدة cold-start نادر على صفحة غير مخزّنة (ثوانٍ) — صفر فقدان وظيفة.
+#
+# 🤖 minInstances: 1 — أُعيد من 0 بعد اختبار زحف حقيقي (scripts/ai-crawler-sim.mjs)
+#    أثبت فقداناً فعلياً: GPTBot و OAI-SearchBot انقطعا (TIMEOUT > 20s) عند أول
+#    اتصال بخادم بارد، بينما نجح الاثنان فوراً بعد الإحماء. TTFB بارداً 6–20s+
+#    مقابل 0.3–1.5s ساخناً.
+#    السبب أن هذا يهمّ: وكلاء الجلب الحيّ (ChatGPT-User / Perplexity-User /
+#    Claude-User) هم *لحظة الاستشهاد* في محرّكات بحث الذكاء الاصطناعي، ولديهم
+#    مهلة قصيرة، ويصلون متفرّقين بعد خمول — أي بالضبط حين يكون الخادم بارداً.
+#    الانقطاع = لا استشهاد. التكلفة ~$8–9/شهر مقابل ضمان الظهور في AI Overviews
+#    وChatGPT وPerplexity — مقايضة مقصودة لصالح الـAEO.
 runConfig:
-  minInstances: 0
+  minInstances: 1
   maxInstances: 10
   concurrency: 80
   cpu: 1

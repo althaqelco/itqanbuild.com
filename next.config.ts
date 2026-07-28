@@ -3,7 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
-  compress: true,
+  // Compression is handled in server.mjs by `compression` (brotli → gzip → deflate).
+  // Next's own `compress` is gzip-only; leaving it on would double-compress.
+  compress: false,
 
   // ═══ Performance Optimizations ═══
   // NOTE: experimental.optimizeCss removed — it's a no-op on the App Router
