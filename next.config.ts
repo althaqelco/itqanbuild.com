@@ -3,9 +3,12 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
-  // Compression is handled in server.mjs by `compression` (brotli → gzip → deflate).
-  // Next's own `compress` is gzip-only; leaving it on would double-compress.
-  compress: false,
+  // MUST stay true. Firebase App Hosting runs its own Next.js adapter entrypoint
+  // and ignores a custom server (server.mjs / npm start), and the envoy edge adds
+  // no compression of its own — so this flag is the ONLY thing compressing the
+  // site. Setting it false shipped 252 KB uncompressed pages until reverted.
+  // (Brotli would need an edge/CDN that App Hosting doesn't expose.)
+  compress: true,
 
   // ═══ Performance Optimizations ═══
   // NOTE: experimental.optimizeCss removed — it's a no-op on the App Router
