@@ -7,7 +7,7 @@ import {
   SERVICE_PRICE_RANGE,
   LAST_CONTENT_UPDATE,
 } from "@/lib/constants";
-import { BLOG_POSTS } from "@/lib/blog-data";
+import { getPublishedPosts } from "@/lib/blog-data";
 
 export const dynamic = "force-static";
 
@@ -47,7 +47,8 @@ export function GET() {
   L.push("");
 
   L.push("## أدلة المعرفة (Knowledge Guides)");
-  for (const p of BLOG_POSTS.filter((b) => b.tier === "pillar")) {
+  const posts = getPublishedPosts();
+  for (const p of posts.filter((b) => b.tier === "pillar")) {
     L.push(`- [${p.h1}](${u}/blog/${p.slug})`);
   }
   L.push("");
@@ -55,7 +56,7 @@ export function GET() {
   L.push("## مراجع (References)");
   L.push(`- [من نحن — الترخيص والفريق الهندسي](${u}/about)`);
   L.push(`- [تواصل / طلب عرض سعر مجاني](${u}/contact)`);
-  L.push(`- [المدونة — ${BLOG_POSTS.length} مقالة متخصّصة](${u}/blog)`);
+  L.push(`- [المدونة — ${posts.length} مقالة متخصّصة](${u}/blog)`);
   L.push(`- [النص الكامل للاستشهاد (llms-full)](${u}/llms-full.txt)`);
   L.push(`- [خريطة الموقع XML](${u}/sitemap.xml)`);
   L.push("");

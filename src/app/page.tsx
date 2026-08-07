@@ -8,7 +8,7 @@ import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { Badge, WhyUsCard, ProjectCard, EEATItem, FAQ } from "@/components/HomeCards";
 import { SITE, SERVICES_LIST, DISTRICTS_LIST, WHATSAPP_URL, LAST_CONTENT_UPDATE } from "@/lib/constants";
 import { SPEAKABLE } from "@/lib/schema";
-import { BLOG_POSTS } from "@/lib/blog-data";
+import { getPublishedPosts } from "@/lib/blog-data";
 
 // ─── Dynamic Imports — below-the-fold client components ───
 // Skeleton heights reserve space close to the real component to minimise hydration CLS
@@ -70,7 +70,7 @@ function homePageSchema() {
 }
 
 export default function HomePage() {
-  const featuredPosts = BLOG_POSTS.filter((p) => p.tier === "pillar").slice(0, 3);
+  const featuredPosts = getPublishedPosts().filter((p) => p.tier === "pillar").slice(0, 3);
   return (
     <>
       <Header />

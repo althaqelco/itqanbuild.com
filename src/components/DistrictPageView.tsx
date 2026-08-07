@@ -23,7 +23,7 @@ import {
 } from "@/lib/constants";
 import { generateDistrictGraph } from "@/lib/schema";
 import { DISTRICT_CONTENT } from "@/lib/district-content";
-import { BLOG_POSTS } from "@/lib/blog-data";
+import { getPublishedPosts } from "@/lib/blog-data";
 import { notFound } from "next/navigation";
 
 export default function DistrictPageView({ slug }: { slug: string }) {
@@ -40,7 +40,7 @@ export default function DistrictPageView({ slug }: { slug: string }) {
     faqs: content.faqs,
   });
 
-  const guides = BLOG_POSTS.filter((p) => p.tier === "pillar").slice(0, 3);
+  const guides = getPublishedPosts().filter((p) => p.tier === "pillar").slice(0, 3);
 
   return (
     <>

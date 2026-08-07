@@ -7,20 +7,22 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { SITE, SERVICES, WHATSAPP_URL, toOgImage } from "@/lib/constants";
-import { BLOG_POSTS, BLOG_POST_SERVICE } from "@/lib/blog-data";
+import { getPublishedPosts, BLOG_POST_SERVICE, type BlogPost } from "@/lib/blog-data";
 import { POSTS_CONTENT } from "@/content/posts";
 
 export const revalidate = 3600;
 
 export function generateStaticParams() {
-  return BLOG_POSTS.map((p) => ({ slug: p.slug }));
+  // Scheduled (future-dated) posts are not prebuilt. Once their date arrives the
+  // page is generated on first request and the ISR window refreshes the listing.
+  return getPublishedPosts().map((p) => ({ slug: p.slug }));
 }
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  const post = getPublishedPosts().find((p) => p.slug === slug);
   if (!post) return {};
   return {
     title: post.title,
@@ -171,14 +173,17 @@ function renderMarkdown(md: string) {
 
 export default async function BlogArticlePage({ params }: Props) {
   const { slug } = await params;
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  // Guarding on the PUBLISHED set is what makes scheduling real: a future-dated
+  // post 404s even if someone guesses its URL, instead of leaking early.
+  const published = getPublishedPosts();
+  const post = published.find((p) => p.slug === slug);
   const content = POSTS_CONTENT[slug];
   if (!post || !content) notFound();
 
   // Category/tier-aware related posts (spreads link equity beyond the first 3 pillars)
-  const related = [...BLOG_POSTS.filter((p) => p.slug !== slug)]
+  const related = [...published.filter((p) => p.slug !== slug)]
     .sort((a, b) => {
-      const score = (p: (typeof BLOG_POSTS)[number]) =>
+      const score = (p: BlogPost) =>
         (p.category === post.category ? 2 : 0) + (p.tier === post.tier ? 1 : 0);
       return score(b) - score(a);
     })

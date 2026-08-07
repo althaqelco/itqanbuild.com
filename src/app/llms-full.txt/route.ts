@@ -9,7 +9,7 @@ import {
 } from "@/lib/constants";
 import { SERVICE_CONTENT } from "@/lib/service-content";
 import { DISTRICT_CONTENT } from "@/lib/district-content";
-import { BLOG_POSTS } from "@/lib/blog-data";
+import { getPublishedPosts } from "@/lib/blog-data";
 import { TESTIMONIALS, calculateReviewStats } from "@/lib/testimonials";
 
 export const dynamic = "force-static";
@@ -121,9 +121,10 @@ export function GET() {
   push("");
 
   // ── Knowledge base ──
-  push(`## قاعدة المعرفة — ${BLOG_POSTS.length} مقالة (Knowledge Base)`);
+  const posts = getPublishedPosts();
+  push(`## قاعدة المعرفة — ${posts.length} مقالة (Knowledge Base)`);
   push("");
-  for (const b of BLOG_POSTS) {
+  for (const b of posts) {
     push(`- [${b.h1}](${u}/blog/${b.slug}): ${b.description}`);
   }
   push("");

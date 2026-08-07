@@ -20,7 +20,7 @@ import {
 } from "@/lib/constants";
 import { generateServiceGraph } from "@/lib/schema";
 import { SERVICE_CONTENT } from "@/lib/service-content";
-import { BLOG_POSTS, BLOG_POST_SERVICE } from "@/lib/blog-data";
+import { getPublishedPosts, BLOG_POST_SERVICE } from "@/lib/blog-data";
 import { notFound } from "next/navigation";
 
 export default function ServicePageView({ slug }: { slug: string }) {
@@ -33,8 +33,9 @@ export default function ServicePageView({ slug }: { slug: string }) {
   // Topically-matched articles → links from the money page into the content cluster.
   // Backfill with pillar guides so every service shows a full 3-card cluster (lifts
   // the services that only have one mapped article: asphalt/shboak/hadm/molahaq/hanager).
-  const directPosts = BLOG_POSTS.filter((p) => BLOG_POST_SERVICE[p.slug] === svc.key);
-  const fillerPosts = BLOG_POSTS.filter(
+  const allPosts = getPublishedPosts();
+  const directPosts = allPosts.filter((p) => BLOG_POST_SERVICE[p.slug] === svc.key);
+  const fillerPosts = allPosts.filter(
     (p) => p.tier === "pillar" && !directPosts.some((d) => d.slug === p.slug)
   );
   const relatedPosts = [...directPosts, ...fillerPosts].slice(0, 3);

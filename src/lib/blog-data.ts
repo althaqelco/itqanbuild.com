@@ -75,7 +75,13 @@ export const BLOG_POST_SERVICE: Record<string, ServiceKey> = {
   "construction-payment-schedule-jeddah": "general",
 };
 
-export const BLOG_POSTS: BlogPost[] = [
+/**
+ * Every authored post — including any scheduled for a FUTURE date.
+ * Do not render this directly: use `getPublishedPosts()` so scheduled posts stay
+ * hidden until their day arrives. The name is deliberate — importing the raw
+ * array is a decision, not an accident.
+ */
+export const BLOG_POSTS_ALL: BlogPost[] = [
   // ─── PILLAR ARTICLES ───
   {
     slug: "villa-build-cost-jeddah",
@@ -85,7 +91,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "تكلفة بناء فيلا في جدة ٢٠٢٦ بالتفصيل — سعر متر العظم وتسليم المفتاح، أمثلة محسوبة لفلل ٣٠٠ و٤٠٠ و٥٠٠ م²، تفصيل بنود التكلفة، والرسوم الحكومية.",
     image: "/images/blog/villa-build-cost-jeddah-hero.avif",
     imageAlt: "تكلفة بناء فيلا في جدة — عظم وتسليم مفتاح",
-    date: "2026-06-16",
+    date: "2026-08-05",
     readTime: "١٤ دقيقة",
     category: "أسعار",
     tier: "pillar",
@@ -130,7 +136,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "دليل اسعار تشطيب فلل في جدة ٢٠٢٦: سعر متر التشطيب من ٢٠٠ إلى ١,٥٠٠ ريال بأربعة مستويات، مع أمثلة محسوبة لشقة ١٥٠م² وفيلا ٤٠٠م² وتوزيع البنود.",
     image: "/images/blog/finishing-cost-jeddah-hero.avif",
     imageAlt: "تشطيب داخلي فاخر لصالة فيلا في جدة يوضح مستويات أسعار متر التشطيب",
-    date: "2026-06-16",
+    date: "2026-08-03",
     readTime: "٩ دقائق",
     category: "أسعار",
     tier: "pillar",
@@ -180,7 +186,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "سعر متر الأسفلت في جدة ٢٠٢٦ من ٣٥ إلى ١٨٠ ريالاً حسب النوع. جداول أسعار البارد والساخن والطرق + أمثلة محسوبة لموقف ٥٠٠م² وطريق داخلي ومقارنة الإنترلوك.",
     image: "/images/blog/asphalt-cost-jeddah-hero.avif",
     imageAlt: "عامل يفرد طبقة أسفلت ساخن لموقف سيارات في جدة بمعدة فرد متخصصة",
-    date: "2026-06-16",
+    date: "2026-08-02",
     readTime: "٩ دقائق",
     category: "أسعار",
     tier: "pillar",
@@ -230,7 +236,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "دليل نسبة البناء في جدة ٢٠٢٦: تعرّف على معامل استغلال الأرض والارتدادات وعدد الأدوار، مع مثال حساب أرض ٦٠٠م² تبني نحو ١,٠٠٦م² مبنية.",
     image: "/images/blog/building-ratio-jeddah-hero.avif",
     imageAlt: "مخطط توضيحي لأرض في جدة يبيّن الارتدادات الأمامية والجانبية والخلفية ونسبة البناء المسموحة وعدد الأدوار فوق الأرض",
-    date: "2026-06-16",
+    date: "2026-07-31",
     readTime: "١٢ دقيقة",
     category: "إجراءات",
     tier: "pillar",
@@ -280,7 +286,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "دليل المالك للكود السعودي للبناء في جدة: أبوابه الـ٨ الإلزامية، خرسانة Type V المقاومة للكبريتات، كفاءة الطاقة، وكيف تتأكد أن مقاولك يطبّقه فعلاً.",
     image: "/images/blog/saudi-building-code-sbc-hero.avif",
     imageAlt: "مهندس يراجع مخططات الكود السعودي للبناء أمام فيلا قيد الإنشاء في جدة",
-    date: "2026-06-16",
+    date: "2026-07-29",
     readTime: "١١ دقيقة",
     category: "تقنية البناء",
     tier: "pillar",
@@ -325,7 +331,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "سعر متر الشبوك في جدة ٢٠٢٦ يتراوح بين ٢٥ و٥٠٠ ريال للمتر الطولي حسب النوع. أسعار الأسوار والبوابات والجلفنة مع أمثلة محسوبة لسور فيلا وأرض.",
     image: "/images/blog/shboak-cost-jeddah-hero.avif",
     imageAlt: "سور حديد مجلفن مدهون لفيلا في جدة مع بوابة سحابة يوضح سعر متر الشبوك",
-    date: "2026-06-17",
+    date: "2026-07-27",
     readTime: "١٠ دقائق",
     category: "أسعار",
     tier: "pillar",
@@ -375,7 +381,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "سعر متر الهنجر في جدة ٢٠٢٦ من ٢٥٠ إلى ٦٠٠ ريال حسب العزل والارتفاع، مع جداول أسعار وأمثلة محسوبة لهنجر ٥٠٠ و١,٠٠٠ م² ومكوّنات التكلفة والضمان.",
     image: "/images/blog/hanager-cost-jeddah-hero.avif",
     imageAlt: "هنجر حديدي معزول بالساندويتش بانل في جدة يوضح مستويات سعر متر الهنجر",
-    date: "2026-06-17",
+    date: "2026-07-26",
     readTime: "١١ دقيقة",
     category: "أسعار",
     tier: "pillar",
@@ -420,7 +426,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "دليل تكلفة هدم مبنى في جدة ٢٠٢٦ وسعر متر الهدم من ١٥ إلى ٦٠ ريالاً، مع جداول حسب نوع المبنى وطريقة الهدم والترحيل والتصاريح وأمثلة محسوبة.",
     image: "/images/blog/hadm-cost-jeddah-hero.avif",
     imageAlt: "معدة هدم ميكانيكية تهدم مبنى خرسانياً في جدة مع تجميع الأنقاض للترحيل",
-    date: "2026-06-17",
+    date: "2026-07-24",
     readTime: "١٠ دقائق",
     category: "أسعار",
     tier: "pillar",
@@ -465,7 +471,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "دليل تكلفة بناء ملحق في جدة ٢٠٢٦ وسعر متر الملحق من ٨٠٠ إلى ١,٨٠٠ ريال، مع جداول حسب النوع والتشطيب وأمثلة محسوبة والترخيص ونسبة البناء.",
     image: "/images/blog/molahaq-cost-jeddah-hero.avif",
     imageAlt: "ملحق علوي روف مبني على سطح فيلا في جدة يوضح تكلفة بناء الملحق وسعر المتر",
-    date: "2026-06-17",
+    date: "2026-07-22",
     readTime: "١١ دقيقة",
     category: "أسعار",
     tier: "pillar",
@@ -510,7 +516,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "دليل عملي للكروكي التنظيمي في جدة: ما هو، والفرق بينه وبين الصك والمخطط المعماري، وماذا يحتوي، وكيف تستخرجه عبر بلدي وتقرأه قبل شراء الأرض والبناء.",
     image: "/images/blog/kroki-jeddah-guide-hero.avif",
     imageAlt: "نموذج الكروكي التنظيمي لقطعة أرض في جدة يوضح الارتدادات وعدد الأدوار ونسبة البناء والاستعمال المسموح",
-    date: "2026-06-17",
+    date: "2026-07-20",
     readTime: "١١ دقيقة",
     category: "إجراءات",
     tier: "pillar",
@@ -555,7 +561,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "دليل شهادة إتمام البناء في جدة (شهادة الإشغال): أهميتها للخدمات الدائمة والإفراغ والبيع والرهن، متطلباتها، وخطوات استخراجها عبر منصة بلدي.",
     image: "/images/blog/completion-certificate-jeddah-hero.avif",
     imageAlt: "مبنى سكني مكتمل في جدة مع وثيقة شهادة إتمام البناء الرسمية",
-    date: "2026-06-17",
+    date: "2026-07-19",
     readTime: "٩ دقائق",
     category: "إجراءات",
     tier: "pillar",
@@ -605,7 +611,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "دليل اشتراطات الدفاع المدني ومتطلبات السلامة للمباني في جدة: مخارج الطوارئ والطفايات والإنذار والرش الآلي وكيف تستوفيها وتستخرج رخصة السلامة.",
     image: "/images/blog/civil-defense-requirements-jeddah-hero.avif",
     imageAlt: "مخطط سلامة لمبنى في جدة يوضح مخارج الطوارئ وطفايات الحريق وأنظمة الإنذار والرش الآلي ضمن اشتراطات الدفاع المدني",
-    date: "2026-06-17",
+    date: "2026-07-17",
     readTime: "٩ دقائق",
     category: "إجراءات",
     tier: "pillar",
@@ -650,7 +656,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "دليل رخصة الترميم في جدة: متى تحتاج تصريح ترميم ومتى لا تحتاجه، الأعمال الهيكلية المرخّصة، وخطوات استخراج الرخصة عبر منصة بلدي بدقة.",
     image: "/images/blog/renovation-permit-jeddah-hero.avif",
     imageAlt: "عامل ترميم يعالج جداراً إنشائياً في مبنى بجدة مع مخططات ووثائق رخصة الترميم",
-    date: "2026-06-17",
+    date: "2026-07-15",
     readTime: "٩ دقائق",
     category: "إجراءات",
     tier: "pillar",
@@ -695,7 +701,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "مقارنة محايدة بين العظم بالمواد وتسليم المفتاح لبناء فيلتك في جدة ٢٠٢٦: جدول مقارنة شامل، حساب تكلفة حقيقي بمثال، ولمن يناسب كل خيار مع توصية عملية.",
     image: "/images/blog/azm-vs-tasleem-miftah-jeddah-hero.avif",
     imageAlt: "مقارنة بين بناء فيلا بنظام العظم بالمواد ونظام تسليم المفتاح في جدة",
-    date: "2026-06-17",
+    date: "2026-07-14",
     readTime: "٩ دقائق",
     category: "مقارنات",
     tier: "pillar",
@@ -740,7 +746,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "مقارنة محايدة بين بناء فيلا وشراء جاهزة في جدة ٢٠٢٦ من حيث التكلفة والجودة والوقت والمخاطر، مع جدول قرار وتوصية عملية حسب وضعك المالي والزمني.",
     image: "/images/blog/build-vs-buy-villa-jeddah-hero.avif",
     imageAlt: "مقارنة بين بناء فيلا جديدة وشراء فيلا جاهزة في جدة من حيث التكلفة والجودة والوقت",
-    date: "2026-06-17",
+    date: "2026-07-12",
     readTime: "٩ دقائق",
     category: "مقارنات",
     tier: "pillar",
@@ -785,7 +791,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "ترميم أم إعادة بناء في جدة؟ دليل حيادي يحسم القرار بقاعدة الـ٥٠٪ وجدول مقارنة للتكلفة والوقت والمخاطر ودور الفحص الإنشائي مع مثال واقعي ٢٠٢٦.",
     image: "/images/blog/renovate-vs-rebuild-jeddah-hero.avif",
     imageAlt: "مقارنة بين ترميم مبنى قديم وإعادة بنائه في جدة مع معايير اتخاذ القرار",
-    date: "2026-06-17",
+    date: "2026-07-10",
     readTime: "٩ دقائق",
     category: "مقارنات",
     tier: "pillar",
@@ -830,7 +836,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "تكييف مركزي أم سبليت لفيلتك في جدة؟ مقارنة محايدة بالأرقام للتكلفة والاستهلاك والصيانة والمظهر، مع توصية عملية حسب مساحة الفيلا والميزانية لمناخ جدة الحار.",
     image: "/images/blog/central-vs-split-ac-jeddah-hero.avif",
     imageAlt: "مقارنة بين وحدة تكييف مركزي ووحدات سبليت في فيلا حديثة بجدة",
-    date: "2026-06-17",
+    date: "2026-07-08",
     readTime: "٩ دقائق",
     category: "مقارنات",
     tier: "pillar",
@@ -880,7 +886,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "دليل تجديد الحمامات في جدة ٢٠٢٦: تكلفة ترميم حمام من ٨٬٠٠٠ إلى ٢٥٬٠٠٠ ريال حسب المستوى، خطوات التنفيذ، أهمية العزل المائي، وأمثلة محسوبة بالريال.",
     image: "/images/blog/bathroom-renovation-jeddah-hero.avif",
     imageAlt: "حمام مجدد في جدة بسيراميك بورسلين حديث وعزل مائي وأدوات صحية وخلاطات جديدة",
-    date: "2026-06-17",
+    date: "2026-07-07",
     readTime: "٩ دقائق",
     category: "تشطيبات",
     tier: "pillar",
@@ -930,7 +936,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "دليل تجديد وتفصيل مطابخ جدة ٢٠٢٦: تكلفة المطبخ بالمتر الطولي، مقارنة خامات الخزائن والأسطح، أمثلة محسوبة بالريال لمطبخ شقة وفيلا، ونصائح عملية.",
     image: "/images/blog/kitchen-renovation-jeddah-hero.avif",
     imageAlt: "مطبخ عصري مفصّل في فيلا بجدة بخزائن بولي لاك وسطح كوارتز وجزيرة وسطية وإضاءة تحت الخزائن",
-    date: "2026-06-17",
+    date: "2026-07-05",
     readTime: "٩ دقائق",
     category: "تشطيبات",
     tier: "pillar",
@@ -975,7 +981,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "دليل واجهات الفلل في جدة ٢٠٢٦: أنواع المواد وأسعارها بالريال للمتر، تكلفة واجهة فيلا ١٥٠م²، ومقارنة GRC والحجر والكلادينج لاختيار الأنسب لمناخ جدة.",
     image: "/images/blog/villa-facades-jeddah-hero.avif",
     imageAlt: "واجهة فيلا حديثة في جدة بمزيج من الحجر الطبيعي والكلادينج وزخارف GRC مع إنارة خارجية",
-    date: "2026-06-17",
+    date: "2026-07-03",
     readTime: "٩ دقائق",
     category: "تشطيبات",
     tier: "pillar",
@@ -1025,7 +1031,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "كم يستغرق بناء فيلا في جدة؟ مدة بناء فيلا متوسطة ٨–١٦ شهراً. جدول زمني مرحلة بمرحلة لعام ٢٠٢٦ ومثال محسوب لفيلا ٤٠٠م² وعوامل التسريع والتأخير.",
     image: "/images/blog/villa-construction-timeline-jeddah-hero.avif",
     imageAlt: "جدول زمني لمراحل بناء فيلا في جدة من التصميم والأساسات والعظم حتى التشطيب وتسليم المفتاح",
-    date: "2026-06-17",
+    date: "2026-07-02",
     readTime: "٨ دقائق",
     category: "أدلة شاملة",
     tier: "pillar",
@@ -1070,7 +1076,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "دليل تكلفة بناء عمارة في جدة ٢٠٢٦ وسعر متر العمارة: عظم وتسليم مفتاح، مثال محسوب لعمارة ٨ شقق، وحساب العائد الاستثماري وفترة الاسترداد بتقدير إرشادي.",
     image: "/images/blog/apartment-building-cost-jeddah-hero.avif",
     imageAlt: "عمارة سكنية حديثة من أربعة أدوار قيد الإنشاء في جدة مع توضيح تكلفة بناء العمارة والعائد الاستثماري",
-    date: "2026-06-17",
+    date: "2026-06-30",
     readTime: "٩ دقائق",
     category: "أسعار",
     tier: "pillar",
@@ -1120,7 +1126,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "دليل تكلفة بناء استراحة في جدة ٢٠٢٦: أسعار المسبح والمجلس والسور واللاندسكيب بجداول واقعية، أمثلة محسوبة، التراخيص اللازمة، ونصائح لتقليل التكلفة.",
     image: "/images/blog/rest-house-construction-jeddah-hero.avif",
     imageAlt: "استراحة عائلية في جدة بمسبح ومجلس مغطى وجلسات خارجية ومظلات",
-    date: "2026-06-17",
+    date: "2026-06-28",
     readTime: "٩ دقائق",
     category: "أدلة شاملة",
     tier: "pillar",
@@ -1165,7 +1171,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "دليل ٢٠٢٦ لأفضل أحياء جدة للبناء والسكن: مقارنة الروضة والسلامة والنزهة وأبحر من حيث أسعار الأراضي والتربة والخدمات والاستثمار والملاءمة العائلية.",
     image: "/images/blog/best-districts-build-jeddah-hero.avif",
     imageAlt: "خريطة مقارنة أبرز أحياء جدة للبناء والسكن والاستثمار بأسعار الأراضي التقديرية لعام ٢٠٢٦",
-    date: "2026-06-17",
+    date: "2026-06-26",
     readTime: "٩ دقائق",
     category: "أدلة شاملة",
     tier: "pillar",
@@ -1210,7 +1216,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "دليل تكلفة بناء مسبح في جدة ٢٠٢٦: أسعار المسابح الخرسانية والفايبر والموزاييك، مكوّنات التكلفة، أمثلة محسوبة بالحجم، العزل، والتشغيل والصيانة.",
     image: "/images/blog/swimming-pool-construction-jeddah-hero.avif",
     imageAlt: "مسبح خرساني حديث بتشطيب موزاييك في فيلا بجدة مع إضاءة غاطسة وديكور محيط",
-    date: "2026-06-17",
+    date: "2026-06-25",
     readTime: "٩ دقائق",
     category: "أدلة شاملة",
     tier: "pillar",
@@ -1255,7 +1261,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "دليل جبس بورد جدة ٢٠٢٦: أنواع الألواح، الفرق عن الجبس العادي، اسعار الجبس بورد بالمتر شامل التركيب ٤٠–٢٠٠ ريال، الأسقف المعلقة والإضاءة المخفية.",
     image: "/images/blog/gypsum-board-decor-jeddah-hero.avif",
     imageAlt: "سقف معلق من جبس بورد بإضاءة مخفية وديكورات جبسية في صالة فيلا بجدة",
-    date: "2026-06-17",
+    date: "2026-06-23",
     readTime: "٩ دقائق",
     category: "تشطيبات",
     tier: "pillar",
@@ -1300,7 +1306,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "دليل أنواع الأرضيات وأفضلها للفلل في جدة ٢٠٢٦ مع سعر متر الرخام والبورسلين والباركيه والسيراميك ومقارنة المتانة والصيانة والأنسب لكل غرفة.",
     image: "/images/blog/flooring-types-jeddah-hero.avif",
     imageAlt: "مقارنة أنواع أرضيات الفلل في جدة من رخام وبورسلين وباركيه وسيراميك مع الأسعار",
-    date: "2026-06-17",
+    date: "2026-06-21",
     readTime: "٩ دقائق",
     category: "تشطيبات",
     tier: "pillar",
@@ -1350,7 +1356,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "دليل تنسيق حدائق جدة ٢٠٢٦: العشب الطبيعي مقابل الصناعي، أنظمة الري، النباتات الملائمة لمناخ جدة، وتكلفة حديقة ١٠٠م٢ مع أبرز الأخطاء.",
     image: "/images/blog/landscaping-jeddah-hero.avif",
     imageAlt: "حديقة فيلا منسّقة في جدة بعشب أخضر ونخيل وإضاءة خارجية ومنطقة جلوس",
-    date: "2026-06-17",
+    date: "2026-06-19",
     readTime: "٩ دقائق",
     category: "أدلة شاملة",
     tier: "pillar",
@@ -1400,7 +1406,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "دليل تصميم فلل جدة ٢٠٢٦: مقارنة طرز المودرن والكلاسيك والنيوكلاسيك والإسلامي والنجدي، سماتها وتأثيرها على الواجهة والتوزيع والتكلفة، وكيف تختار الأنسب.",
     image: "/images/blog/villa-design-styles-jeddah-hero.avif",
     imageAlt: "واجهات فلل بطرز مودرن وكلاسيك ونيوكلاسيك وإسلامي ونجدي معاصر في جدة",
-    date: "2026-06-17",
+    date: "2026-06-18",
     readTime: "٩ دقائق",
     category: "أدلة شاملة",
     tier: "pillar",
@@ -1445,7 +1451,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "دليل نظام دفعات عقد المقاولة وبناء فيلا في جدة ٢٠٢٦: دفعة مقدمة ٥-١٠٪، دفعات مرحلية مرتبطة بالإنجاز، وضمان محتجز ٥-١٠٪ يحمي أموالك من التعثّر.",
     image: "/images/blog/construction-payment-schedule-jeddah-hero.avif",
     imageAlt: "جدول دفعات عقد بناء فيلا في جدة يربط كل دفعة بمرحلة إنجاز موثّقة",
-    date: "2026-06-17",
+    date: "2026-06-16",
     readTime: "٩ دقائق",
     category: "حماية قانونية",
     tier: "pillar",
@@ -1814,3 +1820,46 @@ export const BLOG_POSTS: BlogPost[] = [
     tier: "faq",
   },
 ];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Publication scheduling
+//
+// A post goes live on its `date`, not when it is committed. Write ahead, set a
+// future date, and it stays invisible (listing, sitemap, llms.txt, direct URL)
+// until that day — the pages carry `revalidate = 3600`, so a scheduled post
+// surfaces within an hour of its date with no redeploy.
+//
+// These are FUNCTIONS on purpose. A module-scope `const` would be evaluated once
+// when the server boots and — with minInstances: 1 keeping that process alive for
+// days — would freeze "today" and never publish anything new.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Today as YYYY-MM-DD in Riyadh — the audience's calendar day, not the server's. */
+export function todayInRiyadh(): string {
+  // en-CA gives ISO-shaped YYYY-MM-DD, so plain string compare is date compare.
+  return new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Riyadh" });
+}
+
+/** Has this post's publication date arrived? */
+export function isPublished(
+  post: Pick<BlogPost, "date">,
+  today: string = todayInRiyadh()
+): boolean {
+  return post.date <= today;
+}
+
+/** Live posts, newest first. Call at render time — never hoist to module scope. */
+export function getPublishedPosts(): BlogPost[] {
+  const today = todayInRiyadh();
+  return BLOG_POSTS_ALL.filter((p) => isPublished(p, today)).sort((a, b) =>
+    b.date.localeCompare(a.date)
+  );
+}
+
+/** Posts written but not yet due — for build logs and scheduling checks. */
+export function getScheduledPosts(): BlogPost[] {
+  const today = todayInRiyadh();
+  return BLOG_POSTS_ALL.filter((p) => !isPublished(p, today)).sort((a, b) =>
+    a.date.localeCompare(b.date)
+  );
+}

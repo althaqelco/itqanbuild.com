@@ -266,7 +266,7 @@ export const toOgImage = (src: string): string => src.replace(/\.avif$/, "-og.jp
 export const DEFAULT_OG_IMAGE = "/images/hero-contractor-jeddah-og.jpg";
 
 // Last meaningful content update — stable sitemap lastmod (avoids churning every deploy)
-export const LAST_CONTENT_UPDATE = "2026-06-13";
+export const LAST_CONTENT_UPDATE = "2026-08-07";
 
 export interface DistrictData {
   key: string;

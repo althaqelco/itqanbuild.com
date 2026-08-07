@@ -8,24 +8,29 @@ import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import BlogCategoryFilter from "@/components/BlogCategoryFilter";
 import { SITE, WHATSAPP_URL, DEFAULT_OG_IMAGE, LAST_CONTENT_UPDATE } from "@/lib/constants";
 import { SPEAKABLE } from "@/lib/schema";
-import { BLOG_POSTS } from "@/lib/blog-data";
+import { getPublishedPosts, type BlogPost } from "@/lib/blog-data";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
-  title: `المدونة — ${BLOG_POSTS.length} مقالة عن المقاولات في جدة`,
-  description: `${BLOG_POSTS.length} مقالة متخصصة عن المقاولات في جدة — أدلة أسعار، مراحل البناء، أنواع الشبوك، الأساسات، العزل، المنزل الذكي، ونصائح اختيار المقاول.`,
+// generateMetadata (not a static const) so the article count re-evaluates on each
+// ISR pass — otherwise a scheduled post going live would not update the title.
+export function generateMetadata(): Metadata {
+  const count = getPublishedPosts().length;
+  return {
+  title: `المدونة — ${count} مقالة عن المقاولات في جدة`,
+  description: `${count} مقالة متخصصة عن المقاولات في جدة — أدلة أسعار، مراحل البناء، أنواع الشبوك، الأساسات، العزل، المنزل الذكي، ونصائح اختيار المقاول.`,
   alternates: { canonical: `${SITE.url}/blog` },
   openGraph: {
-    title: `مدونة ${SITE.name} | ${BLOG_POSTS.length} مقالة متخصصة`,
+    title: `مدونة ${SITE.name} | ${count} مقالة متخصصة`,
     description: `أدلة أسعار المقاولات، مراحل البناء، ونصائح اختيار المقاول في جدة ٢٠٢٦`,
     url: `${SITE.url}/blog`,
     images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, type: "image/jpeg" }],
   },
-};
+  };
+}
 
 // Blog index Schema
-function blogSchema() {
+function blogSchema(BLOG_POSTS: BlogPost[]) {
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -62,6 +67,7 @@ function blogSchema() {
 }
 
 export default function BlogPage() {
+  const BLOG_POSTS = getPublishedPosts();
   const featured = BLOG_POSTS[0];
   const pillars = BLOG_POSTS.filter((p) => p.tier === "pillar");
   const clusters = BLOG_POSTS.filter((p) => p.tier === "cluster");
@@ -78,7 +84,7 @@ export default function BlogPage() {
       <main id="main">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema()) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema(BLOG_POSTS)) }}
         />
 
         {/* Hero */}

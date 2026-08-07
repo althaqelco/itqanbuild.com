@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE, SERVICES_LIST, DISTRICTS_LIST, LAST_CONTENT_UPDATE } from "@/lib/constants";
-import { BLOG_POSTS } from "@/lib/blog-data";
+import { getPublishedPosts } from "@/lib/blog-data";
 
 export const dynamic = "force-static";
 
@@ -38,7 +38,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     images: [`${base}${d.image}`],
   }));
 
-  const blogPages: MetadataRoute.Sitemap = BLOG_POSTS.map((p) => {
+  const blogPages: MetadataRoute.Sitemap = getPublishedPosts().map((p) => {
     const images = [`${base}${p.image}`];
     images.push(`${base}/images/blog/${p.slug}-body.avif`);
     
