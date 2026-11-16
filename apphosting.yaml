@@ -1,17 +1,22 @@
 # Firebase App Hosting — Cloud Run + Cloud CDN
 # ملاحظة: الـ region يُحدَّد عند إنشاء الـ backend (فعلياً asia-southeast1)، لا من هنا.
 #
-# 🤖 minInstances: 1 — أُعيد من 0 بعد اختبار زحف حقيقي (scripts/ai-crawler-sim.mjs)
-#    أثبت فقداناً فعلياً: GPTBot و OAI-SearchBot انقطعا (TIMEOUT > 20s) عند أول
-#    اتصال بخادم بارد، بينما نجح الاثنان فوراً بعد الإحماء. TTFB بارداً 6–20s+
-#    مقابل 0.3–1.5s ساخناً.
-#    السبب أن هذا يهمّ: وكلاء الجلب الحيّ (ChatGPT-User / Perplexity-User /
-#    Claude-User) هم *لحظة الاستشهاد* في محرّكات بحث الذكاء الاصطناعي، ولديهم
-#    مهلة قصيرة، ويصلون متفرّقين بعد خمول — أي بالضبط حين يكون الخادم بارداً.
-#    الانقطاع = لا استشهاد. التكلفة ~$8–9/شهر مقابل ضمان الظهور في AI Overviews
-#    وChatGPT وPerplexity — مقايضة مقصودة لصالح الـAEO.
+# 🧪 minInstances: 0 + إحماء دوري — تجربة بدأت 2026-11-16.
+#    الخلفية: الخادم البارد يُسقط زواحف الذكاء الاصطناعي — اختبار
+#    scripts/ai-crawler-sim.mjs (يوليو 2026) أثبت انقطاع GPTBot و OAI-SearchBot
+#    (TIMEOUT > 20s) عند أول اتصال بخادم بارد؛ TTFB بارداً 6–20s+ مقابل 0.3–1.5s
+#    ساخناً. وكلاء الجلب الحيّ (ChatGPT-User / Perplexity-User / Claude-User) هم
+#    *لحظة الاستشهاد* ومهلتهم قصيرة، فالانقطاع = لا استشهاد.
+#    الحل السابق (minInstances: 1) كلّف ~$9.30/شهر — 99% من فاتورة المشروع —
+#    مقابل 58 دقيقة معالجة فعلية في الشهر.
+#    الحل الحالي: مهمة Cloud Scheduler «warm-itqanbuild» تطلب /api/warm كل 5 دقائق.
+#    Cloud Run يُبقي الخادم الخامل حتى 15 دقيقة بلا محاسبة (request-based billing)،
+#    فالطلب الدوري يبقيه ساخناً بسنتات. ليس ضماناً من جوجل: قد يُعاد تدوير الخادم،
+#    وعندها يتحمّل طلب الإحماء التالي البرودة (نافذة ≤ 5 دقائق).
+#    ↩️ للرجوع: minInstances: 1 هنا + إيقاف مهمة الـScheduler. ارجع إن أظهر
+#    ai-crawler-sim أي TIMEOUT على الموقع الحي، أو إن توقفت المهمة.
 runConfig:
-  minInstances: 1
+  minInstances: 0
   maxInstances: 10
   concurrency: 80
   cpu: 1
